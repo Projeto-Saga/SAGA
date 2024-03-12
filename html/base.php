@@ -1,13 +1,13 @@
 <div class="topbar rowalign">
-    <a class="saga-titl" href="lobby.php">
+    <a class="saga-titl" href="lobby">
         <img src="img/logo-n-forwhite.png">
     </a>
 
     <div id="top_bar" class="clmalign" style="margin-right:101px;">
         <div class="rowalign">
-            <a class="topbar-link" href="mybook.php">NOTAS E FALTAS</a>
-            <a class="topbar-link" href="calendar.php">CALENDÁRIO</a>
-            <a class="topbar-link" href="requests.php">SECRETARIA</a>
+            <a class="topbar-link" href="mybook">NOTAS E FALTAS</a>
+            <a class="topbar-link" href="calendar">CALENDÁRIO</a>
+            <a class="topbar-link" href="requests">SECRETARIA</a>
         </div>
 
         <hr class="topbar-hr">
@@ -21,9 +21,9 @@
             <div class="stud-hidden clmalign">
                 <br>
 
-                <a href="profile.php" class="stud-link">Meu Perfil</a>
+                <a href="profile" class="stud-link">Meu Perfil</a>
                 <hr style="width:calc(100% - 2px);">
-                <a href="logout.php" class="stud-link">Desconectar</a>
+                <a href="php/logout" class="stud-link">Desconectar</a>
             </div>
         </div>
         <div class="stud-ball" style="background-image:url(img/fotos/<?php echo $imge; ?>);"></div>
@@ -34,17 +34,17 @@
     <img class="sidebar-menu" src="img/hbm-menuicon.png" onclick="show();">
 
     <div class="clmalign">
-        <a class="sidebar-link" href="mybook.php">
+        <a class="sidebar-link" href="mybook">
             <img class="sidebar-icon" src="img/notas-icon.png">
             <div class="sidebar-label invobjct">Notas e Faltas</div>
         </a>
         <hr class="sidebar-hr">
-        <a class="sidebar-link" href="calendar.php">
+        <a class="sidebar-link" href="calendar">
             <img class="sidebar-icon" src="img/calendario-icon.png">
             <div class="sidebar-label invobjct">Calendário</div>
         </a>
         <hr class="sidebar-hr">
-        <a class="sidebar-link" href="requests.php">
+        <a class="sidebar-link" href="requests">
             <img class="sidebar-icon" src="img/secretaria-icon.png">
             <div class="sidebar-label invobjct">Secretaria</div>
         </a>

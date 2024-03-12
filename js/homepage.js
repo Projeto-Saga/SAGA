@@ -15,14 +15,12 @@ function nextImage()
     document.getElementById("radio"+count).checked = true;
 }
 
-function abrirJanela(numJanela)
+function abrirJanela(window)
 {
-    var janela = 'janela' + numJanela;
-    document.getElementById(janela).style.display = 'block';
+    document.getElementById(window).style.display = 'block';
 }
    
-function fecharJanela(numJanela)
+function fecharJanela(window)
 {
-    var janela = 'janela' + numJanela;
-    document.getElementById(janela).style.display = 'none';
+    document.getElementById(window).style.display = 'none';
 }
