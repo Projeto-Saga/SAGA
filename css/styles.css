@@ -1,12 +1,22 @@
+/* variáveis globais */
+:root
+{
+    --red-base:#d72b48;
+    --red-dark:#bf0000;
+
+    --blue-base:#0198f8;
+
+    --font-fml-base:"Poppins";
+}
+
 /* estrutura */
 body
 {
     margin:0;
     display:flex;
     justify-content:center;
-    background:white;
-    font-family:Poppins;
-    background:#de405a;
+    font-family:var(--font-fml-base);
+    background:var(--red-base);
 }
 button:focus, input:focus, select:focus
 {
@@ -35,11 +45,11 @@ label
 }
 .maininpt:focus
 {
-    box-shadow:0 0 5px 1px #BF0000;
+    box-shadow:0 0 5px 1px var(--red-dark)
 }
 .mainbutn, .demibutn
 {
-    background:#BF0000;
+    background:var(--red-dark);
     color:white;
     height:41px;
     padding:11px 0 6px 0;
@@ -54,7 +64,7 @@ label
 {
     cursor:pointer;
     background:#ddd;
-    color:#BF0000;
+    color:var(--red-dark)
 }
 .labltext
 {
@@ -168,7 +178,7 @@ label
 }
 .topbar-link:hover
 {
-    color:#BF0000;
+    color:var(--red-dark)
 }
 .topbar-hr
 {
@@ -185,39 +195,50 @@ label
    padding:0 25px 0 25px;
    width:200px;
    z-index:3;
-   transition:all 0.3s ease;
+   transition:all 0.3s ease
 }
 .sidebar-link
 {
+    display:flex;
+    align-items:center;
     color:#fefefe;
-    height:70px;
-    background:#222;
-    border-radius:50%;
-    transition:all 0.3s ease;
+    height:50px;
+    background:#111;
+    border-radius:25px;
+    text-decoration:none;
+    transition:all 0.3s ease
 }
 .sidebar-link:hover
 {
     cursor:pointer;
-    background:#19467E;
+    color:var(--red-base)
+}
+.sidebar-link:hover .sidebar-icon
+{
+    background:var(--red-base)
 }
 .sidebar-icon
 {
-    margin:10px 0 10px 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    aspect-ratio:1/1;
+    background:#111;
+    border-radius:50%;
+    transition:all 0.3s ease
+}
+.sidebar-icon img
+{
+    width:25px;
+    height:25px;
 }
 .sidebar-label
 {
-    position:fixed;
-    margin:-55px 0 0 65px;
-    font-size:18px;
+    margin-left:10px;
+    font-size:15px;
     font-weight:bold;
-    font-family:Poppins;
-    transition:all 0.2s ease;
-}
-.sidebar-hr
-{
-    width:calc(100% - 2px);
-    border-style:solid;
-    border-color:#fefefe;
+    font-family:var(--font-fml-base)
 }
 
 .content
@@ -272,7 +293,7 @@ label
 .box1::-webkit-scrollbar-thumb
 {
     border-radius:10px;
-    background:#de405a
+    background:var(--red-base)
 }
 .student-card
 {
@@ -280,7 +301,7 @@ label
     height:605px;
     border-radius:25px;
     padding:20px;
-    background:linear-gradient(135deg, #0198F8 0%, #194982 100%);
+    background:linear-gradient(135deg, var(--blue-base) 0%, #194982 100%);
 }
 .card-imge
 {
@@ -321,7 +342,7 @@ label
 {
     font-weight:bold;
     font-family:"Arial";
-    color:#BF0000;
+    color:var(--red-dark);
     margin-top:5px;
 }
 .update-input
@@ -332,28 +353,28 @@ label
     border-radius:5px 5px 0 0;
     border-style:solid;
     border-width:0 0 1px 0;
-    border-color:#0198F8;
+    border-color:var(--blue-base);
     margin-bottom:5px;
     transition:all 0.3s ease;
 }
 .update-input:hover
 {
-    color:#0198F8;
+    color:var(--blue-base)
 }
 .update-input:focus
 {
-    box-shadow:inset 0 0 10px -1px #0198F8;
+    box-shadow:inset 0 0 10px -1px var(--blue-base)
 }
 .demibutn
 {
     height:36px;
     width:50%;
     margin:-4px 0 0 5px;
-    background:#0198F8;
+    background:var(--blue-base)
 }
 .demibutn:hover
 {
-    color:#0198F8;
+    color:var(--blue-base)
 }
 .profile
 {
@@ -433,7 +454,7 @@ label
 }
 .alrt-text-1, .alrt-text-2
 {
-    font-family:Poppins;
+    font-family:var(--font-fml-base);
     font-weight:bold;
     width:100%;
     font-size:15px;
@@ -446,7 +467,7 @@ label
 
 h2
 {
-    color:#BF0000;
+    color:var(--red-dark)
 }
 img
 {
