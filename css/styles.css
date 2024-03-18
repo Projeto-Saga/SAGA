@@ -20,7 +20,11 @@ body
     display:flex;
     justify-content:center;
     font-family:var(--ffml-base);
-    background:var(--gray-base);
+    /* background:var(--gray-base); */
+    background-image:url("https://wallpaperaccess.com/full/1850865.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 }
 button:focus, input:focus, select:focus
 {
@@ -236,6 +240,7 @@ label
 {
     width:25px;
     height:25px;
+    filter:invert(1)
 }
 .sidebar-label
 {
@@ -256,7 +261,7 @@ label
     position:fixed;
     margin:25px 0 0 25px;
     top:0; left:0;
-    transition:all 0.3s ease;
+    transition:all 0.3s ease
 }
 .sidebar-menu:hover
 {
@@ -286,7 +291,7 @@ label
     border-radius:10px;
     box-shadow:0 0 10px -1px rgba(0, 0, 0, 0.7);
 }
-.box1, .box2
+.box, .box1, .box3
 {
     width:calc(100% - 20px);
     padding:10px;
