@@ -1,12 +1,16 @@
 /* variáveis globais */
 :root
 {
+    /* general colors */
     --red-base:#d72b48;
     --red-dark:#bf0000;
 
+    --gray-base:#d4cdce;
+
     --blue-base:#0198f8;
 
-    --font-fml-base:"Poppins";
+    /* font families */
+    --ffml-base:"Poppins";
 }
 
 /* estrutura */
@@ -15,8 +19,8 @@ body
     margin:0;
     display:flex;
     justify-content:center;
-    font-family:var(--font-fml-base);
-    background:var(--red-base);
+    font-family:var(--ffml-base);
+    background:var(--gray-base);
 }
 button:focus, input:focus, select:focus
 {
@@ -238,7 +242,7 @@ label
     margin-left:10px;
     font-size:15px;
     font-weight:bold;
-    font-family:var(--font-fml-base)
+    font-family:var(--ffml-base)
 }
 
 .content
@@ -259,28 +263,40 @@ label
     cursor:pointer;
     filter:brightness(0.75);
 }
-.s-gmain
+
+/* GRID DO LOBBY */
+.grid-box-1, .grid-box-2
 {
     display:grid;
     grid-gap:15px;
+}
+.grid-box-1
+{
     grid-template-columns:300px 1fr;
 }
-.box, .box1, .box2
+.grid-box-2
+{
+    grid-template-rows:calc(60vh - 80px) calc(40vh - 75px);
+}
+
+.box, .box1, .box2, .box3
 {
     width:100%;
-    height:100%;
     background:white;
     border-radius:10px;
     box-shadow:0 0 10px -1px rgba(0, 0, 0, 0.7);
 }
-.box1
+.box1, .box2
 {
     width:calc(100% - 20px);
+    padding:10px;
+}
+.box1
+{
     height:calc(100vh - 160px);
     overflow-y:scroll;
     display:grid;
     grid-gap:10px;
-    padding:10px;
 }
 .box1::-webkit-scrollbar
 {
@@ -295,6 +311,11 @@ label
     border-radius:10px;
     background:var(--red-base)
 }
+/* .box2
+{
+    
+} */
+
 .student-card
 {
     width:305px;
@@ -454,7 +475,7 @@ label
 }
 .alrt-text-1, .alrt-text-2
 {
-    font-family:var(--font-fml-base);
+    font-family:var(--ffml-base);
     font-weight:bold;
     width:100%;
     font-size:15px;

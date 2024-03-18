@@ -9,7 +9,7 @@
 .slides
 {
     width:300%;
-    height:calc(100vh - 140px);
+    height:100%;
     display:flex;
 }
 .slides input
