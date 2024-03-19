@@ -445,6 +445,10 @@ img
     {
         justify-self:center;
     }
+    .maininpt
+    {
+        width:auto;
+    }
 }
 @media screen and (max-width:1350px)
 {
