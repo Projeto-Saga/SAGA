@@ -1,6 +1,6 @@
 <div class="topbar rowalign">
     <a class="saga-titl" href="lobby">
-        <img src="img/logo-n-forwhite.png">
+        <img src="img/logos/logo-n-forwhite.png">
     </a>
 
     <div id="top_bar" class="clmalign" style="margin-right:101px">
@@ -31,9 +31,13 @@
 </div>
 
 <div id="sidebar" class="sidebar clmalign collapse">
-    <img class="sidebar-menu" src="https://cc.sj-cdn.net/instructor/oq965j8f0qmg-zendesk/courses/1gkqtncquj9ay/promo-image.1661989652.png" onclick="show()">
+    <img class="sidebar-menu" src="img/icons/menu-icon.png" onclick="show()">
 
-    <div class="clmalign" style="gap:15px">
+    <div class="clmalign">
+        <a class="sidebar-link" href="lobby">
+            <div class="sidebar-icon"><img src="https://cdn-icons-png.flaticon.com/512/25/25694.png"></div>
+            <div class="sidebar-label invobjct">Página Inicial</div>
+        </a>
         <a class="sidebar-link" href="mybook">
             <div class="sidebar-icon"><img src="https://lapka.by/upload/iblock/e8e/literatura-po-shityu.png"></div>
             <div class="sidebar-label invobjct">Notas e Faltas</div>

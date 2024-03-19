@@ -21,8 +21,7 @@
             <div class="grid-box-1">
                 <div class="box1">
                     <?php
-                    $cmd1 = "SELECT * FROM eventos";
-                    $rst1 = mysqli_query($conn, $cmd1);
+                    $rst1 = mysqli_query($conn, "SELECT * FROM eventos");
                     
                     if (mysqli_affected_rows($conn) > 0)
                     {
@@ -71,7 +70,8 @@
                         </div>
                     </div>
                     <div class="box3">
-                        
+                        <h3 style="margin:0; text-align:center; font-weight:800">Título Exemplo</h3>
+                        <p style="margin:0; text-align:justify; font-weight:500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porta nulla nec turpis pellentesque, vitae fermentum mauris gravida. Nunc et mi in nisi venenatis consectetur. Nunc in lorem a enim vulputate rhoncus. Fusce imperdiet eget lectus vel tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean sed ipsum velit. Pellentesque ultrices a nisi ut elementum. Vestibulum eu eleifend arcu. Sed pulvinar vulputate velit, id bibendum libero consectetur sed. Morbi tincidunt eu sem quis venenatis. Cras nunc magna, convallis eu imperdiet sit amet, elementum et elit. Aliquam eget pulvinar turpis. Praesent tincidunt interdum scelerisque.</p>
                     </div>
                 </div>
             </div>

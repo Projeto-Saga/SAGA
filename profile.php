@@ -18,20 +18,14 @@
                             <input id="file_foto" name="file_foto" type="file" hidden="true">
     
                             <div id="card_imge" class="card-imge">
-                                <img style="height:100%; width:100%;" src="img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png"?>">
+                                <img src="img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png" ?>">
                             </div>
                         </div>
-                        <p class="card-name"><?php echo $name; ?></p>
-                        <?php
-                        for ($i = 1; $i <= 18 - strlen($rmat); $i++)
-                        {
-                            $rmat = "0".$rmat; 
-                        }
-                        ?>
-                        <p class="card-text">MATRÍCULA <?php echo $rmat; ?></p><br>
-                        <p class="card-text"><?php echo "$cicl"."º CICLO"; ?></p>
-                        <p class="card-text"><?php echo $curs; ?></p>
-                        <p class="card-text"><?php echo $mail; ?></p><br>
+                        <p class="card-name"><?php echo $name ?></p>
+                        <p class="card-text">MATRÍCULA <?php echo sprintf("%010d", $rmat) ?></p><br>
+                        <p class="card-text"><?php echo "$cicl"."º CICLO" ?></p>
+                        <p class="card-text"><?php echo $curs ?></p>
+                        <p class="card-text"><?php echo $mail ?></p><br>
                     </form>
                 </div>
                 
