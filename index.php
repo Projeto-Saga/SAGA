@@ -7,7 +7,7 @@
     <?php
         if (isset($_SESSION['ativ']))
         {
-            header('location:lobby');
+            header('location:lobby.php');
         }
         else
         {
@@ -16,14 +16,14 @@
                 $cpf_ = $_POST['cpf_'];
                 $pass = $_POST['pass'];
 
-                $cmd1 = "SELECT * FROM aluno WHERE codg_alun='$cpf_' AND senh_alun='$pass'";
+                $cmd1 = "SELECT flag_user FROM usuario WHERE codg_user='$cpf_' AND senh_user='$pass'";
                 $rst1 = mysqli_query($conn, $cmd1);
 
                 if (mysqli_affected_rows($conn) > 0)
                 {
                     $_SESSION['ativ'] = $cpf_;
 
-                    header('location:lobby');
+                    header('location:lobby.php');
                 }
                 else
                 {
@@ -34,19 +34,22 @@
 
             <div class="clmalign mainform">
                 <form class="clmalign fanimate" action="" method="POST">
-                    <div class="rowalign"><img class="mainlogo" src="img/logo-n-colors.png"></div>
+                    <div class="rowalign"><img class="mainlogo" src="img/logos/logo-n-colors.png"></div>
 
                     <h2>Entrar no SAGA</h2>
 
                     <div class="rowalign">
-                        <div class="clmalign">
-                            <label class="labltext">CPF</label>
-                            <label class="labltext">Senha</label>
+                        <div class="clmalign grid-g15">
+                            <label class="mainlabl">
+                                <img src="img/icons/user-icon.png">
+                            </label>
+                            <label class="mainlabl">
+                                <img src="img/icons/lock-icon.png">
+                            </label>
                         </div>
-                        <div class="vertline"></div>
-                        <div class="clmalign">
-                            <input name="cpf_" class="maininpt" type="text"     placeholder="cpf"   oninput="mask(this, 'cpf_');" required>
-                            <input name="pass" class="maininpt" type="password" placeholder="senha" required>
+                        <div class="clmalign grid-g15">
+                            <input name="cpf_" class="maininpt" type="text" oninput="mask(this, 'cpf_')" required maxlength="14">
+                            <input name="pass" class="maininpt" type="password" required>
                         </div>
                     </div>
                     <?php
@@ -55,7 +58,10 @@
                     echo "<p class=\"retmsge1\">$rslt</p>";
                     }
                     ?>
-                    <input class="mainbutn" type="submit" value="ENTRAR">
+                    <div class="rowalign lognarea">
+                        <input class="mainbutn" type="submit" value="ALUNO">
+                        <input class="mainbutn" type="submit" value="FUNCIONÁRIO">
+                    </div>
                 </form>
             </div>
         <?php

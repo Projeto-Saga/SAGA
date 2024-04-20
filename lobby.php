@@ -75,8 +75,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- -->
             
             <!--<div class="box" style="margin-top:15px; width:auto;">
                 <div class="rowalign">

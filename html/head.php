@@ -18,8 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
-/* WAMP --> */ $conn = mysqli_connect('localhost', 'root', '', 'saga_db');
-// /* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+// /* WAMP --> */ $conn = mysqli_connect('localhost', 'root', '', 'saga_db');
+/* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
 
 session_start();
 
@@ -27,22 +27,40 @@ if (isset($_SESSION['ativ']))
 {
 	$ativ = $_SESSION['ativ'];
 
-	$cmd1 = "SELECT aluno.rmat_alun,aluno.mail_alun,aluno.nome_alun,curso.nome_curs,aluno.cicl_alun,aluno.codg_alun,
-					aluno.senh_alun,aluno.fone_alun,aluno.foto_alun
-			  FROM aluno INNER JOIN curso ON aluno.curs_alun=curso.codg_curs WHERE aluno.codg_alun='$ativ'";
+	$cmd1 = "SELECT flag_user FROM usuario WHERE codg_user='$ativ'";
 	$rst1 = mysqli_query($conn, $cmd1);
 
-	while ($a = mysqli_fetch_array($rst1))
+	while ($a = mysqli_fetch_array($rst1)) $flag = $a[0];
+
+	switch ($flag)
 	{
-		$rmat = $a[0];
-		$mail = $a[1];
-		$name = $a[2];
-		$curs = $a[3];
-		$cicl = $a[4];
-		$codg = $a[5];
-		$pass = $a[6];
-		$fone = $a[7];
-		$imge = $a[8];
+		case 'A':
+			$cmd2 = "SELECT u.regx_user,u.mail_user,u.nome_user,c.nome_curs,a.cicl_alun,u.codg_user,
+					u.senh_user,u.fone_user,u.foto_user
+			FROM usuario AS u INNER JOIN aluno AS a ON u.regx_user=a.regx_user 
+							INNER JOIN curso AS c ON a.curs_alun=c.codg_curs
+			WHERE u.flag_user='A' AND u.codg_user='$ativ'";
+			$rst2 = mysqli_query($conn, $cmd2);
+
+			while ($b = mysqli_fetch_array($rst2))
+			{
+				$rmat = $b[0];
+				$mail = $b[1];
+				$name = $b[2];
+				$curs = $b[3];
+				$cicl = $b[4];
+				$codg = $b[5];
+				$pass = $b[6];
+				$fone = $b[7];
+				$imge = $b[8];
+			}
+		break;
+		
+		case 'S':
+		break;
+
+		case 'F':
+		break;
 	}
 }
 ?>
