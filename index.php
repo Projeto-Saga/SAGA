@@ -16,7 +16,7 @@
                 $cpf_ = $_POST['cpf_'];
                 $pass = $_POST['pass'];
 
-                $cmd1 = "SELECT * FROM aluno WHERE codg_alun='$cpf_' AND senh_alun='$pass'";
+                $cmd1 = "SELECT flag_user FROM usuario WHERE codg_user='$cpf_' AND senh_user='$pass'";
                 $rst1 = mysqli_query($conn, $cmd1);
 
                 if (mysqli_affected_rows($conn) > 0)
@@ -40,8 +40,12 @@
 
                     <div class="rowalign">
                         <div class="clmalign grid-g15">
-                            <label class="mainlabl">CPF</label>
-                            <label class="mainlabl">Senha</label>
+                            <label class="mainlabl">
+                                <img src="img/icons/user-icon.png">
+                            </label>
+                            <label class="mainlabl">
+                                <img src="img/icons/lock-icon.png">
+                            </label>
                         </div>
                         <div class="clmalign grid-g15">
                             <input name="cpf_" class="maininpt" type="text" oninput="mask(this, 'cpf_')" required maxlength="14">

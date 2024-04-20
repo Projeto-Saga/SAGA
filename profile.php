@@ -40,7 +40,7 @@
                         <input name="pass" type="text" class="update-input" value="<?php echo $pass; ?>">
                         <h1 class="update-group">Institucional</h1>
                         <label class="update-label">RA</label>
-                        <input type="text" class="update-input disabled" value="<?php echo $rmat; ?>" disabled>
+                        <input type="text" class="update-input disabled" value="<?php echo sprintf("%010d", $rmat) ?>" disabled>
                         <label class="update-label">Curso</label>
                         <input type="text" class="update-input disabled" value="<?php echo $curs; ?>" disabled>
 

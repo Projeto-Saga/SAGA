@@ -48,15 +48,18 @@ label
 .mainlabl
 {
     height:35px;
-    width:70px;
     display:flex;
-    flex-direction:column;
     justify-content:center;
-    text-align:right;
+    align-items:center;
+    padding:0 8px 0 12px;
     background:#ddd;
     color:var(--red-dark);
-    padding-right:5px;
     border-radius:17px 0 0 17px;
+}
+.mainlabl img
+{
+    height:20px;
+    width:20px;
 }
 .maininpt
 {
@@ -422,7 +425,7 @@ label
 .retmsge1
 {
     text-align:center;
-    margin-top:-5px;
+    margin-bottom:0;
     color:red;
 }
 .fanimate
