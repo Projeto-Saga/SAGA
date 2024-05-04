@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 20-Abr-2024 às 13:35
+-- Tempo de geração: 04-Maio-2024 às 14:19
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 8.1.3
 
@@ -28,17 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `aluno` (
-  `regx_user` char(10) NOT NULL,
+  `rmat_alun` int(11) NOT NULL,
+  `codg_alun` char(14) NOT NULL,
+  `mail_alun` varchar(100) NOT NULL,
+  `nome_alun` varchar(60) NOT NULL,
+  `senh_alun` varchar(24) NOT NULL,
+  `fone_alun` char(15) NOT NULL,
   `curs_alun` int(11) NOT NULL,
-  `cicl_alun` int(11) NOT NULL DEFAULT '1'
+  `cicl_alun` int(11) NOT NULL DEFAULT '1',
+  `foto_alun` char(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `aluno`
 --
 
-INSERT INTO `aluno` (`regx_user`, `curs_alun`, `cicl_alun`) VALUES
-('1', 1, 1);
+INSERT INTO `aluno` (`rmat_alun`, `codg_alun`, `mail_alun`, `nome_alun`, `senh_alun`, `fone_alun`, `curs_alun`, `cicl_alun`, `foto_alun`) VALUES
+(1, '111.111.111-11', 'rogerio.gomes@maltec.sp.gov.br', 'ROGÉRIO DA SILVA GOMES', 'pamonão', '(11) 91234-4567', 1, 2, NULL),
+(2, '222.222.222-22', 'ariel.souza@maltec.sp.gov.br', 'ARIEL SOUZA', 'cocacolamata', '(11) 95412-5345', 1, 1, 'IMG_0000000002.jpg');
 
 -- --------------------------------------------------------
 
@@ -47,18 +54,39 @@ INSERT INTO `aluno` (`regx_user`, `curs_alun`, `cicl_alun`) VALUES
 --
 
 CREATE TABLE `cursando` (
-  `iden_crsn` int(11) NOT NULL,
-  `regx_user` int(11) NOT NULL,
-  `idmt_crsn` int(11) NOT NULL,
-  `ntp1_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `ntp2_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `ntp3_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `nttt_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `falt_crsn` int(11) NOT NULL DEFAULT '0',
-  `cicl_alun` int(11) NOT NULL,
-  `_ano_crsn` char(4) COLLATE utf8_unicode_ci NOT NULL,
-  `situ_crsn` enum('Em Aberto','Retido','Aprovado') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Em Aberto'
+  `mater_curs` int(11) NOT NULL,
+  `rmat_alun` int(11) NOT NULL,
+  `cod_materia` int(11) NOT NULL,
+  `notap1_curs` int(11) NOT NULL DEFAULT '0',
+  `notap2_curs` int(11) NOT NULL DEFAULT '0',
+  `notap3_curs` int(11) NOT NULL DEFAULT '0',
+  `notatt_curs` int(11) NOT NULL DEFAULT '0',
+  `faltas_curs` int(11) NOT NULL DEFAULT '0',
+  `cicl_curs` int(11) NOT NULL,
+  `ano_curs` char(4) COLLATE utf8_unicode_ci NOT NULL,
+  `situac_curs` enum('Em Aberto','Retido','Aprovado') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Em Aberto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `cursando`
+--
+
+INSERT INTO `cursando` (`mater_curs`, `rmat_alun`, `cod_materia`, `notap1_curs`, `notap2_curs`, `notap3_curs`, `notatt_curs`, `faltas_curs`, `cicl_curs`, `ano_curs`, `situac_curs`) VALUES
+(1, 1, 1, 5, 3, 1, 7, 8, 1, '2023', 'Retido'),
+(2, 1, 3, 10, 9, 0, 10, 0, 1, '2023', 'Aprovado'),
+(3, 1, 6, 9, 8, 0, 10, 4, 1, '2023', 'Aprovado'),
+(4, 1, 7, 10, 10, 0, 9, 0, 1, '2023', 'Aprovado'),
+(5, 1, 1, 6, 0, 0, 8, 12, 2, '2023', 'Em Aberto'),
+(6, 1, 4, 9, 0, 0, 8, 8, 2, '2023', 'Em Aberto'),
+(7, 1, 8, 8, 0, 0, 7, 0, 2, '2023', 'Em Aberto'),
+(8, 1, 9, 6, 0, 0, 8, 4, 2, '2023', 'Em Aberto'),
+(9, 2, 1, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado'),
+(10, 2, 3, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado'),
+(11, 2, 5, 3, 6, 6, 7, 0, 1, '2023', 'Aprovado'),
+(12, 2, 6, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado'),
+(13, 2, 7, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado'),
+(14, 2, 10, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado'),
+(15, 2, 15, 10, 10, 0, 10, 0, 1, '2023', 'Aprovado');
 
 -- --------------------------------------------------------
 
@@ -112,6 +140,22 @@ INSERT INTO `eventos` (`id_evento`, `tipo_event`, `nome_event`, `data_event`, `l
 (1, 'Palestra', 'Interação Humano-Computador', '2023-11-29', 'Auditório', 'A revolução digital está em constante evolução, e a chave para moldar o futuro tecnológico reside na compreensão profunda da interação humano-computador. A Faculdade de Técnologia tem o prazer de apresentar uma palestra fascinante que mergulhará nas nuances dessa interação dinâmica, trazendo à tona insights cruciais e perspectivas inovadoras. Junte-se a renomados especialistas no campo da Interação Humano-Computador, cujas contribuições têm impactado significativamente a forma como interagimos com a tecnologia no nosso dia a dia. Eles compartilharão experiências práticas, pesquisas avançadas e visões futuras que prometem transformar a maneira como percebemos e utilizamos a tecnologia.', 2, 'slide-1.png'),
 (2, 'Palestra', 'Programa InterStudy', '2023-11-27', 'Auditório', 'A Faculdade de Tecnologia tem o prazer de convidar todos os estudantes para uma palestra exclusiva que abrirá portas para um emocionante programa de intercâmbio estudantil com o renomado Instituto de Tecnologia de Massachusetts (MIT). Durante esta palestra informativa, você terá a oportunidade única de aprender sobre as vantagens e experiências que aguardam aqueles que são selecionados para participar do programa de intercâmbio com o MIT. Professores e representantes do programa estarão presentes para compartilhar informações cruciais sobre os requisitos de inscrição, os benefícios acadêmicos e a vida no campus do MIT.', 2, 'slide-2.png'),
 (3, 'Vestibular', 'Vestibular 2024', '2024-01-07', 'FATEC', 'Você está pronto para dar o próximo passo em direção a um futuro repleto de oportunidades inovadoras? A Faculdade de Tecnologia FATEC está entusiasmada em anunciar o Vestibular para o Primeiro Semestre de 2024, convidando mentes curiosas e apaixonadas pela tecnologia a se juntarem a nós nesta jornada educacional excepcional.A Instituição é reconhecida nacional e internacionalmente por seu compromisso com a excelência acadêmica. Nossos programas de tecnologia são desenvolvidos em colaboração com líderes do setor, garantindo que nossos alunos estejam na vanguarda das últimas tendências e inovações.', 4, 'slide-3.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `funcionario`
+--
+
+CREATE TABLE `funcionario` (
+  `id_func` int(11) NOT NULL,
+  `codg_func` char(14) COLLATE utf8_unicode_ci NOT NULL,
+  `mail_func` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `nome_func` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `senh_func` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
+  `fone_func` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `flag_func` enum('S','P') COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -196,40 +240,23 @@ CREATE TABLE `telefone` (
 INSERT INTO `telefone` (`iden_fone`, `idal_fone`, `nmro_fone`) VALUES
 (12, 2, '(11) 98737-6222');
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
---
-
-CREATE TABLE `usuario` (
-  `iden_user` int(11) NOT NULL,
-  `codg_user` char(14) COLLATE utf8_unicode_ci NOT NULL,
-  `regx_user` int(11) NOT NULL,
-  `mail_user` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `senh_user` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
-  `nome_user` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `fone_user` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `foto_user` text COLLATE utf8_unicode_ci,
-  `flag_user` enum('A','S','P') COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`iden_user`, `codg_user`, `regx_user`, `mail_user`, `senh_user`, `nome_user`, `fone_user`, `foto_user`, `flag_user`) VALUES
-(1, '111.111.111-11', 1, 'mauricio.soares@maltec.sp.gov.br', '12345678', 'MAURÍCIO DA SILVA SOARES', '(11) 91234-5678', NULL, 'A');
-
 --
 -- Índices para tabelas despejadas
 --
 
 --
+-- Índices para tabela `aluno`
+--
+ALTER TABLE `aluno`
+  ADD PRIMARY KEY (`rmat_alun`),
+  ADD UNIQUE KEY `codg_alun` (`codg_alun`),
+  ADD UNIQUE KEY `mail_alun` (`mail_alun`);
+
+--
 -- Índices para tabela `cursando`
 --
 ALTER TABLE `cursando`
-  ADD PRIMARY KEY (`iden_crsn`);
+  ADD PRIMARY KEY (`mater_curs`);
 
 --
 -- Índices para tabela `curso`
@@ -245,6 +272,14 @@ ALTER TABLE `curso`
 ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id_evento`),
   ADD UNIQUE KEY `nome_event` (`nome_event`);
+
+--
+-- Índices para tabela `funcionario`
+--
+ALTER TABLE `funcionario`
+  ADD PRIMARY KEY (`id_func`),
+  ADD UNIQUE KEY `codg_prof` (`codg_func`),
+  ADD UNIQUE KEY `mail_prof` (`mail_func`);
 
 --
 -- Índices para tabela `materia`
@@ -265,23 +300,20 @@ ALTER TABLE `telefone`
   ADD PRIMARY KEY (`iden_fone`);
 
 --
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`iden_user`),
-  ADD UNIQUE KEY `codg_prof` (`codg_user`),
-  ADD UNIQUE KEY `mail_prof` (`mail_user`),
-  ADD UNIQUE KEY `regx_user` (`regx_user`);
-
---
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `aluno`
+--
+ALTER TABLE `aluno`
+  MODIFY `rmat_alun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `cursando`
 --
 ALTER TABLE `cursando`
-  MODIFY `iden_crsn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mater_curs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `curso`
@@ -294,6 +326,12 @@ ALTER TABLE `curso`
 --
 ALTER TABLE `eventos`
   MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `funcionario`
+--
+ALTER TABLE `funcionario`
+  MODIFY `id_func` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `materia`
@@ -312,12 +350,6 @@ ALTER TABLE `solicitacoes`
 --
 ALTER TABLE `telefone`
   MODIFY `iden_fone` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `iden_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

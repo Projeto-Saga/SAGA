@@ -74,32 +74,16 @@ label
     /* box-shadow:0 0 5px 1px var(--red-dark) */
     background-color:#eee;
 }
-.lognarea
+.mainbutn
 {
     margin-top:15px;
     width:100%;
-}
-.mainbutn:nth-child(1)
-{
     background:var(--red-dark);
-    border-radius:20px 0 0 20px;
+    border-radius:20px;
 }
-.mainbutn:nth-child(1):hover
+.mainbutn:hover
 {
     color:var(--red-dark);
-}
-.mainbutn:nth-child(2)
-{
-    background:var(--blue-base);
-    border-radius:0 20px 20px 0;
-}
-.mainbutn:nth-child(2):hover
-{
-    color:var(--blue-base);
-}
-.mainbutn
-{
-    width:50%;
 }
 .mainbutn, .demibutn
 {

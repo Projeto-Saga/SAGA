@@ -58,10 +58,7 @@
                     echo "<p class=\"retmsge1\">$rslt</p>";
                     }
                     ?>
-                    <div class="rowalign lognarea">
-                        <input class="mainbutn" type="submit" value="ALUNO">
-                        <input class="mainbutn" type="submit" value="FUNCIONÁRIO">
-                    </div>
+                    <input class="mainbutn" type="submit" value="ENTRAR">
                 </form>
             </div>
         <?php
