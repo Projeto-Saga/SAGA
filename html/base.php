@@ -1,5 +1,5 @@
 <div class="topbar rowalign">
-    <a class="saga-titl" href="lobby">
+    <a class="saga-titl" href="lobby.php">
         <img src="img/logos/logo-n-forwhite.png">
     </a>
 
@@ -38,17 +38,35 @@
             <div class="sidebar-icon"><img src="https://cdn-icons-png.flaticon.com/512/25/25694.png"></div>
             <div class="sidebar-label invobjct">Página Inicial</div>
         </a>
+        <?php
+        if ($flag == "A")
+        {?>
         <a class="sidebar-link" href="mybook.php">
             <div class="sidebar-icon"><img src="https://lapka.by/upload/iblock/e8e/literatura-po-shityu.png"></div>
             <div class="sidebar-label invobjct">Notas e Faltas</div>
         </a>
+        <?php
+        }
+        if ($flag == "P")
+        {?>
+        <a class="sidebar-link" href="setbook.php">
+            <div class="sidebar-icon"><img src="https://lapka.by/upload/iblock/e8e/literatura-po-shityu.png"></div>
+            <div class="sidebar-label invobjct">Atribuições</div>
+        </a>
+        <?php
+        }?>
         <a class="sidebar-link" href="calendar.php">
             <div class="sidebar-icon"><img src="https://icon-library.com/images/calendar-icon-png/calendar-icon-png-2.jpg"></div>
             <div class="sidebar-label invobjct">Calendário</div>
         </a>
+        <?php
+        if ($flag == "A")
+        {?>
         <a class="sidebar-link" href="requests.php">
             <div class="sidebar-icon"><img src="https://cdn1.iconfinder.com/data/icons/business-705/70/reception__office__desk__employee__screen-512.png"></div>
             <div class="sidebar-label invobjct">Secretaria</div>
         </a>
+        <?php
+        }?>
     </div>
 </div>
