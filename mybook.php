@@ -37,9 +37,9 @@
                         <h2 class="book-item">Matérias</h2>
                         <ul class="book-item-list">
                         <?php
-                        $cmd2 = "SELECT materia.nome_materia FROM materia
-                                 INNER JOIN cursando ON materia.cod_materia=cursando.cod_materia
-                                 WHERE cursando.rmat_alun='$rmat' AND cursando.cicl_curs='$tick'";
+                        $cmd2 = "SELECT matr.nome_matr
+                                FROM materia AS matr INNER JOIN cursando AS crsn ON matr.iden_matr=crsn.iden_matr
+                                WHERE crsn.regx_user=$rmat AND crsn.cicl_alun=$tick";
                         $rst2 = mysqli_query($conn, $cmd2);
                         
                         while ($b = mysqli_fetch_array($rst2))
@@ -54,8 +54,8 @@
                         <h2 class="book-item">Médias</h2>
                         <ul class="book-item-list">
                         <?php
-                        $cmd3 = "SELECT notap1_curs,notap2_curs,notap3_curs,notatt_curs,mater_curs
-                                 FROM cursando WHERE rmat_alun='$rmat' AND cicl_curs='$tick'";
+                        $cmd3 = "SELECT ntp1_crsn,ntp2_crsn,ntp3_crsn,nttt_crsn,iden_matr
+                                FROM cursando WHERE regx_user=$rmat AND cicl_alun=$tick";
                         $rst3 = mysqli_query($conn, $cmd3);
                         
                         while ($c = mysqli_fetch_array($rst3))
@@ -91,7 +91,7 @@
                         <h2 class="book-item">Faltas</h2>
                         <ul class="book-item-list">
                         <?php
-                        $cmd4 = "SELECT faltas_curs FROM cursando WHERE rmat_alun='$rmat' AND cicl_curs='$tick'";
+                        $cmd4 = "SELECT falt_crsn FROM cursando WHERE regx_user=$rmat AND cicl_alun=$tick";
                         $rst4 = mysqli_query($conn, $cmd4);
                         
                         while ($d = mysqli_fetch_array($rst4))
@@ -106,7 +106,7 @@
                         <h2 class="book-item">Situação</h2>
                         <ul class="book-item-list">
                         <?php
-                        $cmd5 = "SELECT situac_curs FROM cursando WHERE rmat_alun='$rmat' AND cicl_curs='$tick'";
+                        $cmd5 = "SELECT situ_crsn FROM cursando WHERE regx_user=$rmat AND cicl_alun=$tick";
                         $rst5 = mysqli_query($conn, $cmd5);
                         
                         while ($e = mysqli_fetch_array($rst5))

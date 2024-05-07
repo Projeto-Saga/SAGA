@@ -5,9 +5,9 @@
 
     <div id="top_bar" class="clmalign" style="margin-right:101px">
         <div class="rowalign">
-            <a class="topbar-link" href="">NOTAS E FALTAS</a>
-            <a class="topbar-link" href="">CALENDÁRIO</a>
-            <a class="topbar-link" href="">SECRETARIA</a>
+            <a class="topbar-link" href="">CURSOS</a>
+            <a class="topbar-link" href="">MATERIAIS</a>
+            <a class="topbar-link" href="">PROJETOS</a>
         </div>
 
         <hr class="topbar-hr">

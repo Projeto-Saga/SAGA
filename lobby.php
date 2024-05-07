@@ -21,7 +21,7 @@
             <div class="grid-box-1">
                 <div class="box1">
                     <?php
-                    $rst1 = mysqli_query($conn, "SELECT * FROM eventos");
+                    $rst1 = mysqli_query($conn, "SELECT * FROM evento");
                     
                     if (mysqli_affected_rows($conn) > 0)
                     {

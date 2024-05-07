@@ -6,28 +6,28 @@
         <script>
             function form(iden)
             {
-                var trgt = document.getElementsByClassName('alrt-text-1');
+                // var trgt = document.getElementsByClassName('alrt-text-1');
                 
-                for (var i = 0; i < trgt.length; i++)
+                for (var i = 0; i <= 6; i++)
                 {
-                    trgt[i].classList.add('stud-hidden');
+                    $(`#form_${i}`).addClass("stud-hidden");
                 }
                 
-                var trgt = document.getElementsByClassName('alrt-text-2');
+                // var trgt = document.getElementsByClassName('alrt-text-2');
                 
-                for (var i = 0; i < trgt.length; i++)
-                {
-                    trgt[i].classList.add('stud-hidden');
-                }
+                // for (var i = 0; i < trgt.length; i++)
+                // {
+                //     trgt[i].classList.add('stud-hidden');
+                // }
                 
-                for (var i = 1; i <= 6; i++)
-                {
-                    var trgt = document.getElementById('form_'+i);
+                // for (var i = 1; i <= 6; i++)
+                // {
+                //     var trgt = document.getElementById('form_'+i);
                     
-                    !trgt.classList.contains('stud-hidden') ? trgt.classList.add('stud-hidden') : null;
-                }
+                //     !trgt.classList.contains('stud-hidden') ? trgt.classList.add('stud-hidden') : null;
+                // }
                 
-                document.getElementById('form_'+iden).classList.remove('stud-hidden');
+                $(`#form_${iden}`).removeClass("stud-hidden");
             }
             
             function tick(iden)
@@ -78,6 +78,7 @@
                         <div class="reqs-docs-item-head">Histórico Escolar</div>
                     </div>
                 </div>
+
                 <div id="form_1" class="reqs-form rowalign">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Passe Escolar</h3>
@@ -123,7 +124,7 @@
                         <br>
                         <label name="mtap_solc" class="reqs-form-labl">Próximas Disciplinas</label>
                         <?php
-                        $cmd4 = "SELECT cod_materia,nome_materia FROM materia WHERE ciclprev_materia='".($cicl+1)."'";
+                        $cmd4 = "SELECT iden_matr,nome_matr FROM materia WHERE ccpv_matr='".($cicl+1)."'";
                         $rst4 = mysqli_query($conn, $cmd4);
                         
                         while ($d = mysqli_fetch_array($rst4))
@@ -174,7 +175,10 @@
                         <label class="reqs-form-labl">Disciplina</label>
                         <select name="mtau_solc" class="reqs-form-inpt">
                             <?php
-                            $cmd3 = "SELECT materia.cod_materia,materia.nome_materia FROM materia LEFT JOIN cursando ON materia.cod_materia=cursando.cod_materia LEFT JOIN aluno ON cursando.cicl_curs=aluno.cicl_alun WHERE cursando.rmat_alun='$rmat' AND aluno.cicl_alun='$cicl'";
+                            $cmd3 = "SELECT matr.iden_matr,matr.nome_matr
+                                    FROM materia AS matr LEFT JOIN cursando AS crsn ON matr.iden_matr=crsn.iden_matr
+                                                         LEFT JOIN aluno    AS alun ON crsn.cicl_alun=alun.cicl_alun
+                                    WHERE crsn.regx_user=$rmat AND alun.cicl_alun=$cicl";
                             $rst3 = mysqli_query($conn, $cmd3);
                             
                             while ($c = mysqli_fetch_array($rst3))
@@ -226,7 +230,9 @@
                                 <th class="reqs-form-form-th">SITUAÇÃO</th>
                             </tr>
                             <?php
-                            $cmd2 = "SELECT materia.nome_materia,cursando.notap1_curs,cursando.notap2_curs,cursando.notap3_curs,cursando.notatt_curs,cursando.faltas_curs,materia.carga_horaria,cursando.ano_curs,cursando.cicl_curs,cursando.situac_curs FROM cursando INNER JOIN materia ON cursando.cod_materia=materia.cod_materia WHERE cursando.rmat_alun='$rmat'";
+                            $cmd2 = "SELECT matr.nome_matr,crsn.ntp1_crsn,crsn.ntp2_crsn,crsn.ntp3_crsn,crsn.nttt_crsn,
+                                            crsn.falt_crsn,matr.chor_matr,crsn._ano_crsn,crsn.cicl_alun,crsn.situ_crsn
+                                    FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr WHERE crsn.regx_user='$rmat'";
                             $rst2 = mysqli_query($conn, $cmd2);
                             
                             while ($b = mysqli_fetch_array($rst2))

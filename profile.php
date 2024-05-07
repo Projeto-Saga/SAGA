@@ -49,7 +49,7 @@
                         <input id="slctfone" name="exclfone" type="hidden">
                         <input name="fone" type="text" class="update-input" placeholder="(00) 90000-0000" value="<?php echo $fone; ?>" oninput="mask(this, 'fone');" minlength="15" maxlength="15">
                         <?php
-                        $cmd2 = "SELECT nmro_fone,iden_fone FROM telefone WHERE idal_fone='$rmat'";
+                        $cmd2 = "SELECT nmro_fone,iden_fone FROM telefone WHERE iden_alun='$iden'";
                         $rst2 = mysqli_query($conn, $cmd2);
 
                         if (mysqli_affected_rows($conn) > 0)

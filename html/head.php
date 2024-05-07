@@ -18,8 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
-// /* WAMP --> */ $conn = mysqli_connect('localhost', 'root', '', 'saga_db');
-/* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+/* WAMP --> */ $conn = mysqli_connect('localhost', 'root', '', 'saga_db');
+// /* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
 
 session_start();
 
@@ -35,11 +35,11 @@ if (isset($_SESSION['ativ']))
 	switch ($flag)
 	{
 		case 'A':
-			$cmd2 = "SELECT u.regx_user,u.mail_user,u.nome_user,c.nome_curs,a.cicl_alun,u.codg_user,
-					u.senh_user,u.fone_user,u.foto_user
-			FROM usuario AS u INNER JOIN aluno AS a ON u.regx_user=a.regx_user 
-							INNER JOIN curso AS c ON a.curs_alun=c.codg_curs
-			WHERE u.flag_user='A' AND u.codg_user='$ativ'";
+			$cmd2 = "SELECT user.regx_user,user.mail_user,user.nome_user,curs.nome_curs,alun.cicl_alun,user.codg_user,
+							user.senh_user,user.fone_user,user.foto_user,alun.iden_alun
+					FROM usuario AS user INNER JOIN aluno AS alun ON user.regx_user=alun.regx_user 
+										 INNER JOIN curso AS curs ON alun.iden_curs=curs.iden_curs
+					WHERE user.flag_user='A' AND user.codg_user='$ativ'";
 			$rst2 = mysqli_query($conn, $cmd2);
 
 			while ($b = mysqli_fetch_array($rst2))
@@ -53,6 +53,7 @@ if (isset($_SESSION['ativ']))
 				$pass = $b[6];
 				$fone = $b[7];
 				$imge = $b[8];
+				$iden = $b[9];
 			}
 		break;
 		
