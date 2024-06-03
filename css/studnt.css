@@ -61,33 +61,23 @@
     border-radius:5px 5px 0 0;
     border-style:solid;
     border-width:0 0 1px 0;
-    border-color:var(--blue-base);
+    border-color:black;
     margin-bottom:5px;
     transition:all 0.3s ease;
 }
-.update-input:hover
+.update-input[disabled]
 {
-    color:var(--blue-base)
+    background:#eee;
+    color:gray;
+    cursor:not-allowed;
 }
-.update-input:focus
+.update-input:not([disabled]):hover
 {
-    box-shadow:inset 0 0 10px -1px var(--blue-base)
+    color:var(--blue-base);
+    border-color:var(--blue-base);
 }
-.demibutn
+#studform
 {
-    height:36px;
-    width:50%;
-    margin:-4px 0 0 5px;
-    background:var(--blue-base)
-}
-.demibutn:hover
-{
-    color:var(--blue-base)
-}
-.profile
-{
-    width:auto;
-    display:grid;
-    grid-gap:20px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    padding:30px;
+    width:calc(100% - 60px);
 }

@@ -71,6 +71,12 @@
     padding:25px;
     font-family:Poppins;
     font-size:16px;
+    border-collapse:collapse;
+}
+.reqs-form-form tbody
+{
+    box-shadow:0 0 10px 1px #464BD9;
+    border-radius:18px;
 }
 .reqs-form-form-th, .reqs-form-form-td
 {
@@ -81,6 +87,22 @@
     text-align:left;
     background:#464BD9;
     color:white;
+}
+.reqs-form-form-th:first-child
+{
+    border-top-left-radius:15px;
+}
+.reqs-form-form-th:last-child
+{
+    border-top-right-radius:15px;
+}
+.reqs-form-form tr:nth-child(odd)
+{
+    background:#ddd;
+}
+.reqs-form-form.dark-mode tr:nth-child(odd)
+{
+    background:#111;
 }
 
 #form_1 {box-shadow:0 0 10px -1px #5ba334;}
@@ -112,6 +134,11 @@
     height:35px;
     padding:5px 8px 8px 8px;
     font-family:"Leelawadee UI";
+}
+.reqs-form-inpt.dark-mode
+{
+    background:#111;
+    border-color:black;
 }
 .reqs-form-inpt:focus, .reqs-form-butn:focus, .reqs-form-data:focus
 {
@@ -174,15 +201,3 @@
         width:auto;
     }
 }
-/*@media screen and (max-width:1265px)*/
-/*{*/
-/*    .table-container*/
-/*    {*/
-/*        width:1fr;*/
-/*        overflow-x:scroll;*/
-/*    }*/
-/*    .reqs-form-form*/
-/*    {*/
-/*        width:755px;*/
-/*    }*/
-/*}*/

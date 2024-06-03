@@ -3,6 +3,12 @@
         <img src="img/logos/logo-n-forwhite.png">
     </a>
 
+    <div class="darkmode">
+        <button onclick="darkmode()">
+            <img src="img/icons/darkmode-icon.png">
+        </button>
+    </div>
+
     <div id="top_bar" class="clmalign" style="margin-right:101px">
         <div class="rowalign">
             <a class="topbar-link" href="">CURSOS</a>
@@ -70,3 +76,41 @@
         }?>
     </div>
 </div>
+
+<script>
+    const elements = ["box", "box1", "box2", "box3", "topbar", "post p", "saga-stud", "darkmode", "reqs-form-form", "reqs-form-inpt"];
+
+    function darkmode()
+    {
+        if (localStorage.getItem("darkmode") == 'N' ||
+            localStorage.getItem("darkmode") == undefined)
+        {
+            localStorage.setItem("darkmode", 'S');
+        }
+        else if (localStorage.getItem("darkmode") == 'S')
+        {
+            localStorage.setItem("darkmode", 'N');
+        }
+
+        location.reload();
+    }
+
+    $(document).ready(function()
+    {
+        if (localStorage.getItem("darkmode") == 'N' ||
+            localStorage.getItem("darkmode") == undefined)
+        {
+            $.each(elements, function(key, val)
+            {
+                $(`.${val}`).removeClass("dark-mode");
+            });
+        }
+        else if (localStorage.getItem("darkmode") == 'S')
+        {
+            $.each(elements, function(key, val)
+            {
+                $(`.${val}`).addClass("dark-mode");
+            });
+        }
+    });
+</script>

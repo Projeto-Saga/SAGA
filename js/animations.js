@@ -23,3 +23,8 @@ function show()
         }
     }
 }
+
+function modal(modal)
+{
+    modal.removeClass("hidden");
+}
