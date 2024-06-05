@@ -22,6 +22,8 @@
 // /* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
 
 session_start();
+include("php/controller.php");
+$main = new Controller();
 
 if (isset($_SESSION['ativ']))
 {

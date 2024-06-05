@@ -11,8 +11,8 @@
         ?>
 
         <div class="content fanimate">
-            <div class="box">
-                <div id="studform" class="clmalign" enctype="multipart/form-data">
+            <form id="studform" class="box" enctype="multipart/form-data">
+                <div class="clmalign">
                     <h1 class="update-group" style="margin-top:0;">Básico</h1>
                     <label class="update-label">Nome</label>
                     <input type="text" class="update-input" value="<?php echo $name; ?>" disabled>
@@ -59,8 +59,8 @@
                         <input id="" type="button" class="mainbutn" value="Salvar Alterações">
                         <input id="" type="button" class="mainbutn" value="Visualizar Carteirinha" onclick="modal($('#studcard'))">
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
 
             <div id="studcard" class="modal hidden">
                 <form id="stud_card" class="student-card" method="POST" enctype="multipart/form-data" action="php/upload.php">
@@ -89,22 +89,4 @@
     </body>
 </html>
 
-<script>
-    function slct_fone(fone)
-    {
-        document.getElementById('slctfone').value = fone;
-    }
-
-    let foto = document.getElementById("card_imge");
-    let file = document.getElementById("file_foto");
-
-    // foto.addEventListener('click', function()
-    // {
-    //     file.click();
-    // });
-    
-    // document.getElementById('file_foto').addEventListener('change', function(event)
-    // {
-    //     document.getElementById('stud_card').submit();
-    // });
-</script>
+<script src="js/profile.js"></script>

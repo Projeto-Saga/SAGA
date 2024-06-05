@@ -8,9 +8,10 @@
     --red-dark:#bf0000;
 
     --gray-base:#d4cdce;
-    --white-base: #eee;
+    --white-base:white;
 
     --blue-base:#0198f8;
+    --blue-dark:#0b4cbc;
 
     /* font families */
     --ffml-base:"Poppins";
@@ -135,12 +136,20 @@ label
 }
 .topbar-link:hover
 {
-    color:var(--red-dark)
+    color:var(--red-base);
+}
+.topbar-link.dark-mode:hover
+{
+    color:var(--blue-base);
 }
 .topbar-hr
 {
     width:500px;
     border:solid 2px #222;
+}
+.topbar-hr.dark-mode
+{
+    border-color:#eee;
 }
 .saga-titl
 {
@@ -148,6 +157,10 @@ label
     height:50px;
     position:fixed;
     left:130px;
+}
+.saga-titl.dark-mode img
+{
+    filter:invert(1);    
 }
 .saga-stud
 {
@@ -354,6 +367,10 @@ label
 .box1::-webkit-scrollbar-thumb
 {
     border-radius:10px;
+    background:var(--blue-base)
+}
+.box1.dark-mode::-webkit-scrollbar-thumb
+{
     background:var(--red-base)
 }
 .box2
@@ -373,7 +390,7 @@ label
 .dark-mode
 {
     color:#eee;
-    background:#222;
+    background:#2c2c2c;
 }
 .darkmode
 { 
@@ -487,7 +504,7 @@ label
 
 h2
 {
-    color:var(--red-dark);
+    color:var(--red-base);
     margin:10px 0 10px 0;
 }
 img

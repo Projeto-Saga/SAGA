@@ -2,52 +2,6 @@
 <html>
     <head>
         <?php include('html/head.php'); ?>
-        
-        <script>
-            function form(iden)
-            {
-                // var trgt = document.getElementsByClassName('alrt-text-1');
-                
-                for (var i = 0; i <= 6; i++)
-                {
-                    $(`#form_${i}`).addClass("stud-hidden");
-                }
-                
-                // var trgt = document.getElementsByClassName('alrt-text-2');
-                
-                // for (var i = 0; i < trgt.length; i++)
-                // {
-                //     trgt[i].classList.add('stud-hidden');
-                // }
-                
-                // for (var i = 1; i <= 6; i++)
-                // {
-                //     var trgt = document.getElementById('form_'+i);
-                    
-                //     !trgt.classList.contains('stud-hidden') ? trgt.classList.add('stud-hidden') : null;
-                // }
-                
-                $(`#form_${iden}`).removeClass("stud-hidden");
-            }
-            
-            function tick(iden)
-            {
-                var trgt = document.getElementById('aprv_mat'+iden);
-                
-                trgt.checked == true ? trgt.checked = false : trgt.checked = true;
-            }
-            
-            function file(iden)
-            {
-                var trgt = document.getElementById("file"+iden);
-                trgt.click();
-                
-                trgt.addEventListener('change', function(event)
-                {
-                    document.getElementById('file_show'+iden).value = trgt.files[0].name;
-                });
-            }
-        </script>
     </head>
     <body>
         <?php
@@ -58,6 +12,7 @@
 
         <div class="content fanimate">
             <div class="box">
+                <!-- índice de abas -->
                 <div class="reqs-docs">
                     <div id="rdit_1" class="reqs-docs-item" onclick="form(1);">
                         <div class="reqs-docs-item-head">Passe Escolar</div>
@@ -79,6 +34,8 @@
                     </div>
                 </div>
 
+                <!-- corpo das abas -->
+                <!-- passe escolar -->
                 <div id="form_1" class="reqs-form rowalign">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Passe Escolar</h3>
@@ -108,6 +65,7 @@
                         <input class="reqs-form-butn" type="submit" value="Concluído">
                     </form>
                 </div>
+                <!-- aproveitamento -->
                 <div id="form_2" class="reqs-form rowalign stud-hidden">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Aproveitamento de Estudos</h3>
@@ -139,16 +97,19 @@
                         <input class="reqs-form-butn" type="submit" value="Concluído">
                     </form>
                 </div>
+                <!-- rematrícula -->
                 <div id="form_3" class="reqs-form rowalign stud-hidden">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Rematrícula</h3>
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">Valide a continuidade dos seus estudos conosco, só assim a sua permanência na instituição é garantida.</p>
                     </div>
-                    <form class="reqs-form-form clmalign" style="justify-content:unset;">
+                    <form class="reqs-form-form clmalign" style="justify-content:unset">
                         <label class="reqs-form-labl">Indisponível</label>
+                        <?php echo $main->mtc_callApi(); ?>
                     </form>
                 </div>
+                <!-- atestados -->
                 <div id="form_4" class="reqs-form rowalign stud-hidden">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Atestado</h3>
@@ -194,6 +155,7 @@
                         <input class="reqs-form-butn" type="submit" value="Concluído">
                     </form>
                 </div>
+                <!-- papéis de estágio -->
                 <div id="form_5" class="reqs-form rowalign stud-hidden">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Papéis de Estágio</h3>
@@ -214,6 +176,7 @@
                         <input class="reqs-form-butn" type="submit" value="Concluído">
                     </form>
                 </div>
+                <!-- histórico escolar -->
                 <div id="form_6" class="reqs-form rowalign stud-hidden">
                     <div class="reqs-form-prev">
                         <h3 style="margin:0;">Histórico Escolar</h3>
@@ -253,9 +216,7 @@
                                 <td class=\"reqs-form-form-td\" style=\"color:$clr2\">$freqs%</td>
                                 <td class=\"reqs-form-form-td\">$b[7]$b[8]</td>
                                 <td class=\"reqs-form-form-td\" style=\"color:$clr3\">$b[9]</td>
-                            </tr>";    
-                                
-                            // echo "<label class=\"reqs-form-labl\">$b[0] - $media - $freqs% - $b[7]$b[8] - $b[9]</label>";
+                            </tr>";
                             }
                             ?>
                         </table>
@@ -286,3 +247,5 @@
         ?>
     </body>
 </html>
+
+<script src="js/requests.js"></script>

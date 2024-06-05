@@ -135,4 +135,4 @@
     </body>
 </html>
 
-<script src="js/homepage.js"></script>
+<script src="js/lobby.js"></script>

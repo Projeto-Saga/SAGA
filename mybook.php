@@ -11,7 +11,6 @@
         ?>
     
         <div class="content fanimate rowalign">
-            <!--<img src="img/moon_icon.png" id="icon">-->
             <div class="student-book clmalign">
                 <form id="cicl_form" class="book-cicles" action="mybook.php" method="GET">
                     <input id="cicl" name="cicl" hidden="true" readonly value="<?php echo $cicl; ?>">
@@ -66,7 +65,7 @@
                                 
                             echo "<li class=\"medias\">$media";
                             
-                            echo "<button class=\"prev-degs-butn\" onclick=\"show_grds('grade'+$c[4])\">+</button><table id=\"grade$c[4]\" class=\"prev-degs stud-hidden\">
+                            echo "<button class=\"prev-degs-butn\" onclick=\"show_grds($('#grade$c[4]'))\">+</button><table id=\"grade$c[4]\" class=\"prev-degs stud-hidden\">
                                 <tr>
                                     <th>P1</th>
                                     <th>P2</th>
@@ -130,19 +129,4 @@
     </body>
 </html>
 
-<script type="text/javascript" src="js/notasfalts.js"></script>
-
-<script>
-    function cicl_slct(cicl)
-    {
-        document.getElementById('cicl').value = cicl;
-        document.getElementById('cicl_form').submit();
-    }
-    
-    function show_grds(iden)
-    {
-        var objt = document.getElementById(iden);
-        
-        objt.classList.contains('stud-hidden') ? objt.classList.remove('stud-hidden') : objt.classList.add('stud-hidden');
-    }
-</script>
+<script src="js/mybook.js"></script>

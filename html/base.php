@@ -78,7 +78,8 @@
 </div>
 
 <script>
-    const elements = ["box", "box1", "box2", "box3", "topbar", "post p", "saga-stud", "darkmode", "reqs-form-form", "reqs-form-inpt"];
+    const elements = ["box", "box1", "box2", "box3", "topbar", "post", "saga-stud", "darkmode", "reqs-form-form", "reqs-form-inpt", "topbar-link", "topbar-hr",
+                      "saga-titl", "update-input", "update-label"];
 
     function darkmode()
     {

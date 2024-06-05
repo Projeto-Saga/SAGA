@@ -31,4 +31,18 @@ function updateListItemColors()
     }
 }
 
-document.addEventListener('DOMContentLoaded', updateListItemColors);
+function cicl_slct(cicl)
+{
+    $("#cicl").val(cicl);
+    $("#cicl_form").submit();
+}
+
+function show_grds(objt)
+{
+    objt.hasClass("stud-hidden") ? objt.removeClass("stud-hidden") : objt.addClass("stud-hidden");
+}
+
+$(document).ready(function()
+{
+    updateListItemColors();
+});

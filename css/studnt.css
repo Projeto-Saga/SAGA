@@ -31,7 +31,7 @@
 {
     margin:0 0 15px 0;
     font-size:25px;
-    color:white;
+    color:var(--white-base);
     font-weight:bold;
     font-family:"Leelawadee UI";
 }
@@ -53,9 +53,13 @@
     color:var(--red-dark);
     margin-top:5px;
 }
+.update-label.dark-mode
+{
+    color:var(--blue-base);
+}
 .update-input
 {
-    background:white;
+    background:transparent;
     font-size:18px;
     padding:8px 8px 5px 8px;
     border-radius:5px 5px 0 0;
@@ -68,7 +72,7 @@
 .update-input[disabled]
 {
     background:#eee;
-    color:gray;
+    color:#bbb;
     cursor:not-allowed;
 }
 .update-input:not([disabled]):hover
@@ -76,8 +80,38 @@
     color:var(--blue-base);
     border-color:var(--blue-base);
 }
+.update-input.dark-mode
+{
+    border-color:white;
+}
+.update-input.dark-mode[disabled]
+{
+    color:#3a3a3a;
+    background:#222;
+}
+.update-input.dark-mode:not([disabled]):hover
+{
+    color:var(--red-dark);
+    border-color:var(--red-dark);
+}
+
 #studform
 {
     padding:30px;
     width:calc(100% - 60px);
+    height:calc(100vh - 200px);
+    overflow-y:scroll;
+}
+#studform::-webkit-scrollbar
+{
+    width:20px;
+}
+#studform::-webkit-scrollbar-track
+{
+    background:transparent;
+}
+#studform::-webkit-scrollbar-thumb
+{
+    border-radius:10px;
+    background:var(--red-base)
 }
