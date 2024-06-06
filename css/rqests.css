@@ -184,20 +184,3 @@
 #form_4 .reqs-form-butn {background:#a89636;}
 #form_5 .reqs-form-butn {background:#B046D9;}
 #form_6 .reqs-form-butn {background:#464BD9;}
-
-@media screen and (max-width:860px)
-{
-    .reqs-form
-    {
-        flex-direction:column;
-    }
-    .reqs-form-prev
-    {
-        width:auto;
-        border-radius:10px 10px 0 0;
-    }
-    .reqs-form-inpt, .reqs-form-butn, .reqs-form-data
-    {
-        width:auto;
-    }
-}

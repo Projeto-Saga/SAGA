@@ -17,7 +17,7 @@
             }
         ?>
 
-        <div class="content fanimate">
+        <div class="container fanimate">
             <div class="grid-box-1">
                 <div class="box1">
                     <?php

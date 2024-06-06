@@ -94,24 +94,3 @@
     color:var(--red-dark);
     border-color:var(--red-dark);
 }
-
-#studform
-{
-    padding:30px;
-    width:calc(100% - 60px);
-    height:calc(100vh - 200px);
-    overflow-y:scroll;
-}
-#studform::-webkit-scrollbar
-{
-    width:20px;
-}
-#studform::-webkit-scrollbar-track
-{
-    background:transparent;
-}
-#studform::-webkit-scrollbar-thumb
-{
-    border-radius:10px;
-    background:var(--red-base)
-}

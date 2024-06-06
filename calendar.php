@@ -10,7 +10,7 @@
             include('html/base.php');
         ?>
 
-        <div class="content fanimate rowalign">
+        <div class="container fanimate rowalign">
             <div class="calendar">
                 <div class="header">
                     <div class="month"></div>

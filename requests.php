@@ -10,7 +10,7 @@
             include('html/base.php');
         ?>
 
-        <div class="content fanimate">
+        <div class="container fanimate">
             <div class="box">
                 <!-- índice de abas -->
                 <div class="reqs-docs">

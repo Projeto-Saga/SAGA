@@ -10,8 +10,8 @@
             include('html/base.php');
         ?>
 
-        <div class="content fanimate">
-            <form id="studform" class="box" enctype="multipart/form-data">
+        <div class="container fanimate">
+            <form id="studform" class="box interface" enctype="multipart/form-data">
                 <div class="clmalign">
                     <h1 class="update-group" style="margin-top:0;">Básico</h1>
                     <label class="update-label">Nome</label>
