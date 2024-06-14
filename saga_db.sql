@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 25-Maio-2024 às 12:07
+-- Tempo de geração: 13-Jun-2024 às 23:38
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 8.1.3
 
@@ -56,8 +56,9 @@ CREATE TABLE `cursando` (
   `ntp3_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
   `nttt_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
   `falt_crsn` int(11) NOT NULL DEFAULT '0',
-  `cicl_alun` int(11) NOT NULL,
+  `cicl_alun` enum('1','2','3','4','5','6','7','8','9','10') NOT NULL DEFAULT '1',
   `_ano_crsn` char(4) NOT NULL,
+  `_sem_crsn` enum('1','2') NOT NULL DEFAULT '1',
   `situ_crsn` enum('Em Aberto','Retido','Aprovado') NOT NULL DEFAULT 'Em Aberto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -65,14 +66,14 @@ CREATE TABLE `cursando` (
 -- Extraindo dados da tabela `cursando`
 --
 
-INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp2_crsn`, `ntp3_crsn`, `nttt_crsn`, `falt_crsn`, `cicl_alun`, `_ano_crsn`, `situ_crsn`) VALUES
-(1, 1, 1, '9.00', '8.75', '0.00', '9.50', 8, 1, '2024', 'Aprovado'),
-(2, 1, 3, '9.85', '10.00', '0.00', '9.00', 0, 1, '2024', 'Aprovado'),
-(3, 1, 5, '8.50', '6.00', '0.00', '0.00', 16, 1, '2024', 'Retido'),
-(4, 1, 6, '9.75', '10.00', '0.00', '10.00', 4, 1, '2024', 'Aprovado'),
-(5, 1, 7, '9.25', '8.50', '0.00', '8.60', 0, 1, '2024', 'Aprovado'),
-(6, 1, 10, '7.60', '8.75', '0.00', '10.00', 16, 1, '2024', 'Aprovado'),
-(7, 1, 15, '10.00', '9.50', '0.00', '10.00', 0, 1, '2024', 'Aprovado');
+INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp2_crsn`, `ntp3_crsn`, `nttt_crsn`, `falt_crsn`, `cicl_alun`, `_ano_crsn`, `_sem_crsn`, `situ_crsn`) VALUES
+(1, 1, 1, '9.00', '8.75', '0.00', '9.50', 8, '1', '2023', '2', 'Aprovado'),
+(2, 1, 3, '9.85', '10.00', '0.00', '9.00', 0, '1', '2023', '2', 'Aprovado'),
+(3, 1, 5, '8.50', '6.00', '0.00', '0.00', 16, '1', '2023', '2', 'Retido'),
+(4, 1, 6, '9.75', '10.00', '0.00', '10.00', 4, '1', '2023', '2', 'Aprovado'),
+(5, 1, 7, '9.25', '8.50', '0.00', '8.60', 0, '1', '2023', '2', 'Aprovado'),
+(6, 1, 10, '7.60', '8.75', '0.00', '10.00', 16, '1', '2023', '2', 'Aprovado'),
+(7, 1, 15, '10.00', '9.50', '0.00', '10.00', 0, '1', '2023', '2', 'Aprovado');
 
 -- --------------------------------------------------------
 
@@ -202,7 +203,7 @@ CREATE TABLE `solicitacao` (
 
 CREATE TABLE `telefone` (
   `iden_fone` int(11) NOT NULL,
-  `iden_alun` int(11) NOT NULL,
+  `iden_user` int(11) NOT NULL,
   `nmro_fone` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -229,7 +230,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`iden_user`, `regx_user`, `codg_user`, `nome_user`, `mail_user`, `senh_user`, `fone_user`, `foto_user`, `flag_user`) VALUES
-(1, 1, '111.111.111-11', 'ROGÉRIO DA SILVA LOPES', 'rogerio.lopes@maltec.sp.gov.br', '12345678', '', NULL, 'A');
+(1, 1, '111.111.111-11', 'ROGÉRIO DA SILVA LOPES', 'rogerio.lopes@maltec.sp.gov.br', 'cocacolamata', '(11) 91230-9054', NULL, 'A');
 
 --
 -- Índices para tabelas despejadas

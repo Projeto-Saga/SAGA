@@ -21,7 +21,7 @@ function updateListItemColors()
 function cicl_slct(cicl)
 {
     $("#cicl").val(cicl);
-    $("#cicl_form").submit();
+    $("#studbook").submit();
 }
 
 function show_grds(objt)

@@ -82,11 +82,11 @@
 }
 .update-input.dark-mode
 {
-    border-color:white;
+    border-color:#cecece;
 }
 .update-input.dark-mode[disabled]
 {
-    color:#3a3a3a;
+    color:#606060;
     background:#222;
 }
 .update-input.dark-mode:not([disabled]):hover

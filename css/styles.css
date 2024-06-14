@@ -25,7 +25,14 @@ body
     display:flex;
     justify-content:center;
     font-family:var(--ffml-base);
-    background-image:url("https://wallpaperaccess.com/full/1850865.jpg");
+    background-image:url("https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/1/2023/03/Foto-Sede-scaled.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+body.dark-mode
+{
+    background-image:url("https://www.nelsonkon.com.br/wp-content/uploads/2018/04/spadoni_aa_e_pedro_taddei_associados_centro_paula_souza_etec_nova_luz_IMG_8848.jpg");
     background-size:cover;
     background-position:center;
     background-attachment:fixed;
@@ -77,12 +84,13 @@ label
 .mainbutn
 {
     margin-top:15px;
-    background:var(--red-dark);
+    background:var(--red-base);
     width:100%;
 }
+
 .mainbutn:hover
 {
-    color:var(--red-dark);
+    color:var(--red-base);
 }
 .demibutn
 {
@@ -324,7 +332,7 @@ label
     padding:20px;
     width:100%;
 }
-.grid-box-1, .grid-box-2
+.grid-box-1, .grid-box-2, .grid-box-3
 {
     display:grid;
     grid-gap:15px;
@@ -336,6 +344,10 @@ label
 .grid-box-2
 {
     grid-template-rows:calc(60vh - 80px) calc(40vh - 75px);
+}
+.grid-box-3
+{
+    grid-template-columns:1fr 1fr;
 }
 .box, .box1, .box2, .box3
 {
@@ -401,6 +413,11 @@ label
     background:transparent;
 }
 .interface::-webkit-scrollbar-thumb
+{
+    border-radius:10px;
+    background:var(--blue-base)
+}
+.interface.dark-mode::-webkit-scrollbar-thumb
 {
     border-radius:10px;
     background:var(--red-base)
@@ -475,6 +492,14 @@ label
     visibility:hidden;
     position:fixed;
     opacity:0;
+}
+.grid-g05
+{
+    gap:5px;
+}
+.grid-g10
+{
+    gap:10px;
 }
 .grid-g15
 {

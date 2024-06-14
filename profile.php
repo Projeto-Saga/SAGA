@@ -11,25 +11,33 @@
         ?>
 
         <div class="container fanimate">
-            <form id="studform" class="box interface" enctype="multipart/form-data">
+            <form id="studform" class="box interface" method="POST" enctype="multipart/form-data" action="php/update.php">
                 <div class="clmalign">
-                    <h1 class="update-group" style="margin-top:0;">Básico</h1>
+                    <input name="iden" hidden readonly value="<?php echo $rmat ?>">
+
+                    <h1 class="update-group" style="margin-top:0">Básico</h1>
                     <label class="update-label">Nome</label>
                     <input type="text" class="update-input" value="<?php echo $name; ?>" disabled>
+
                     <label class="update-label">CPF</label>
                     <input type="text" class="update-input" value="<?php echo $codg; ?>" disabled>
+
                     <label class="update-label">Senha</label>
-                    <input name="pass" type="text" class="update-input" value="<?php echo $pass; ?>">
+                    <input name="senh" type="text" class="update-input" value="<?php echo $pass; ?>">
+
                     <h1 class="update-group">Institucional</h1>
                     <label class="update-label">RA</label>
                     <input type="text" class="update-input" value="<?php echo sprintf("%010d", $rmat) ?>" disabled>
+
                     <label class="update-label">Curso</label>
                     <input type="text" class="update-input" value="<?php echo $curs; ?>" disabled>
 
                     <h1 class="update-group">Contato</h1>
                     <label class="update-label">Telefone 1</label>
+
                     <input id="slctfone" name="exclfone" type="hidden">
                     <input name="fone" type="text" class="update-input" placeholder="(00) 90000-0000" value="<?php echo $fone; ?>" oninput="mask(this, 'fone');" minlength="15" maxlength="15">
+
                     <?php
                     $cmd2 = "SELECT nmro_fone,iden_fone FROM telefone WHERE iden_alun='$iden'";
                     $rst2 = mysqli_query($conn, $cmd2);
@@ -50,20 +58,20 @@
                         }
                     }
                     ?>
-                    <div class="rowalign" style="align-items:center;">
-                        <input name="novofone" style="width:50%;" type="text" class="update-input" placeholder="(00) 90000-0000" oninput="mask(this, 'fone');" minlength="15" maxlength="15">
-                        <input id="" type="button" class="demibutn" value="Adicionar Telefone">
+                    <div class="rowalign" style="align-items:center">
+                        <input name="novo" style="width:50%" type="text" class="update-input" placeholder="(00) 90000-0000" oninput="mask(this, 'fone');" minlength="15" maxlength="15">
+                        <input type="submit" class="demibutn" value="Adicionar Telefone">
                     </div>
 
                     <div class="rowalign grid-g15">
-                        <input id="" type="button" class="mainbutn" value="Salvar Alterações">
-                        <input id="" type="button" class="mainbutn" value="Visualizar Carteirinha" onclick="modal($('#studcard'))">
+                        <input type="submit" class="mainbutn" value="Salvar Alterações">
+                        <input type="button" class="mainbutn" value="Visualizar Carteirinha" onclick="modal($('#studcard'))">
                     </div>
                 </div>
             </form>
 
             <div id="studcard" class="modal hidden">
-                <form id="stud_card" class="student-card" method="POST" enctype="multipart/form-data" action="php/upload.php">
+                <div class="student-card">
                     <div class="rowalign">
                         <input id="file_foto" name="file_foto" type="file" hidden="true">
 
@@ -76,7 +84,7 @@
                     <p class="card-text"><?php echo "$cicl"."º CICLO" ?></p>
                     <p class="card-text"><?php echo $curs ?></p>
                     <p class="card-text"><?php echo $mail ?></p><br>
-                </form>
+                </div>
             </div>
         </div>
         <?php 

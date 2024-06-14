@@ -28,3 +28,8 @@ function file(iden)
         document.getElementById('file_show'+iden).value = trgt.files[0].name;
     });
 }
+
+function chck(trgt)
+{
+    trgt.hasClass("active") ? trgt.removeClass("active") : trgt.addClass("active");
+}

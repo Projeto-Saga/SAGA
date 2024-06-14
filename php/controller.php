@@ -2,36 +2,49 @@
 class Controller
 {
     private $url;
+    private $con;
 
     public function __construct()
     {
-        $this->url = "https://localhost:8080/aux/materia/find_all";
+        $this->url = "http://localhost:8080/aux/materia/find_all";
+        $this->con = mysqli_connect('localhost', 'root', '', 'saga_db');
+        // $this->con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
     }
 
-    public function mtc_callApi()
+    public function mtc_callApi($cicl)
     {
-        $options = [
-            'http' => [
-                'method' => 'GET',
-                'timeout' => 0
-            ]
-        ];
+        $data = file_get_contents($this->url);
         
-        $context = stream_context_create($options);
-        
-        $response = @file_get_contents($this->url, false, $context);
-        
-        if ($response === false)
+        if ($data === false)
         {
-            $response = "Erro ao tentar acessar a API.";
+            $response = "<label class=\"reqs-form-labl\">Conexão com API indisponível</label>";
         }
         else
         {
-            $response = json_decode($response);
+            $data = json_decode($data);
         
             if (json_last_error() !== JSON_ERROR_NONE)
             {
-                $response = "Erro ao processar resposta.";
+                $response = "<label class=\"reqs-form-labl\">Erro ao processar retorno</label>";
+            }
+            else
+            {
+                $response = "<article class=\"clmalign grid-g10\">";
+
+                foreach ($data as $d)
+                {
+                    if (intval($d->ccpv_matr) == $cicl)
+                    {
+                        $response .= "
+                        <div id=\"$d->abrv_matr\" onclick=\"chck($(this))\">
+                            <h1>$d->nome_matr</h1>
+                            <h2>($d->abrv_matr)</h2>
+                            <p>$d->chor_matr horas - Aula $d->hora_matr</p>
+                        </div>";
+                    }
+                }
+
+                $response .= "</article>";
             }
         }
 

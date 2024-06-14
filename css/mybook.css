@@ -10,6 +10,11 @@
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
 }
+#studbook .body.dark-mode
+{
+    color:white;
+    background-color: rgb(27, 27, 27);
+}
 
 #studbook .head
 {

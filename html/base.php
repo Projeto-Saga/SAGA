@@ -78,8 +78,9 @@
 </div>
 
 <script>
-    const elements = ["box", "box1", "box2", "box3", "topbar", "post", "saga-stud", "darkmode", "reqs-form-form", "reqs-form-inpt", "topbar-link", "topbar-hr",
-                      "saga-titl", "update-input", "update-label"];
+    const elements = [".box", ".box1", ".box2", ".box3", ".topbar", ".post", ".saga-stud", ".darkmode", ".reqs-form-form", ".reqs-form-inpt",
+                      ".reqs-form-data", ".topbar-link", ".topbar-hr", "body", ".calendar", ".header", ".month", ".days", ".day", ".holiday",
+                      ".weekdays", ".saga-titl", ".update-input", ".update-label"];
 
     function darkmode()
     {
@@ -103,14 +104,14 @@
         {
             $.each(elements, function(key, val)
             {
-                $(`.${val}`).removeClass("dark-mode");
+                $(val).removeClass("dark-mode");
             });
         }
         else if (localStorage.getItem("darkmode") == 'S')
         {
             $.each(elements, function(key, val)
             {
-                $(`.${val}`).addClass("dark-mode");
+                $(val).addClass("dark-mode");
             });
         }
     });

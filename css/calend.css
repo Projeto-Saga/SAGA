@@ -1,181 +1,238 @@
-:root
-{
-  --primary-color: #19467E;
-  --text-color: #222222;
-  --bg-color: #f1f1fb;
+:root {
+	--primary-color: #19467E;
+	--text-color: #222222;
+	--text-dark: #f1f1fb;
+	--bg-color: #f1f1fb;
+	--bg-dark: #2c2c2c;
 }
 
 .container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .calendar {
-  max-width: 800px;
-  padding: 30px 20px;
-  border-radius: 10px;
-  background-color: var(--bg-color);
-  font-family:Poppins;
+	max-width: 800px;
+	padding: 30px 20px;
+	border-radius: 10px;
+	background-color: var(--bg-color);
+	font-family: Poppins;
+}
+
+.calendar.dark-mode {
+	background-color: var(--bg-dark);
 }
 
 .calendar .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 3px solid #222222;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 3px solid #222222;
+}
+
+.calendar.dark-mode .header.dark-mode {
+	background-color: var(--bg-dark);
+	border-bottom: 3px solid #fefefe;
 }
 
 .calendar .header .month {
-  display: flex;
-  align-items: center;
-  font-size: 25px;
-  font-weight: 600;
-  color: var(--text-color);
+	display: flex;
+	align-items: center;
+	font-size: 25px;
+	font-weight: 600;
+	color: var(--text-color);
+}
+
+.calendar.dark-mode .header.dark-mode .month.dark-mode {
+	background-color: var(--bg-dark);
+	color: var(--text-dark);
 }
 
 .calendar .header .btns {
-  display: flex;
-  gap: 10px;
+	display: flex;
+	gap: 10px;
 }
 
 .calendar .header .btns .btn {
-  width: 50px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  color: #fefefe;
-  background-color: var(--primary-color);
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
+	width: 50px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	color: #fefefe;
+	background-color: var(--primary-color);
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.2s;
 }
 
 .calendar .header .btns .btn:hover {
-  background-color: #BF0000;
-  transform: scale(1.05);
+	background-color: #BF0000;
+	transform: scale(1.05);
 }
 
 .weekdays {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+	display: flex;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.weekdays.dark-mode {
+	background-color: var(--bg-dark);
 }
 
 .weekdays .day {
-  width: calc(100% / 7 - 10px);
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
+	width: calc(100% / 7 - 10px);
+	text-align: center;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .days {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
-.days .day, .days .sunday {
-  width: calc(100% / 7 - 10px);
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  border: none;
-  font-size: 16px;
-  font-weight: 400;
-  transition: all 0.3s;
+.days .day,
+.days .sunday {
+	width: calc(100% / 7 - 10px);
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	border: none;
+	font-size: 16px;
+	font-weight: 400;
+	transition: all 0.3s;
 }
 
 .days .day {
-  color: #222;
-  background-color: #fff;
+	color: #222;
+	background-color: #fff;
+}
+
+.days.dark-mode .day.dark-mode {
+	color: #fff;
+	background-color: rgb(22, 22, 22);
 }
 
 .days .sunday {
-  color: white;
-  font-weight: bold;
-  background-color: hsl(2, 69%, 50%);
+	color: white;
+	font-weight: bold;
+	background-color: hsl(2, 69%, 50%);
+}
+
+.days.dark-mode .sunday.dark-mode {
+	color: white;
+	font-weight: bold;
+	background-color: hsl(2, 69%, 50%);
 }
 
 .days .holiday {
-  color: white;
-  font-weight: bold;
-  background-color: hsl(29, 100%, 60%);
+	color: white;
+	font-weight: bold;
+	background-color: hsl(29, 100%, 60%);
+}
+
+.days.dark-mode .holiday.dark-mode {
+	color: white;
+	font-weight: bold;
+	background-color: hsl(29, 100%, 60%);
 }
 
 .days .day:not(.next):not(.prev):hover {
-  cursor: pointer;
-  filter: brightness(0.85);
-  transform: scale(1.05);
+	cursor: pointer;
+	filter: brightness(0.85);
+	transform: scale(1.05);
 }
 
 .days .day.today {
-  color: #fff;
-  background-color: var(--primary-color);
-  font-size: 20px;
-  font-weight: 600;
+	color: #fff;
+	background-color: var(--primary-color);
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.days.dark-mode .day.today.dark-mode {
+	color: #fff;
+	background-color: var(--primary-color);
+	font-size: 20px;
+	font-weight: 600;
 }
 
 .days .day.next,
 .days .day.prev {
-  color: #d3d3d3;
+	color: #d3d3d3;
+}
+
+.days.dark-mode .day.next.dark-mode,
+.days.dark-mode .day.prev.dark-mode {
+	color: #7d7d7d;
 }
 
 .legenda {
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 10px;
-  display: grid;
-  grid-gap: 10px;
-  background-color:white;
+	border: 2px solid var(--primary-color);
+	border-radius: 10px;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 10px;
+	display: grid;
+	grid-gap: 10px;
+	background-color: white;
 }
 
 .row {
-  place-items: center;
-  display: flex;
-  align-items: center;
+	place-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .blue-square,
 .green-square,
 .red-square {
-  width: 30px;
-  height: 30px;
-  border-radius: 18%;
-  margin-right: 10px;
+	width: 30px;
+	height: 30px;
+	border-radius: 18%;
+	margin-right: 10px;
 }
 
 .blue-square {
-  background-color: var(--primary-color);
+	background-color: var(--primary-color);
 }
 
 .green-square {
-  background-color: #7ED957;
+	background-color: #7ED957;
 }
 
 .red-square {
-  background-color: #BF0000;
+	background-color: #BF0000;
 }
 
 .subtitle {
-  font-size: 18px;
-  font-weight: 500;
+	font-size: 18px;
+	font-weight: 500;
 }
 
-.red { color: #BF0000; }
-.blue { color: #009DFF; }
-.green { color: #7ED957; }
+.red {
+	color: #BF0000;
+}
+
+.blue {
+	color: #009DFF;
+}
+
+.green {
+	color: #7ED957;
+}
