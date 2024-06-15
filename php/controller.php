@@ -13,7 +13,7 @@ class Controller
 
     public function mtc_callApi($cicl)
     {
-        $data = file_get_contents($this->url);
+        $data = @file_get_contents($this->url);
         
         if ($data === false)
         {

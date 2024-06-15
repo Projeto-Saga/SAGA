@@ -1,7 +1,7 @@
 <?php
 session_start();
-// $con = mysqli_connect('localhost', 'root', '', 'saga_db');
-$con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+$con = mysqli_connect('localhost', 'root', '', 'saga_db');
+// $con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
 
 if (isset($_SESSION['ativ']))
 {
@@ -9,6 +9,7 @@ if (isset($_SESSION['ativ']))
     $senh = $_POST["senh"];
     $fone = $_POST["fone"];
     $novo = $_POST["novo"];
+    $excl = $_POST["excl"];
     // $foto = $_FILES["foto"];
     
     if (!empty($senh) && strlen($senh) >= 8)
@@ -23,7 +24,7 @@ if (isset($_SESSION['ativ']))
     }
     if (!empty($novo) && strlen($novo) == 15)
     {
-        $cmd = "INSERT INTO telefone SET nmro_fone='$novo' WHERE iden_user=$iden";
+        $cmd = "INSERT INTO telefone (iden_user, nmro_fone) VALUES ($iden, '$novo')";
         $rst = mysqli_query($con, $cmd);
     }
 

@@ -1,17 +1,15 @@
-function slct_fone(fone)
+$("#foto").on("change", function()
 {
-    $("#slctfone").val(fone);
-}
-
-let foto = $("#card_imge");
-let file = $("#file_foto");
-
-// foto.addEventListener("click", function()
-// {
-//     file.click();
-// });
-
-// document.getElementById("file_foto").addEventListener("change", function(event)
-// {
-//     document.getElementById("stud_card").submit();
-// });
+    $.ajax(
+    {
+        url: "php/upload.php",
+        type: "POST",
+        processData: false,
+        contentType: false,
+        data: new FormData($("#studform")[0])
+    })
+    .done(function(data)
+    {
+        location.refresh;
+    });
+});

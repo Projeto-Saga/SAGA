@@ -81,28 +81,6 @@ label
 {
     background-color:#eee;
 }
-.mainbutn
-{
-    margin-top:15px;
-    background:var(--red-base);
-    width:100%;
-}
-
-.mainbutn:hover
-{
-    color:var(--red-base);
-}
-.demibutn
-{
-    height:36px;
-    width:50%;
-    margin:-4px 0 0 5px;
-    background:var(--blue-base)
-}
-.demibutn:hover
-{
-    color:var(--blue-base)
-}
 .mainbutn, .demibutn
 {
     color:white;
@@ -119,6 +97,27 @@ label
 .mainbutn:hover, .demibutn:hover
 {
     background:#ddd;
+}
+.mainbutn
+{
+    margin-top:15px;
+    background:var(--red-base);
+    width:100%;
+}
+.mainbutn:hover
+{
+    color:var(--red-base);
+}
+.demibutn
+{
+    height:35px;
+    width:50%;
+    margin:-4px 0 0 5px;
+    background:var(--blue-base)
+}
+.demibutn:hover
+{
+    color:var(--blue-base)
 }
 
 /* barra superior */

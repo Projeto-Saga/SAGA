@@ -21,8 +21,8 @@
 
     <div class="saga-stud rowalign">
         <div class="stud-text clmalign">
-            <p class="stud-name"><?php echo $name; ?></p>
-            <p class="stud-mail"><?php echo $mail; ?></p>
+            <p class="stud-name"><?php echo $name ?></p>
+            <p class="stud-mail"><?php echo $mail ?></p>
 
             <div class="stud-hidden clmalign">
                 <br>
@@ -32,7 +32,7 @@
                 <a href="php/logout.php" class="stud-link">Desconectar</a>
             </div>
         </div>
-        <div class="stud-ball" style="background-image:url(img/fotos/<?php echo $imge; ?>)"></div>
+        <div class="stud-ball" style="background-image:url(img/fotos/<?php echo $imge ?>)"></div>
     </div>
 </div>
 
