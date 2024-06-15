@@ -533,6 +533,10 @@ label
     border-color:#eee;
     margin:10px 0 10px 0;
 }
+.separate.dark-mode
+{
+    border-color:#444444;
+}
 .alrt-text-1, .alrt-text-2
 {
     font-family:var(--ffml-base);

@@ -10,6 +10,16 @@
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
 }
+#studbook .body
+{
+    background:#fefefe;
+    padding:30px;
+    box-shadow:0 2px 16px rgba(0, 0, 0, .1);
+    border-radius:20px;
+    width:auto;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+}
 #studbook.dark-mode .body
 {
     color:white;
@@ -80,6 +90,17 @@
     border-color:#eee;
     padding-left:15px;
 }
+#studbook h2.dark-mode
+{
+    font-family:Poppins;
+    padding-bottom:5px;
+    border-style:solid;
+    border-width:0 0 1px 0;
+    color:#d72b48;
+    border-color:#444444;
+    background-color: rgb(27, 27, 27);
+    padding-left:15px;
+}
 #studbook .body h2,
 #studbook .body ul
 {
@@ -98,6 +119,11 @@
     border-width:0 1px 0 0;
     border-color:#eee;
 }
+#studbook section.dark-mode
+{
+    border-color:#444444;
+    background-color: rgb(27, 27, 27)
+}
 
 #studbook .body section table
 {
@@ -109,6 +135,11 @@
     box-shadow:0 0 6px 2px gray;
     transition:all 0.3s ease;
 }
+#studbook .body section table.dark-mode
+{
+    background:#313131;
+    box-shadow:0 0 6px 2px rgb(94, 94, 94);
+}
 #studbook .body section table th, #studbook .body section table td
 {
     padding:0 6px 0 6px;
@@ -117,6 +148,10 @@
 #studbook .body section table th
 {
     background:#ddd;
+}
+#studbook .body section table th.dark-mode
+{
+    background:#1f1f1f;
 }
 #studbook .body section button
 {
@@ -134,6 +169,11 @@
     background-position:center;
     opacity:0.5;
     transition:all 0.3s ease;
+}
+#studbook .body section button.dark-mode
+{
+    filter: brightness(5) invert(1);
+
 }
 #studbook .body section button:hover
 {

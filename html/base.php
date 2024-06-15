@@ -80,7 +80,7 @@
 <script>
     const elements = [".box", ".box1", ".box2", ".box3", ".topbar", ".post", ".saga-stud", ".darkmode", ".reqs-form-form", ".reqs-form-inpt",
                       ".reqs-form-data", ".topbar-link", ".topbar-hr", "body", ".calendar", ".header", ".month", ".days", ".day", ".holiday",
-                      ".weekdays", ".saga-titl", ".update-input", ".update-label"];
+                      ".separate", "section", "h2", "button", "th", "table", ".weekdays", ".saga-titl", ".update-input", ".update-label", ".mainlabl"];
 
     function darkmode()
     {

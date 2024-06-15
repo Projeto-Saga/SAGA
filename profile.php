@@ -15,7 +15,7 @@
                 <input name="iden" hidden readonly value="<?php echo $rmat ?>">
 
                 <div class="rowalign grid-g15">
-                    <div class="clmalign" style="width:50%">
+                    <div class="clmalign" style="width:50%; justify-content:unset">
                         <!-- seção: básico -->
                         <h1 class="update-group" style="margin-top:0">Básico</h1>
                         <label class="update-label">Nome</label>
@@ -49,7 +49,7 @@
                             {?>
                         <div class="rowalign" style="align-items:center">
                             <input class="update-input" style="width:calc(100% - 35px)" value="<?php echo $b[0] ?>" oninput="mask(this, 'fone')" maxlength="15" disabled>
-                            <input class="demibutn" style="width:35px" type="button" value="X" onclick="$('#excl').val(<?php echo $b[1] ?>)">
+                            <input class="demibutn" style="width:35px" type="button" value="X" onclick="updt('fone', <?php echo $b[1] ?>)">
                         </div>
                             <?php
                             }
@@ -62,31 +62,32 @@
                         {?>
                         <div class="rowalign" style="align-items:center">
                             <input name="novo" class="update-input" style="width:50%" type="text" placeholder="(00) 90000-0000" oninput="mask(this, 'fone')" maxlength="15">
-                            <input class="demibutn" type="submit" value="Adicionar Telefone">
+                            <input class="demibutn" type="button" value="Adicionar Telefone" onclick="updt('fone')">
                         </div>
                         <?php
                         }?>
                     </div>
 
-                    <div class="clmalign" style="width:50%">
+                    <div class="clmalign" style="width:50%; justify-content:unset">
                         <!-- seção: adicional -->
                         <h1 class="update-group" style="margin-top:0">Adicional</h1>
                         <label class="update-label">Foto</label>
                         <div class="rowalign" style="align-items:center">
-                            <input id="foto" name="foto" hidden readonly>
+                            <input id="foto" name="foto" type="file" accept=".png, .jpg, .jpeg" hidden>
 
-                            <input class="update-input" style="width:50%" type="text" value="<?php echo $imge ?>" disabled>
-                            <input class="demibutn" type="submit" value="Adicionar Foto" onclick="$('#foto').click()">
+                            <input class="update-input" style="width:50%" type="text" value="<?php echo "$imge.jpg" ?>" disabled>
+                            <input class="demibutn" type="button" value="Adicionar Foto" onclick="$('#foto').click()">
                         </div>
                     </div>
                 </div>
 
                 <div class="rowalign grid-g15">
-                    <input class="mainbutn" type="submit" value="Salvar Alterações">
+                    <input class="mainbutn" type="button" value="Salvar Alterações" onclick="updt('altr')">
                     <input class="mainbutn" type="button" value="Visualizar Carteirinha" onclick="modal($('#studcard'))">
                 </div>
             </form>
 
+            <!-- carteirinha -->
             <div id="studcard" class="modal hidden">
                 <div class="student-card">
                     <div class="card-imge" style="background-image:url('img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png" ?>')"></div>
