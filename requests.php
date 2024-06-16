@@ -105,7 +105,7 @@
                         <p style="margin:0;" class="reqs-form-prev-text">Valide a continuidade dos seus estudos conosco, só assim a sua permanência na instituição é garantida.</p>
                     </div>
                     <form class="reqs-form-form clmalign" style="justify-content:unset">
-                        <?php print_r($main->mtc_callApi($cicl)); ?>
+                        <?php print_r($main->mtc_callApi($iden, $cicl)); ?>
                     </form>
                 </div>
                 <!-- atestados -->

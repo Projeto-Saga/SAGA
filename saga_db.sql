@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 13-Jun-2024 às 23:38
--- Versão do servidor: 5.7.36
--- versão do PHP: 8.1.3
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 16-Jun-2024 às 02:28
+-- Versão do servidor: 8.2.0
+-- versão do PHP: 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,15 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `aluno`
 --
 
-CREATE TABLE `aluno` (
-  `iden_alun` int(11) NOT NULL,
-  `regx_user` int(11) NOT NULL,
-  `iden_curs` int(11) NOT NULL,
-  `cicl_alun` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `aluno`;
+CREATE TABLE IF NOT EXISTS `aluno` (
+  `iden_alun` int NOT NULL AUTO_INCREMENT,
+  `regx_user` int NOT NULL,
+  `iden_curs` int NOT NULL,
+  `cicl_alun` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`iden_alun`),
+  UNIQUE KEY `regx_user` (`regx_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `aluno`
@@ -47,33 +50,35 @@ INSERT INTO `aluno` (`iden_alun`, `regx_user`, `iden_curs`, `cicl_alun`) VALUES
 -- Estrutura da tabela `cursando`
 --
 
-CREATE TABLE `cursando` (
-  `iden_crsn` int(11) NOT NULL,
-  `regx_user` int(11) NOT NULL,
-  `iden_matr` int(11) NOT NULL,
+DROP TABLE IF EXISTS `cursando`;
+CREATE TABLE IF NOT EXISTS `cursando` (
+  `iden_crsn` int NOT NULL AUTO_INCREMENT,
+  `regx_user` int NOT NULL,
+  `iden_matr` int NOT NULL,
   `ntp1_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
   `ntp2_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
   `ntp3_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
   `nttt_crsn` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `falt_crsn` int(11) NOT NULL DEFAULT '0',
+  `falt_crsn` int NOT NULL DEFAULT '0',
   `cicl_alun` enum('1','2','3','4','5','6','7','8','9','10') NOT NULL DEFAULT '1',
   `_ano_crsn` char(4) NOT NULL,
   `_sem_crsn` enum('1','2') NOT NULL DEFAULT '1',
-  `situ_crsn` enum('Em Aberto','Retido','Aprovado') NOT NULL DEFAULT 'Em Aberto'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `situ_crsn` enum('Em Aberto','Retido','Aprovado') NOT NULL DEFAULT 'Em Aberto',
+  PRIMARY KEY (`iden_crsn`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `cursando`
 --
 
 INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp2_crsn`, `ntp3_crsn`, `nttt_crsn`, `falt_crsn`, `cicl_alun`, `_ano_crsn`, `_sem_crsn`, `situ_crsn`) VALUES
-(1, 1, 1, '9.00', '8.75', '0.00', '9.50', 8, '1', '2023', '2', 'Aprovado'),
-(2, 1, 3, '9.85', '10.00', '0.00', '9.00', 0, '1', '2023', '2', 'Aprovado'),
-(3, 1, 5, '8.50', '6.00', '0.00', '0.00', 16, '1', '2023', '2', 'Retido'),
-(4, 1, 6, '9.75', '10.00', '0.00', '10.00', 4, '1', '2023', '2', 'Aprovado'),
-(5, 1, 7, '9.25', '8.50', '0.00', '8.60', 0, '1', '2023', '2', 'Aprovado'),
-(6, 1, 10, '7.60', '8.75', '0.00', '10.00', 16, '1', '2023', '2', 'Aprovado'),
-(7, 1, 15, '10.00', '9.50', '0.00', '10.00', 0, '1', '2023', '2', 'Aprovado');
+(1, 1, 1, 9.00, 8.75, 0.00, 9.50, 8, '1', '2023', '2', 'Aprovado'),
+(2, 1, 3, 9.85, 10.00, 0.00, 9.00, 0, '1', '2023', '2', 'Aprovado'),
+(3, 1, 5, 8.50, 6.00, 0.00, 0.00, 16, '1', '2023', '2', 'Retido'),
+(4, 1, 6, 9.75, 10.00, 0.00, 10.00, 4, '1', '2023', '2', 'Aprovado'),
+(5, 1, 7, 9.25, 8.50, 0.00, 8.60, 0, '1', '2023', '2', 'Aprovado'),
+(6, 1, 10, 7.60, 8.75, 0.00, 10.00, 16, '1', '2023', '2', 'Aprovado'),
+(7, 1, 15, 10.00, 9.50, 0.00, 10.00, 0, '1', '2023', '2', 'Aprovado');
 
 -- --------------------------------------------------------
 
@@ -81,11 +86,15 @@ INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp
 -- Estrutura da tabela `curso`
 --
 
-CREATE TABLE `curso` (
-  `iden_curs` int(11) NOT NULL,
+DROP TABLE IF EXISTS `curso`;
+CREATE TABLE IF NOT EXISTS `curso` (
+  `iden_curs` int NOT NULL AUTO_INCREMENT,
   `nome_curs` varchar(50) NOT NULL,
-  `abrv_curs` varchar(3) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+  `abrv_curs` varchar(3) NOT NULL,
+  PRIMARY KEY (`iden_curs`),
+  UNIQUE KEY `nome_curs` (`nome_curs`),
+  UNIQUE KEY `abrv_curs` (`abrv_curs`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `curso`
@@ -108,16 +117,19 @@ INSERT INTO `curso` (`iden_curs`, `nome_curs`, `abrv_curs`) VALUES
 -- Estrutura da tabela `evento`
 --
 
-CREATE TABLE `evento` (
-  `iden_even` int(11) NOT NULL,
+DROP TABLE IF EXISTS `evento`;
+CREATE TABLE IF NOT EXISTS `evento` (
+  `iden_even` int NOT NULL AUTO_INCREMENT,
   `tipo_even` varchar(15) NOT NULL,
   `nome_even` varchar(60) NOT NULL,
   `data_even` date NOT NULL,
   `loca_even` varchar(20) NOT NULL,
   `desc_even` text NOT NULL,
-  `dura_even` int(11) NOT NULL,
-  `imgm_even` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `dura_even` int NOT NULL,
+  `imgm_even` text NOT NULL,
+  PRIMARY KEY (`iden_even`),
+  UNIQUE KEY `nome_event` (`nome_even`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `evento`
@@ -134,15 +146,17 @@ INSERT INTO `evento` (`iden_even`, `tipo_even`, `nome_even`, `data_even`, `loca_
 -- Estrutura da tabela `materia`
 --
 
-CREATE TABLE `materia` (
-  `iden_matr` int(11) NOT NULL,
+DROP TABLE IF EXISTS `materia`;
+CREATE TABLE IF NOT EXISTS `materia` (
+  `iden_matr` int NOT NULL AUTO_INCREMENT,
   `nome_matr` varchar(30) NOT NULL,
-  `chor_matr` int(11) NOT NULL,
+  `chor_matr` int NOT NULL,
   `abrv_matr` varchar(4) NOT NULL,
-  `ccpv_matr` int(11) NOT NULL,
-  `dias_matr` int(11) NOT NULL,
-  `hora_matr` enum('A','B') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ccpv_matr` int NOT NULL,
+  `dias_matr` int NOT NULL,
+  `hora_matr` enum('A','B') NOT NULL,
+  PRIMARY KEY (`iden_matr`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `materia`
@@ -183,17 +197,19 @@ INSERT INTO `materia` (`iden_matr`, `nome_matr`, `chor_matr`, `abrv_matr`, `ccpv
 -- Estrutura da tabela `solicitacao`
 --
 
-CREATE TABLE `solicitacao` (
-  `iden_soli` int(11) NOT NULL,
-  `regx_user` int(11) NOT NULL,
+DROP TABLE IF EXISTS `solicitacao`;
+CREATE TABLE IF NOT EXISTS `solicitacao` (
+  `iden_soli` int NOT NULL AUTO_INCREMENT,
+  `regx_user` int NOT NULL,
   `tipo_soli` enum('Passe Escolar','Aproveitamento','Rematrícula','Atestado','Papéis de Estágio') NOT NULL,
   `anex_soli` varchar(50) DEFAULT NULL,
   `cond_soli` varchar(10) DEFAULT NULL,
   `mtap_soli` varchar(26) DEFAULT NULL,
   `tpau_soli` varchar(20) DEFAULT NULL,
   `mtau_soli` varchar(50) DEFAULT NULL,
-  `dtau_soli` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `dtau_soli` date DEFAULT NULL,
+  PRIMARY KEY (`iden_soli`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -201,11 +217,20 @@ CREATE TABLE `solicitacao` (
 -- Estrutura da tabela `telefone`
 --
 
-CREATE TABLE `telefone` (
-  `iden_fone` int(11) NOT NULL,
-  `iden_user` int(11) NOT NULL,
-  `nmro_fone` char(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `telefone`;
+CREATE TABLE IF NOT EXISTS `telefone` (
+  `iden_fone` int NOT NULL AUTO_INCREMENT,
+  `iden_user` int NOT NULL,
+  `nmro_fone` char(15) NOT NULL,
+  PRIMARY KEY (`iden_fone`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `telefone`
+--
+
+INSERT INTO `telefone` (`iden_fone`, `iden_user`, `nmro_fone`) VALUES
+(13, 1, '(11) 91111-2222');
 
 -- --------------------------------------------------------
 
@@ -213,135 +238,29 @@ CREATE TABLE `telefone` (
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
-  `iden_user` int(11) NOT NULL,
-  `regx_user` int(11) NOT NULL,
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `iden_user` int NOT NULL AUTO_INCREMENT,
+  `regx_user` int NOT NULL,
   `codg_user` char(14) NOT NULL,
   `nome_user` varchar(40) NOT NULL,
   `mail_user` varchar(40) NOT NULL,
   `senh_user` varchar(16) NOT NULL,
   `fone_user` char(15) NOT NULL,
   `foto_user` char(14) DEFAULT NULL,
-  `flag_user` enum('A','P','S') NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+  `flag_user` enum('A','P','S') NOT NULL,
+  PRIMARY KEY (`iden_user`),
+  UNIQUE KEY `mail_user` (`mail_user`),
+  UNIQUE KEY `codg_user` (`codg_user`),
+  UNIQUE KEY `foto_user` (`foto_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
 INSERT INTO `usuario` (`iden_user`, `regx_user`, `codg_user`, `nome_user`, `mail_user`, `senh_user`, `fone_user`, `foto_user`, `flag_user`) VALUES
-(1, 1, '111.111.111-11', 'ROGÉRIO DA SILVA LOPES', 'rogerio.lopes@maltec.sp.gov.br', 'cocacolamata', '(11) 91230-9054', NULL, 'A');
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `aluno`
---
-ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`iden_alun`),
-  ADD UNIQUE KEY `regx_user` (`regx_user`);
-
---
--- Índices para tabela `cursando`
---
-ALTER TABLE `cursando`
-  ADD PRIMARY KEY (`iden_crsn`);
-
---
--- Índices para tabela `curso`
---
-ALTER TABLE `curso`
-  ADD PRIMARY KEY (`iden_curs`),
-  ADD UNIQUE KEY `nome_curs` (`nome_curs`),
-  ADD UNIQUE KEY `abrv_curs` (`abrv_curs`);
-
---
--- Índices para tabela `evento`
---
-ALTER TABLE `evento`
-  ADD PRIMARY KEY (`iden_even`),
-  ADD UNIQUE KEY `nome_event` (`nome_even`);
-
---
--- Índices para tabela `materia`
---
-ALTER TABLE `materia`
-  ADD PRIMARY KEY (`iden_matr`);
-
---
--- Índices para tabela `solicitacao`
---
-ALTER TABLE `solicitacao`
-  ADD PRIMARY KEY (`iden_soli`);
-
---
--- Índices para tabela `telefone`
---
-ALTER TABLE `telefone`
-  ADD PRIMARY KEY (`iden_fone`);
-
---
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`iden_user`),
-  ADD UNIQUE KEY `mail_user` (`mail_user`),
-  ADD UNIQUE KEY `codg_user` (`codg_user`),
-  ADD UNIQUE KEY `foto_user` (`foto_user`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `aluno`
---
-ALTER TABLE `aluno`
-  MODIFY `iden_alun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de tabela `cursando`
---
-ALTER TABLE `cursando`
-  MODIFY `iden_crsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de tabela `curso`
---
-ALTER TABLE `curso`
-  MODIFY `iden_curs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de tabela `evento`
---
-ALTER TABLE `evento`
-  MODIFY `iden_even` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `materia`
---
-ALTER TABLE `materia`
-  MODIFY `iden_matr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT de tabela `solicitacao`
---
-ALTER TABLE `solicitacao`
-  MODIFY `iden_soli` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `telefone`
---
-ALTER TABLE `telefone`
-  MODIFY `iden_fone` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `iden_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+(1, 1, '111.111.111-11', 'ROGÉRIO DA SILVA LOPES', 'rogerio.lopes@maltec.sp.gov.br', 'cocacolamata', '(11) 91230-5445', 'IMG_0000000001', 'A');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,17 +3,15 @@ class Controller
 {
     private $url;
     private $con;
-    private $cdg;
 
     public function __construct()
     {
         $this->url = "http://localhost:8080/aux/materia/find_all";
         $this->con = mysqli_connect('localhost', 'root', '', 'saga_db');
         // $this->con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
-        $this->cdg = $_SESSION['ativ'];
     }
 
-    public function mtc_callApi($cicl)
+    public function mtc_callApi($iden, $cicl)
     {
         $data = @file_get_contents($this->url);
         
@@ -37,9 +35,7 @@ class Controller
 
                 $cmd = "SELECT abrv_matr, nome_matr, chor_matr, dias_matr, hora_matr, situ_crsn
                         FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
-                        WHERE cicl_alun=$cicl
-                          AND regx_user=(SELECT regx_user FROM usuario WHERE codg_user='$this->cdg')
-                        ORDER BY dias_matr, hora_matr ASC";
+                        WHERE cicl_alun=$cicl AND iden_user=$iden ORDER BY dias_matr, hora_matr ASC";
                 $rst = mysqli_query($this->con, $cmd);
 
                 while ($r = mysqli_fetch_array($rst))
