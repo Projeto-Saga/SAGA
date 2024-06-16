@@ -34,7 +34,7 @@ class Controller
 
                 $cmd = "SELECT DISTINCT cicl_alun
                         FROM cursando AS crsn INNER JOIN usuario AS user ON crsn.regx_user=user.regx_user
-                        WHERE iden_user=$iden ORDER BY cicl_alun ASC";
+                        WHERE iden_user=$iden AND cicl_alun<$cicl ORDER BY cicl_alun ASC";
                 $rst = mysqli_query($this->con, $cmd);
 
                 while ($r = mysqli_fetch_array($rst)) $all[] = $r[0];

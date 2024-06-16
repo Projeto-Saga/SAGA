@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 16-Jun-2024 às 02:28
+-- Tempo de geração: 16-Jun-2024 às 21:28
 -- Versão do servidor: 8.2.0
 -- versão do PHP: 8.2.13
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `aluno` (
 --
 
 INSERT INTO `aluno` (`iden_alun`, `regx_user`, `iden_curs`, `cicl_alun`) VALUES
-(1, 1, 1, 1);
+(1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS `cursando` (
   `cicl_alun` enum('1','2','3','4','5','6','7','8','9','10') NOT NULL DEFAULT '1',
   `_ano_crsn` char(4) NOT NULL,
   `_sem_crsn` enum('1','2') NOT NULL DEFAULT '1',
-  `situ_crsn` enum('Em Aberto','Retido','Aprovado') NOT NULL DEFAULT 'Em Aberto',
+  `situ_crsn` enum('Em Curso','Retido','Aprovado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Em Curso',
   PRIMARY KEY (`iden_crsn`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `cursando`
@@ -78,7 +78,14 @@ INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp
 (4, 1, 6, 9.75, 10.00, 0.00, 10.00, 4, '1', '2023', '2', 'Aprovado'),
 (5, 1, 7, 9.25, 8.50, 0.00, 8.60, 0, '1', '2023', '2', 'Aprovado'),
 (6, 1, 10, 7.60, 8.75, 0.00, 10.00, 16, '1', '2023', '2', 'Aprovado'),
-(7, 1, 15, 10.00, 9.50, 0.00, 10.00, 0, '1', '2023', '2', 'Aprovado');
+(7, 1, 15, 10.00, 9.50, 0.00, 10.00, 0, '1', '2023', '2', 'Aprovado'),
+(8, 1, 2, 6.50, 7.00, 0.00, 10.00, 0, '2', '2024', '1', 'Aprovado'),
+(9, 1, 4, 9.50, 10.00, 0.00, 10.00, 10, '2', '2024', '1', 'Aprovado'),
+(10, 1, 5, 10.00, 8.00, 0.00, 9.00, 10, '2', '2024', '1', 'Aprovado'),
+(11, 1, 16, 8.00, 8.00, 0.00, 10.00, 4, '2', '2024', '1', 'Aprovado'),
+(12, 1, 9, 9.75, 8.25, 0.00, 9.00, 0, '2', '2024', '1', 'Aprovado'),
+(13, 1, 8, 10.00, 9.25, 0.00, 10.00, 8, '2', '2024', '1', 'Aprovado'),
+(14, 1, 11, 10.00, 10.00, 0.00, 10.00, 8, '2', '2024', '1', 'Aprovado');
 
 -- --------------------------------------------------------
 
@@ -156,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `dias_matr` int NOT NULL,
   `hora_matr` enum('A','B') NOT NULL,
   PRIMARY KEY (`iden_matr`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `materia`
@@ -165,13 +172,13 @@ CREATE TABLE IF NOT EXISTS `materia` (
 INSERT INTO `materia` (`iden_matr`, `nome_matr`, `chor_matr`, `abrv_matr`, `ccpv_matr`, `dias_matr`, `hora_matr`) VALUES
 (1, 'CÁLCULO I', 40, 'CAL1', 1, 1, 'A'),
 (2, 'CÁLCULO II', 40, 'CAL2', 2, 1, 'A'),
-(3, 'ENGENHARIA DE SOFTWARE I', 40, 'ENGI', 1, 1, 'B'),
+(3, 'ENGENHARIA DE SOFTWARE I', 40, 'ENG1', 1, 1, 'B'),
 (4, 'ENGENHARIA DE SOFTWARE II', 40, 'ENG2', 2, 1, 'B'),
 (5, 'ÉTICA', 40, 'ETC', 1, 2, 'A'),
 (6, 'TÉCNICAS DE PROGRAMAÇÃO I', 80, 'TCP1', 1, 3, 'A'),
 (7, 'MODELAGEM DE BANCO DE DADOS ', 80, 'MBD', 1, 4, 'A'),
 (8, 'BANCO DE DADOS RELACIONAL', 80, 'BDD', 2, 4, 'A'),
-(9, 'TÉCNICA DE PROGRAMAÇÃO II', 80, 'TCP2', 2, 3, 'A'),
+(9, 'TÉCNICAS DE PROGRAMAÇÃO II', 80, 'TCP2', 2, 3, 'A'),
 (10, 'DESENVOLVIMENTO WEB I', 80, 'DVW1', 1, 5, 'A'),
 (11, 'DESENVOLVIMENTO WEB II', 80, 'DVW2', 2, 5, 'A'),
 (12, 'DESENVOLVIMENTO WEB III', 80, 'DVW3', 3, 5, 'A'),
@@ -189,7 +196,8 @@ INSERT INTO `materia` (`iden_matr`, `nome_matr`, `chor_matr`, `abrv_matr`, `ccpv
 (24, 'EXPERIÊNCIA DE USUÁRIO', 40, 'EXU', 4, 3, 'B'),
 (25, 'INTERNET DAS COISAS', 80, 'IDC', 4, 4, 'A'),
 (26, 'REDES DE COMPUTADORES', 40, 'RDC', 4, 5, 'A'),
-(27, 'PROGRAMAÇÃO EMBARCADA', 40, 'PRE', 4, 5, 'B');
+(27, 'PROGRAMAÇÃO EMBARCADA', 40, 'PRE', 4, 5, 'B'),
+(28, 'TÉCNICAS DE PROGRAMAÇÃO III', 80, 'TCP3', 3, 3, 'A');
 
 -- --------------------------------------------------------
 
@@ -223,14 +231,7 @@ CREATE TABLE IF NOT EXISTS `telefone` (
   `iden_user` int NOT NULL,
   `nmro_fone` char(15) NOT NULL,
   PRIMARY KEY (`iden_fone`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Extraindo dados da tabela `telefone`
---
-
-INSERT INTO `telefone` (`iden_fone`, `iden_user`, `nmro_fone`) VALUES
-(13, 1, '(11) 91111-2222');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 

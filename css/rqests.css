@@ -130,13 +130,17 @@
 {
     background:#68deff;
 }
+#form_3 article div.open
+{
+    background:#f1d015;
+}
 #form_3 article div.aprv
 {
     background:#3de474;
 }
 #form_3 article div.retd
 {
-    background:#f11557;
+    background:#fa4e81;
 }
 #form_3 article div.next
 {
@@ -152,6 +156,25 @@
 #form_3 article div label
 {
     justify-content:unset;
+}
+#form_3 input
+{
+    margin-bottom:20px;
+    height:40px;
+    border-radius:20px;
+    border:none;
+    background:#D94646;
+    color:white;
+    font-size:18px;
+    font-family:"Poppins";
+    font-weight:bold;
+    transition:0.3s;
+}
+#form_3 input:hover
+{
+    cursor:pointer;
+    background:#ddd;
+    color:#D94646;
 }
 #form_6 .reqs-form-form tbody
 {

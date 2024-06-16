@@ -104,7 +104,8 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">Valide a continuidade dos seus estudos conosco, só assim a sua permanência na instituição é garantida.</p>
                     </div>
-                    <form class="reqs-form-form clmalign" style="justify-content:unset">
+                    <form action="php/enroll.php" method="POST" class="reqs-form-form clmalign" style="justify-content:unset">
+                        <input type="submit" value="Confirmar Matrícula">
                         <?php print_r($main->mtc_callApi($iden, $cicl+1)); ?>
                     </form>
                 </div>
