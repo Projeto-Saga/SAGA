@@ -31,5 +31,5 @@ function file(iden)
 
 function chck(trgt)
 {
-    trgt.hasClass("active") ? trgt.removeClass("active") : trgt.addClass("active");
+    trgt.hasClass("actv") ? trgt.removeClass("actv") : trgt.addClass("actv");
 }

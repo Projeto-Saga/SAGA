@@ -111,27 +111,35 @@
     box-shadow:0 0 5px 1px rgba(0, 0, 0, 0.25);
     padding:10px;
     width:300px;
-    height:80px;
+    height:75px;
     transition:0.3s;
 }
 #form_3 article div:hover
 {
     cursor:default;
 }
-#form_3 article div.active
+#form_3 article div.actv
 {
     background:#68deff;
+}
+#form_3 article div.aprv
+{
+    background:#3de474;
+}
+#form_3 article div.retd
+{
+    background:#f11557;
+}
+#form_3 article div.next
+{
+    background:#999;
 }
 #form_3 article div h1,
 #form_3 article div h2,
 #form_3 article div p
 {
     margin:0;
-}
-#form_3 article div h1,
-#form_3 article div h2
-{
-    font-size:18px;
+    font-size:16px;
 }
 #form_3 article div label
 {
@@ -199,10 +207,28 @@
     padding:5px 8px 8px 8px;
     font-family:"Leelawadee UI";
 }
+.reqs-form-inpt[type="button"]
+{
+    transition:all 0.3s ease;
+}
+.reqs-form-inpt[type="button"]:hover
+{
+    cursor:pointer;
+    background:#ddd;
+}
 .reqs-form-inpt.dark-mode
 {
-    background:#101010;
+    background:transparent;
     border-color:black;
+}
+.reqs-form-inpt.dark-mode[type="button"]
+{
+    background:#1A1A1A;
+}
+.reqs-form-inpt.dark-mode[type="button"]:hover
+{
+    cursor:pointer;
+    background:#111;
 }
 .reqs-form-inpt:focus, .reqs-form-butn:focus, .reqs-form-data:focus
 {
@@ -242,21 +268,6 @@
 {
     cursor:pointer;
     filter:brightness(0.85);
-}
-.reqs-form-inpt[type="button"]
-{
-    transition:all 0.3s ease;
-}
-.reqs-form-inpt[type="button"]:hover
-{
-    cursor:pointer;
-    background:#ddd;
-}
-
-.reqs-form-inpt.dark-mode[type="button"]:hover
-{
-    cursor:pointer;
-    background:#3b3b3b;
 }
 
 #form_1 .reqs-form-butn {background:#5ba334;}
