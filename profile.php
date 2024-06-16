@@ -12,7 +12,7 @@
 
         <div class="container fanimate">
             <form id="studform" class="box interface" method="POST" enctype="multipart/form-data" action="php/update.php">
-                <input name="iden" hidden readonly value="<?php echo $rmat ?>">
+                <input name="iden" hidden readonly value="<?php echo $iden ?>">
 
                 <div class="rowalign grid-g15">
                     <div class="clmalign" style="width:50%; justify-content:unset">

@@ -105,7 +105,7 @@
                         <p style="margin:0;" class="reqs-form-prev-text">Valide a continuidade dos seus estudos conosco, só assim a sua permanência na instituição é garantida.</p>
                     </div>
                     <form class="reqs-form-form clmalign" style="justify-content:unset">
-                        <?php print_r($main->mtc_callApi($iden, $cicl)); ?>
+                        <?php print_r($main->mtc_callApi($iden, $cicl+1)); ?>
                     </form>
                 </div>
                 <!-- atestados -->
@@ -195,7 +195,8 @@
                             $cmd2 = "SELECT matr.nome_matr,crsn.ntp1_crsn,crsn.ntp2_crsn,crsn.ntp3_crsn,crsn.nttt_crsn,
                                             crsn.falt_crsn,matr.chor_matr,crsn._ano_crsn,crsn._sem_crsn,crsn.situ_crsn
                                     FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
-                                    WHERE crsn.regx_user='$rmat'";
+                                    WHERE crsn.regx_user='$rmat'
+                                    ORDER BY cicl_alun, dias_matr, hora_matr ASC";
                             $rst2 = mysqli_query($conn, $cmd2);
                             
                             while ($b = mysqli_fetch_array($rst2))

@@ -96,6 +96,14 @@
 {
     border-top-right-radius:15px;
 }
+.reqs-form-form tr:last-child td:first-child
+{
+    border-bottom-left-radius:15px;
+}
+.reqs-form-form tr:last-child td:last-child
+{
+    border-bottom-right-radius:15px;
+}
 .reqs-form-form tr:nth-child(odd)
 {
     background:#ddd;

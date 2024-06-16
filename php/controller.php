@@ -17,7 +17,7 @@ class Controller
         
         if ($data === false)
         {
-            $response = "<label class=\"reqs-form-labl\">Conexão com API indisponível</label>";
+            $response = "<label class=\"reqs-form-labl\">Indisponível</label>";
         }
         else
         {
@@ -25,41 +25,53 @@ class Controller
         
             if (json_last_error() !== JSON_ERROR_NONE)
             {
-                $response = "<label class=\"reqs-form-labl\">Erro ao processar retorno</label>";
+                $response = "<label class=\"reqs-form-labl\">Erro processual</label>";
             }
             else
             {
                 $response = "
-                <div class=\"rowalign grid-g10\">
-                    <article class=\"clmalign grid-g10\">";
+                <div class=\"rowalign grid-g10\">";
 
-                $cmd = "SELECT abrv_matr, nome_matr, chor_matr, dias_matr, hora_matr, situ_crsn
-                        FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
-                        WHERE cicl_alun=$cicl AND iden_user=$iden ORDER BY dias_matr, hora_matr ASC";
+                $cmd = "SELECT DISTINCT cicl_alun
+                        FROM cursando AS crsn INNER JOIN usuario AS user ON crsn.regx_user=user.regx_user
+                        WHERE iden_user=$iden ORDER BY cicl_alun ASC";
                 $rst = mysqli_query($this->con, $cmd);
 
-                while ($r = mysqli_fetch_array($rst))
+                while ($r = mysqli_fetch_array($rst)) $all[] = $r[0];
+
+                foreach ($all as $key => $val)
                 {
-                    if ($r[5] == 'Retido'  ) $stat = "retd";
-                    if ($r[5] == 'Aprovado') $stat = "aprv";
+                    $response .= "
+                    <article class=\"clmalign grid-g10\">";
+
+                    $cmd = "SELECT abrv_matr, nome_matr, chor_matr, dias_matr, hora_matr, situ_crsn, cicl_alun
+                            FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
+                                                  INNER JOIN usuario AS user ON crsn.regx_user=user.regx_user
+                            WHERE iden_user=$iden AND cicl_alun=$val ORDER BY cicl_alun, dias_matr, hora_matr ASC";
+                    $rst = mysqli_query($this->con, $cmd);
+
+                    while ($r = mysqli_fetch_array($rst))
+                    {
+                        $response .= "
+                        <div id=\"$r[0]\" class=\"".$this->mtc_statMtr($r[5])."\">
+                            <h1>$r[1]</h1>
+                            <h2>($r[0])</h2>
+                            <p>$r[2] horas - Aula $r[4]</p>
+                        </div>";
+                    }
 
                     $response .= "
-                    <div id=\"$r[0]\" class=\"$stat\">
-                        <h1>$r[1]</h1>
-                        <h2>($r[0])</h2>
-                        <p>$r[2] horas - Aula $r[4]</p>
-                    </div>";
+                    </article>";
                 }
 
                 $response .= "
-                </article>
-                <article class=\"clmalign grid-g10\">";
+                    <article class=\"clmalign grid-g10\">";
 
                 usort($data, array($this, 'mtc_compare'));
 
                 foreach ($data as $d)
                 {
-                    if (intval($d->ccpv_matr) == $cicl+1)
+                    if (intval($d->ccpv_matr) == $cicl)
                     {
                         $response .= "
                         <div id=\"$d->abrv_matr\" onclick=\"chck($(this))\">
@@ -70,11 +82,40 @@ class Controller
                     }
                 }
 
-                $response .= "</article></div>";
+                $response .= "
+                    </article>
+                </div>";
             }
         }
 
         return $response;
+    }
+
+    public function mtc_inclMtr($data)
+    {
+
+    }
+
+    private function mtc_statMtr($stat)
+    {
+        switch ($stat)
+        {
+            case 'Em Curso':
+                return 'open';
+            break;
+
+            case 'Aprovado':
+                return 'aprv';
+            break;
+
+            case 'Retido':
+                return 'retd';
+            break;
+
+            case 'Próximo':
+                return 'next';
+            break;
+        }
     }
 
     private function mtc_compare($a, $b)

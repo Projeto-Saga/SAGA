@@ -39,7 +39,7 @@ if (isset($_SESSION['ativ']))
 	{
 		case 'A':
 			$cmd2 = "SELECT user.regx_user,user.mail_user,user.nome_user,curs.nome_curs,alun.cicl_alun,user.codg_user,
-							user.senh_user,user.fone_user,user.foto_user,alun.iden_alun
+							user.senh_user,user.fone_user,user.foto_user,user.iden_user
 					FROM usuario AS user INNER JOIN aluno AS alun ON user.regx_user=alun.regx_user 
 										 INNER JOIN curso AS curs ON alun.iden_curs=curs.iden_curs
 					WHERE user.flag_user='A' AND user.codg_user='$ativ'";
