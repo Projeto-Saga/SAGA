@@ -88,7 +88,7 @@
             </form>
 
             <!-- carteirinha -->
-            <div id="studcard" class="modal hidden">
+            <div id="studcard" class="modal" style="visibility:hidden; opacity:0">
                 <div class="student-card">
                     <div class="card-imge" style="background-image:url('img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png" ?>')"></div>
                     <div class="card-text">
@@ -98,6 +98,7 @@
                         <p><?php echo $curs ?></p>
                         <p><?php echo $mail ?></p>
                     </div>
+                    <button class="card-exit" onclick="modal($('#studcard'))">X</button>
                 </div>
             </div>
         </div>

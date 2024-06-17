@@ -247,7 +247,7 @@
     cursor:pointer;
     background:#ddd;
 }
-.reqs-form-inpt.dark-mode
+.reqs-form-inpt.dark-mode, .reqs-form-data.dark-mode
 {
     background:transparent;
     border-color:black;
@@ -269,13 +269,6 @@
 {
     width:282px;
     height:20px;
-}
-.reqs-form-data.dark-mode
-{
-    width:282px;
-    height:20px;
-    border: solid 1px black;
-    background-color:#101010;
 }
 .reqs-form-data.dark-mode::-webkit-calendar-picker-indicator
 {

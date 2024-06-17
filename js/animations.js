@@ -26,5 +26,14 @@ function show()
 
 function modal(modal)
 {
-    modal.removeClass("hidden");
+    if (modal.css("visibility") == "hidden")
+    {
+        modal.css("visibility", "visible");
+        modal.css("opacity", 1);
+    }
+    else
+    {
+        modal.css("opacity", 0);
+        modal.css("visibility", "hidden");
+    }
 }

@@ -5,6 +5,8 @@
     border-radius:25px;
     background:#D1ECFF;
     display:flex;
+    position:relative;
+    box-shadow:0 0 8px 1px var(--blue-base);
 }
 .card-imge
 {
@@ -21,6 +23,25 @@
     flex-direction:column;
     width:325px;
     padding:25px;
+}
+.card-exit
+{
+    right:-40px;
+    position:absolute;
+    font-weight:bold;
+    height:30px;
+    width:30px;
+    background:var(--red-dark);
+    color:white;
+    border-radius:5px;
+    border:none;
+    transition:0.3s;
+}
+.card-exit:hover
+{
+    cursor:pointer;
+    background:#ddd;
+    color:var(--red-dark);
 }
 .student-card h4,
 .student-card p
