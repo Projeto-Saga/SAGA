@@ -53,7 +53,7 @@
                         </section>
 
                         <section>
-                            <h2>Médias</h2>
+                            <h2>Notas</h2>
                             <ul>
                             <?php
                             $cmd3 = "SELECT ntp1_crsn,ntp2_crsn,ntp3_crsn,nttt_crsn,matr.iden_matr
@@ -108,24 +108,6 @@
                             while ($d = mysqli_fetch_array($rst4))
                             {
                             echo "<li>$d[0]</li>";
-                            }
-                            ?>
-                            </ul>
-                        </section>
-                        
-                        <section>
-                            <h2>Situação</h2>
-                            <ul>
-                            <?php
-                            $cmd5 = "SELECT crsn.situ_crsn
-                                     FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
-                                     WHERE crsn.regx_user=$rmat AND crsn.cicl_alun=$tick
-                                     ORDER BY matr.dias_matr, matr.hora_matr";
-                            $rst5 = mysqli_query($conn, $cmd5);
-                            
-                            while ($e = mysqli_fetch_array($rst5))
-                            {
-                            echo "<li>$e[0]</li>";
                             }
                             ?>
                             </ul>

@@ -30,6 +30,7 @@ class Controller
             else
             {
                 $response = "
+                <input type=\"submit\" value=\"Confirmar Matrícula\">
                 <div class=\"rowalign grid-g10\">";
 
                 $cmd = "SELECT DISTINCT cicl_alun

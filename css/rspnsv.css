@@ -6,11 +6,16 @@
     }
     .reqs-form-prev
     {
+        width:auto;
         border-radius:10px 10px 0 0;
     }
-    .reqs-form-prev, .reqs-form-inpt, .reqs-form-butn, .reqs-form-data, .maininpt
+    .reqs-form-inpt, .reqs-form-butn, .reqs-form-data, .maininpt
     {
-        width:auto;
+        width:100%;
+    }
+    .reqs-form-data
+    {
+        width:calc(100% - 18px);
     }
     .grid-box-1
     {
