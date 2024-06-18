@@ -3,7 +3,7 @@
     <head>
         <?php include("html/head.php") ?>
     </head>
-    <body style="background:white">
+    <body class="bodyind">
     <?php
         if (isset($_SESSION['ativ']))
         {

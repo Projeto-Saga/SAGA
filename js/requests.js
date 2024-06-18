@@ -9,14 +9,6 @@ function form(iden)
     $(`#form_${iden}`).removeClass("stud-hidden");
 }
 
-// selecionar matéria
-function tick(iden)
-{
-    var trgt = document.getElementById('aprv_mat'+iden);
-    
-    trgt.checked == true ? trgt.checked = false : trgt.checked = true;
-}
-
 // subir arquivo
 function file(iden)
 {
@@ -29,7 +21,10 @@ function file(iden)
     });
 }
 
+// selecionar matéria
 function chck(trgt)
 {
     trgt.hasClass("actv") ? trgt.removeClass("actv") : trgt.addClass("actv");
+
+    trgt.find("input").is(":checked") ? trgt.find("input").prop("checked", false) : trgt.find("input").prop("checked", true);
 }

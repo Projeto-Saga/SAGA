@@ -14,13 +14,3 @@ function nextImage()
 
     document.getElementById("radio"+count).checked = true;
 }
-
-function abrirJanela(window)
-{
-    document.getElementById(window).style.display = 'block';
-}
-   
-function fecharJanela(window)
-{
-    document.getElementById(window).style.display = 'none';
-}

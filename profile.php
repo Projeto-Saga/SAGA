@@ -27,14 +27,6 @@
                         <label class="update-label">Senha</label>
                         <input name="senh" class="update-input" type="text" value="<?php echo $pass ?>">
 
-                        <!-- seção: institucional -->
-                        <h1 class="update-group">Institucional</h1>
-                        <label class="update-label">RA</label>
-                        <input class="update-input" type="text" value="<?php echo sprintf("%010d", $rmat) ?>" disabled>
-
-                        <label class="update-label">Curso</label>
-                        <input class="update-input" type="text" value="<?php echo $curs ?>" disabled>
-
                         <!-- seção: contatos -->
                         <h1 class="update-group">Contato</h1>
                         <label class="update-label">Telefones</label>
@@ -69,8 +61,19 @@
                     </div>
 
                     <div class="clmalign" style="width:50%; justify-content:unset">
+                        <!-- seção: institucional -->
+                        <h1 class="update-group" style="margin-top:0">Institucional</h1>
+                        <label class="update-label">RA</label>
+                        <input class="update-input" type="text" value="<?php echo sprintf("%010d", $rmat) ?>" disabled>
+
+                        <label class="update-label">Curso</label>
+                        <input class="update-input" type="text" value="<?php echo $curs ?>" disabled>
+
+                        <label class="update-label">E-Mail</label>
+                        <input class="update-input" type="text" value="<?php echo $mail ?>" disabled>
+
                         <!-- seção: adicional -->
-                        <h1 class="update-group" style="margin-top:0">Adicional</h1>
+                        <h1 class="update-group">Adicional</h1>
                         <label class="update-label">Foto</label>
                         <div class="rowalign" style="align-items:center">
                             <input id="foto" name="foto" type="file" accept=".png, .jpg, .jpeg" hidden>

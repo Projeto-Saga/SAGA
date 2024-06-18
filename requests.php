@@ -87,10 +87,10 @@
                         
                         while ($d = mysqli_fetch_array($rst4))
                         {
-                        echo "<div onclick=\"tick($d[0]);\" class=\"rowalign\" style=\"justify-content:unset\">
+                        echo "<label class=\"rowalign\" style=\"justify-content:unset\">
                             <input id=\"aprv_mat$d[0]\" name=\"mtap_solc[]\" class=\"reqs-form-optn\" type=\"checkbox\" value=\"$d[0]\">
-                            <label>$d[1]</label>
-                        </div>";
+                            $d[1]
+                        </label>";
                         }
                         ?>
                         <br>

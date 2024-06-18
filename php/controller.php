@@ -79,6 +79,8 @@ class Controller
                             <h1>$d->nome_matr</h1>
                             <h2>($d->abrv_matr)</h2>
                             <p>$d->chor_matr horas - Aula $d->hora_matr</p>
+
+                            <input name=\"matr[]\" type=\"checkbox\" value=\"$d->iden_matr\" hidden>
                         </div>";
                     }
                 }
@@ -90,11 +92,6 @@ class Controller
         }
 
         return $response;
-    }
-
-    public function mtc_inclMtr($data)
-    {
-
     }
 
     private function mtc_statMtr($stat)

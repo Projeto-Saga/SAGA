@@ -1,0 +1,57 @@
+<?php
+session_start();
+$con = mysqli_connect('localhost', 'root', '', 'saga_db');
+// $con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+
+if (isset($_SESSION['ativ']))
+{
+    $codg = $_SESSION['ativ'];
+
+    $cmd = "SELECT regx_user FROM usuario WHERE codg_user='$codg'";
+    $rst = mysqli_query($con, $cmd);
+
+    while ($r = mysqli_fetch_array($rst)) $regx = $r[0];
+
+    $exts = "." . pathinfo($_FILES['anex_solc']['name'], PATHINFO_EXTENSION);
+
+    $file = $_POST['iden_solc']."_$regx"."_".time().$exts;
+    $type = $_POST['tipo_solc'];
+
+    if (!empty($_FILES['anex_solc']['size']))
+    {
+        if ($_FILES['anex_solc']['size'] <= 1000000)
+        {
+            if (file_put_contents("../arq/solc/$file", file_get_contents($_FILES['anex_solc']['tmp_name'])))
+            {
+                $cmd = "INSERT INTO solicitacao (regx_user, tipo_soli, anex_soli) VALUES ($regx, '$type', '$file')";
+                $rst = mysqli_query($con, $cmd);
+
+                if ($rst)
+                {
+                    echo json_encode(array("success" => true, "message" => "FOTO DE PERFIL ALTERADA COM SUCESSO!"));
+                }
+                else
+                {
+                    echo json_encode(array("success" => false, "message" => "ERRO AO TENTAR ALTERAR FOTO DE PERFIL!"));
+                }
+            }
+            else
+            {
+                echo json_encode(array("success" => false, "message" => "ERRO AO TENTAR MOVER ARQUIVO!"));
+            }
+        }
+        else
+        {
+            echo json_encode(array("success" => false, "message" => "ARQUIVO GRANDE DEMAIS! MÁXIMO: 1MB"));
+        }
+    }
+    else
+    {
+        echo json_encode(array("success" => false, "message" => "NENHUM ARQUIVO FOI SELECIONADO..."));
+    }
+}
+else
+{
+    header("location:..");
+} 
+?>

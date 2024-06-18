@@ -1,4 +1,4 @@
-.student-card
+.student-card, .informt-card
 {
     width:600px;
     height:300px;
@@ -44,7 +44,9 @@
     color:var(--red-dark);
 }
 .student-card h4,
-.student-card p
+.student-card p,
+.informt-card h4,
+.informt-card p
 {
     word-break:break-word;
     margin:0 0 15px 0;
@@ -53,13 +55,15 @@
     font-weight:bold;
     font-family:"Leelawadee UI";
 }
-.student-card p
+.student-card p,
+.informt-card p
 {
     margin:0 0 5px 0;
     font-size:15px;
     color:#777;
 }
-.student-card p:nth-child(even)
+.student-card p:nth-child(even),
+.informt-card p:nth-child(even)
 {
     color:var(--blue-base)
 }

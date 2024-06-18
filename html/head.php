@@ -19,11 +19,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
-/* WAMP --> */ $conn = mysqli_connect('localhost', 'root', '', 'saga_db');
-// /* USBW --> */ $conn = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+$conn = mysqli_connect('localhost', 'root', '', 'saga_db');
 
 session_start();
+
+include("php/darkmode.php");
 include("php/controller.php");
+
 $main = new Controller();
 
 if (isset($_SESSION['ativ']))

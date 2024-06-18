@@ -163,3 +163,81 @@
     background-color:var(--gray-base);
     color:var(--red-base);
 }
+.informt-card
+{
+    width:700px;
+    height:500px;
+}
+.informt-card .card-imge
+{
+    height:500px;
+    width:250;
+    background:lightgray;
+    background-size:cover;
+    background-position:center;
+    border-radius:25px 0 0 25px;
+}
+.informt-card .card-text
+{
+    width:425px;
+}
+.informt-card .card-text h4
+{
+    margin-top:0;
+}
+.informt-card .card-text p
+{
+    text-align:justify;
+}
+.informt-card .card-text p:first-child
+{
+    margin:0;
+    margin-bottom:-5px;
+    color:#222;
+    font-size:20px;
+}
+.informt-card .card-text p:nth-child(5)
+{
+    text-indent:60px;
+}
+
+footer
+{
+    display:flex;
+    flex-wrap:wrap;
+    height:100%;
+    gap:15px;
+    margin:0;
+    font-weight:500;
+}
+footer div
+{
+    flex:2 0 20%;
+    text-align:center;
+    padding:20px;
+    font-size:15px;
+    background-color:#ccddf3;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    height:100%;
+    border-radius:10px;
+}
+footer div.dark-mode 
+{
+    background-color:#191c20;
+}
+footer div img
+{
+    margin-bottom:10px;
+}
+footer div p
+{
+    margin:0;
+    line-height:25px;
+}
+footer div.dark-mode p
+{
+    color:#ccddf3;
+}
