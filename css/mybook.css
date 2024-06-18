@@ -48,10 +48,18 @@
     border-radius:40px;
     transition:all 0.3s ease;
 }
+#studbook .head button.dark-mode
+{
+    color:#ddd;
+}
+#studbook .head button.locked.dark-mode
+{
+    color:#555;
+}
 #studbook .head button:hover
 {
     cursor:pointer;
-    color:var(--red-dark);
+    color:var(--red-base);
 }
 #studbook .head button:focus
 {
@@ -59,8 +67,8 @@
 }
 #studbook .head button.active
 {
-    color:red;
-    border:solid red 4px;
+    color:var(--red-base);
+    border:solid var(--red-base) 4px;
 }
 #studbook .head button.locked
 {
@@ -172,7 +180,7 @@
 }
 #studbook .body section button.dark-mode
 {
-    filter: brightness(5) invert(1);
+    filter:brightness(5) invert(1);
 
 }
 #studbook .body section button:hover
