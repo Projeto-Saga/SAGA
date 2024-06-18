@@ -186,7 +186,11 @@
     font-weight:bold;
     transition:0.3s;
 }
-#form_3 input:hover
+#form_3 input[disabled]
+{
+    opacity:0.5;
+}
+#form_3 input:not(:disabled):hover
 {
     cursor:pointer;
     background:#ddd;

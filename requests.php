@@ -42,7 +42,7 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">O aluno regularmente matriculado deverá solicitar a inclusão dos seus dados junto à empresa de transportes preenchendo o formulário de solicitação ao lado.</p>
                     </div>
-                    <form action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
+                    <form id="reqs_1" action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
                         <input id="file1" name="anex_solc" type="file" hidden="true">
                         <input name="iden_solc" type="text" value="1" hidden="true">
                         <input name="tipo_solc" type="text" value="Passe Escolar" hidden="true">
@@ -62,7 +62,7 @@
                            <option>Linha C-26</option>
                         </select>
                         <br>
-                        <input class="reqs-form-butn" type="submit" value="Concluído">
+                        <input class="reqs-form-butn" type="button" value="Concluído" onclick="send($('#reqs_1'))">
                     </form>
                 </div>
                 <!-- aproveitamento -->
@@ -72,7 +72,7 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">O aluno ingressante que já cursou outra instituição de ensino superior pode solicitar aproveitamento de estudos para eliminação de disciplinas.<br>O mesmo terá que solicitar somente no período de matrícula atendendo ao calendário acadêmico.<br>Para tal o aluno(a) deverá encaminhas os documentos informados ao lado:</p>
                     </div>
-                    <form action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
+                    <form id="reqs_2" action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
                         <input id="file2" name="anex_solc" type="file" hidden="true">
                         <input name="iden_solc" type="text" value="2" hidden="true">
                         <input name="tipo_solc" type="text" value="Aproveitamento" hidden="true">
@@ -94,7 +94,7 @@
                         }
                         ?>
                         <br>
-                        <input class="reqs-form-butn" type="submit" value="Concluído">
+                        <input class="reqs-form-butn" type="button" value="Concluído" onclick="send($('#reqs_2'))">
                     </form>
                 </div>
                 <!-- rematrícula -->
@@ -104,7 +104,7 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">Valide a continuidade dos seus estudos conosco, só assim a sua permanência na instituição é garantida.</p>
                     </div>
-                    <form action="php/enroll.php" method="POST" class="reqs-form-form clmalign" style="justify-content:unset">
+                    <form id="reqs_3" action="php/enroll.php" method="POST" class="reqs-form-form clmalign" style="justify-content:unset">
                         <?php print_r($main->mtc_callApi($iden, $cicl+1)); ?>
                     </form>
                 </div>
@@ -115,7 +115,7 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">Preencha o formulário ao lado com todas as informações devidas para que suas ausências sejam justificadas.</p>
                     </div>
-                    <form action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
+                    <form id="reqs_4" action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
                         <input id="file4" name="anex_solc" type="file" hidden="true">
                         <input name="iden_solc" type="text" value="4" hidden="true">
                         <input name="tipo_solc" type="text" value="Atestado" hidden="true">
@@ -151,7 +151,7 @@
                         <label class="reqs-form-labl">Data da Ausência</label>
                         <input name="dtau_solc" class="reqs-form-data" type="date">
                         <br>
-                        <input class="reqs-form-butn" type="submit" value="Concluído">
+                        <input class="reqs-form-butn" type="button" value="Concluído" onclick="send($('#reqs_4'))">
                     </form>
                 </div>
                 <!-- papéis de estágio -->
@@ -161,7 +161,7 @@
                         <hr>
                         <p style="margin:0;" class="reqs-form-prev-text">O estágio constitui-se em trabalho de campo, onde as atividades práticas são exercidas mediante fundamentação teórica prévia ou simultaneamente adquirida, em situações reais de trabalho.<br>Tem duração de 240 horas e é atividade obrigatória. Sua integralização, com êxito, é indispensável à conclusão do curso.</p>
                     </div>
-                    <form action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
+                    <form id="reqs_5" action="php/request.php" method="POST" enctype="multipart/form-data" class="reqs-form-form clmalign" style="justify-content:unset;">
                         <input id="file5" name="anex_solc" type="file" hidden="true">
                         <input name="iden_solc" type="text" value="5" hidden="true">
                         <input name="tipo_solc" type="text" value="Papéis de Estágio" hidden="true">
@@ -172,7 +172,7 @@
                         <label class="reqs-form-labl">Seu Preenchimento</label>
                         <input id="file_show5" class="reqs-form-inpt" type="button" value="Clique Para Subir Arquivo" onclick="file(5);">
                         <br>
-                        <input class="reqs-form-butn" type="submit" value="Concluído">
+                        <input class="reqs-form-butn" type="button" value="Concluído" onclick="send($('#reqs_5'))">
                     </form>
                 </div>
                 <!-- histórico escolar -->

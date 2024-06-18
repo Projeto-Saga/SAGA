@@ -29,16 +29,27 @@ class Controller
             }
             else
             {
-                $response = "
-                <input type=\"submit\" value=\"Confirmar Rematrícula\">
-                <div class=\"rowalign grid-g10\">";
-
                 $cmd = "SELECT DISTINCT cicl_alun
                         FROM cursando AS crsn INNER JOIN usuario AS user ON crsn.regx_user=user.regx_user
                         WHERE iden_user=$iden AND cicl_alun<$cicl ORDER BY cicl_alun ASC";
                 $rst = mysqli_query($this->con, $cmd);
 
                 while ($r = mysqli_fetch_array($rst)) $all[] = $r[0];
+
+                $semAt = date('n') >= 1 && date('n') <= 6 ? '2' : '1';
+
+                $cmd = "SELECT DISTINCT _sem_crsn
+                        FROM cursando AS crsn INNER JOIN usuario AS user ON crsn.regx_user=user.regx_user
+                        WHERE iden_user=$iden AND cicl_alun=$cicl-1";
+                $rst = mysqli_query($this->con, $cmd);
+
+                while ($r = mysqli_fetch_array($rst)) $semAl = $r[0];
+
+                $enable = $semAt == $semAl ? "disabled" : "";
+
+                $response = "
+                <input type=\"button\" value=\"Confirmar Rematrícula\" onclick=\"send($('#reqs_3'), true)\" $enable>
+                <div class=\"rowalign grid-g10\">";
 
                 foreach ($all as $key => $val)
                 {
@@ -68,13 +79,15 @@ class Controller
                 $response .= "
                     <article class=\"clmalign grid-g10\">";
 
-                usort($data, array($this, 'mtc_compare'));
-
-                foreach ($data as $d)
+                if (empty($enable))
                 {
-                    if (intval($d->ccpv_matr) == $cicl)
+                    usort($data, array($this, 'mtc_compare'));
+
+                    foreach ($data as $d)
                     {
-                        $response .= "
+                        if (intval($d->ccpv_matr) == $cicl)
+                        {
+                            $response .= "
                         <div id=\"$d->abrv_matr\" onclick=\"chck($(this))\">
                             <h1>$d->nome_matr</h1>
                             <h2>($d->abrv_matr)</h2>
@@ -82,6 +95,7 @@ class Controller
 
                             <input name=\"matr[]\" type=\"checkbox\" value=\"$d->iden_matr\" hidden>
                         </div>";
+                        }
                     }
                 }
 

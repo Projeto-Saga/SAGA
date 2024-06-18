@@ -28,7 +28,7 @@
                         while ($a = mysqli_fetch_array($rst1))
                         {
                     echo "<div id=\"post_$a[0]\" class=\"post\">
-                        <img src=\"img/slides/$a[7]\">
+                        <img src=\"img/slides/$a[7]-feed.png\">
                         <h2>$a[2]</h2>
                         <p>$a[5]</p>
                         <button class=\"info\" onclick=\"modal($('#evento_$a[0]'))\">info.</button>
@@ -50,15 +50,15 @@
                                 <input type="radio" name="radio-btn" id="radio3">
                     
                                 <div class="slide first">
-                                    <img src="img/slides/slide-1.png">
+                                    <img src="img/slides/1-carousel.png">
                                 </div>
                     
                                 <div class="slide second">
-                                    <img src="img/slides/slide-2.png">
+                                    <img src="img/slides/2-carousel.png">
                                 </div>
                     
                                 <div class="slide third">
-                                    <img src="img/slides/slide-3.png">
+                                    <img src="img/slides/3-carousel.png">
                                 </div>
                             </div>
                     
@@ -107,7 +107,7 @@
             {?>
             <div id="evento_<?php echo $b[0] ?>" class="modal" style="visibility:hidden; opacity:0">
                 <div class="informt-card">
-                    <div class="card-imge" style="background-image:url('img/slides/<?php echo $b[7] ?>')"></div>
+                    <div class="card-imge" style="background-image:url('img/slides/<?php echo $b[7] ?>-modal.png')"></div>
                     <div class="card-text">
                         <p><?php echo $b[1] ?></p>
                         <h4><?php echo $b[2] ?></h4>

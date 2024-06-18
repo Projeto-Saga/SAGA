@@ -17,22 +17,45 @@ if (isset($_SESSION['ativ']))
     $file = $_POST['iden_solc']."_$regx"."_".time().$exts;
     $type = $_POST['tipo_solc'];
 
+    switch ($_POST['iden_solc'])
+    {
+        case '1':
+            $cols = ", cond_soli";
+            $vals = ", '".$_POST['trns_solc']."'";
+        break;
+
+        case '2':
+            $cols = ", mtap_soli";
+            $vals = ", '".json_encode($_POST['mtap_solc'])."'";
+        break;
+
+        case '4':
+            $cols = ", tpau_soli, mtau_soli, dtau_soli";
+            $vals = ", '".$_POST['tpau_solc']."', '".$_POST['mtau_solc']."', '".$_POST['dtau_solc']."'";
+        break;
+
+        case '5':
+            $cols = "";
+            $vals = "";
+        break;
+    }
+
     if (!empty($_FILES['anex_solc']['size']))
     {
         if ($_FILES['anex_solc']['size'] <= 1000000)
         {
             if (file_put_contents("../arq/solc/$file", file_get_contents($_FILES['anex_solc']['tmp_name'])))
             {
-                $cmd = "INSERT INTO solicitacao (regx_user, tipo_soli, anex_soli) VALUES ($regx, '$type', '$file')";
+                $cmd = "INSERT INTO solicitacao (regx_user, tipo_soli, anex_soli$cols) VALUES ($regx, '$type', '$file'$vals)";
                 $rst = mysqli_query($con, $cmd);
 
                 if ($rst)
                 {
-                    echo json_encode(array("success" => true, "message" => "FOTO DE PERFIL ALTERADA COM SUCESSO!"));
+                    echo json_encode(array("success" => true, "message" => "SOLICITAÇÃO ENVIADA COM SUCESSO!"));
                 }
                 else
                 {
-                    echo json_encode(array("success" => false, "message" => "ERRO AO TENTAR ALTERAR FOTO DE PERFIL!"));
+                    echo json_encode(array("success" => false, "message" => "ERRO AO TENTAR ENVIAR SOLICITAÇÃO!"));
                 }
             }
             else

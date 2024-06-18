@@ -28,3 +28,30 @@ function chck(trgt)
 
     trgt.find("input").is(":checked") ? trgt.find("input").prop("checked", false) : trgt.find("input").prop("checked", true);
 }
+
+function send(form, enrl = false)
+{
+    var url = !enrl ? "php/request.php" : "php/enroll.php";
+
+    $.ajax(
+    {
+        url: url,
+        type: "POST",
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        data: new FormData(form[0])
+    })
+    .done(function(data)
+    {
+        if (data.success)
+        {
+            alert(data.message);
+            location.reload();
+        }
+        else
+        {
+            alert(data.message)
+        }
+    });
+}

@@ -38,8 +38,6 @@ if (isset($_SESSION['ativ']))
     {
         $data_json = json_encode($json);
 
-        echo "JSON enviado: $data_json";
-
         $ch = curl_init("http://localhost:8080/aux/cursando/insert");
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -55,19 +53,29 @@ if (isset($_SESSION['ativ']))
 
         if (curl_errno($ch)) 
         {
-            $response = 'Erro cURL: ' . curl_error($ch);
+            echo json_encode(array("success" => false, "message" => "ERRO cURL: " . curl_error($ch)));
         }
         else
         {
             $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             
-            if ($http_code >= 400) $response = "Erro HTTP: $http_code";
+            if ($http_code >= 400) echo json_encode(array("success" => false, "message" => "ERRO HTTP: $http_code"));
         }
 
         curl_close($ch);
     }
 
-    echo $response;
+    $cmd = "UPDATE aluno SET cicl_alun='$cicl' WHERE regx_user=(SELECT regx_user FROM usuario WHERE codg_user='$codg')";
+    $rst = mysqli_query($con, $cmd);
+
+    if ($rst)
+    {
+        echo json_encode(array("success" => true , "message" => "REMATRÍCULA REALIZADA COM SUCESSO!"));
+    }
+    else
+    {
+        echo json_encode(array("success" => false , "message" => "ERRO AO TENTAR REALIZAR REMATRÍCULA!"));
+    }
 }
 else
 {
