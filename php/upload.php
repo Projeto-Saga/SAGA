@@ -1,7 +1,5 @@
 <?php
-session_start();
-$con = mysqli_connect('localhost', 'root', '', 'saga_db');
-// $con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+include("{$_SERVER['DOCUMENT_ROOT']}/php/connect.php");
 
 if (isset($_SESSION['ativ']))
 {

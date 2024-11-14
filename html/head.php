@@ -19,9 +19,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'saga_db');
-
-session_start();
+include("{$_SERVER['DOCUMENT_ROOT']}/php/connect.php");
 
 include("php/darkmode.php");
 include("php/controller.php");
