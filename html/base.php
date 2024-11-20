@@ -11,9 +11,9 @@
 
     <div id="top_bar" class="clmalign" style="margin-right:101px">
         <div class="rowalign">
-            <a class="topbar-link" href="">CURSOS</a>
-            <a class="topbar-link" href="">MATERIAIS</a>
-            <a class="topbar-link" href="">PROJETOS</a>
+            <a class="topbar-link" href="courses.php">CURSOS</a>
+            <a class="topbar-link" href="material.php">MATERIAIS</a>
+            <a class="topbar-link" href="projects.php">PROJETOS</a>
         </div>
 
         <hr class="topbar-hr">

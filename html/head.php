@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/calend.css">
 <link rel="stylesheet" href="css/rqests.css">
 <link rel="stylesheet" href="css/rspnsv.css">
+<link rel="stylesheet" href="css/mtrial.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -41,7 +42,7 @@ if (isset($_SESSION['ativ']))
 	{
 		case 'A':
 			$cmd2 = "SELECT user.regx_user,user.mail_user,user.nome_user,curs.nome_curs,alun.cicl_alun,user.codg_user,
-							user.senh_user,user.fone_user,user.foto_user,user.iden_user
+							user.senh_user,user.fone_user,user.foto_user,user.iden_user,alun.iden_curs
 					FROM usuario AS user INNER JOIN aluno AS alun ON user.regx_user=alun.regx_user 
 										 INNER JOIN curso AS curs ON alun.iden_curs=curs.iden_curs
 					WHERE user.flag_user='A' AND user.codg_user='$ativ'";
@@ -59,6 +60,7 @@ if (isset($_SESSION['ativ']))
 				$fone = $b[7];
 				$imge = $b[8];
 				$iden = $b[9];
+				$idcs = $b[10];
 			}
 		break;
 		

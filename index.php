@@ -16,13 +16,12 @@
                 $cpf_ = $_POST['cpf_'];
                 $pass = $_POST['pass'];
 
-                $cmd1 = "SELECT flag_user, regx_user FROM usuario WHERE codg_user='$cpf_' AND senh_user='$pass'";
+                $cmd1 = "SELECT flag_user FROM usuario WHERE codg_user='$cpf_' AND senh_user='$pass'";
                 $rst1 = mysqli_query($conn, $cmd1);
 
                 if (mysqli_affected_rows($conn) > 0)
                 {
                     $_SESSION['ativ'] = $cpf_;
-                    $_SESSION['regx'] = mysqli_fetch_array($rst1)[1];
 
                     header('location:lobby.php');
                 }

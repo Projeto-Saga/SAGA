@@ -24,6 +24,8 @@ if (isset($_SESSION['ativ']))
         break;
 
         case '2':
+            if (empty($_POST['mtap_solc'])) {echo json_encode(array("success" => false, "message" => "SELECIONE AO MENOS UMA MATÉRIA!")); die;}
+
             $cols = ", mtap_soli";
             $vals = ", '".json_encode($_POST['mtap_solc'])."'";
         break;
