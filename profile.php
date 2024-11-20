@@ -64,7 +64,7 @@
                         <!-- seção: institucional -->
                         <h1 class="update-group" style="margin-top:0">Institucional</h1>
                         <label class="update-label">RA</label>
-                        <input class="update-input" type="text" value="<?php echo sprintf("%010d", $rmat) ?>" disabled>
+                        <input class="update-input" type="text" value="<?php echo $rmat ?>" disabled>
 
                         <label class="update-label">Curso</label>
                         <input class="update-input" type="text" value="<?php echo $curs ?>" disabled>
@@ -78,7 +78,7 @@
                         <div class="rowalign" style="align-items:center">
                             <input id="foto" name="foto" type="file" accept=".png, .jpg, .jpeg" hidden>
 
-                            <input class="update-input" style="width:50%" type="text" value="<?php echo "$imge.jpg" ?>" disabled>
+                            <input class="update-input" style="width:50%" type="text" value="<?php echo (!empty($imge) ? "$imge.jpg" : "selecionar") ?>" disabled>
                             <input class="demibutn" type="button" value="Adicionar Foto" onclick="$('#foto').click()">
                         </div>
                     </div>
@@ -89,14 +89,14 @@
                     <input class="mainbutn" type="button" value="Visualizar Carteirinha" onclick="modal($('#studcard'))">
                 </div>
             </form>
-
+            
             <!-- carteirinha -->
             <div id="studcard" class="modal" style="visibility:hidden; opacity:0">
                 <div class="student-card">
                     <div class="card-imge" style="background-image:url('img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png" ?>')"></div>
                     <div class="card-text">
                         <h4><?php echo $name ?></h4>
-                        <p>MATRÍCULA: <?php echo sprintf("%010d", $rmat) ?></p>
+                        <p>MATRÍCULA: <?php echo $rmat ?></p>
                         <p><?php echo "$cicl"."º CICLO" ?></p>
                         <p><?php echo $curs ?></p>
                         <p><?php echo $mail ?></p>

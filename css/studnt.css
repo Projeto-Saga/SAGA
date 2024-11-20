@@ -3,7 +3,9 @@
     width:600px;
     height:300px;
     border-radius:25px;
-    background:#D1ECFF;
+    background-image:url("https://img.freepik.com/fotos-premium/fundo-azul-claro-abstrato_53876-143877.jpg");
+    background-size:cover;
+    background-position:center;
     display:flex;
     position:relative;
     box-shadow:0 0 8px 1px var(--blue-base);
@@ -65,7 +67,7 @@
 .student-card p:nth-child(even),
 .informt-card p:nth-child(even)
 {
-    color:var(--blue-base)
+    color:var(--blue-dark)
 }
 .update-group
 {

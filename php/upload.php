@@ -1,12 +1,11 @@
 <?php
 session_start();
-$con = mysqli_connect('localhost', 'root', '', 'saga_db');
-// $con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+$con = include("{$_SERVER["DOCUMENT_ROOT"]}/server/SAGA/php/connect.php");
 
 if (isset($_SESSION['ativ']))
 {
     $iden = $_POST['iden'];
-    $foto = "IMG_".sprintf("%010d", $iden).".jpg";
+    $foto = "IMG_{$_SESSION["regx"]}.jpg";
 
     if (!empty($_FILES['foto']['size']))
     {

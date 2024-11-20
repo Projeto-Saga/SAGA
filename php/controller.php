@@ -7,8 +7,7 @@ class Controller
     public function __construct()
     {
         $this->url = "http://localhost:8080/aux/materia/find_all";
-        $this->con = mysqli_connect('localhost', 'root', '', 'saga_db');
-        // $this->con = mysqli_connect('localhost', 'root', 'usbw', 'saga_db');
+        $this->con = include("{$_SERVER["DOCUMENT_ROOT"]}/server/SAGA/php/connect.php");
     }
 
     public function mtc_callApi($iden, $cicl)
