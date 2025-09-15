@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `aluno` (
   `cicl_alun` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`iden_alun`),
   UNIQUE KEY `regx_user` (`regx_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `aluno`
@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS `cursando` (
   `cicl_alun` enum('1','2','3','4','5','6','7','8','9','10') NOT NULL DEFAULT '1',
   `_ano_crsn` char(4) NOT NULL,
   `_sem_crsn` enum('1','2') NOT NULL DEFAULT '1',
-  `situ_crsn` enum('Em Curso','Retido','Aprovado') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Em Curso',
+  `situ_crsn` enum('Em Curso','Retido','Aprovado') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Em Curso',
   PRIMARY KEY (`iden_crsn`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `cursando`
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   PRIMARY KEY (`iden_curs`),
   UNIQUE KEY `nome_curs` (`nome_curs`),
   UNIQUE KEY `abrv_curs` (`abrv_curs`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `curso`
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `imgm_even` text NOT NULL,
   PRIMARY KEY (`iden_even`),
   UNIQUE KEY `nome_event` (`nome_even`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `evento`
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `dias_matr` int NOT NULL,
   `hora_matr` enum('A','B') NOT NULL,
   PRIMARY KEY (`iden_matr`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `materia`
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `solicitacao` (
   `mtau_soli` varchar(50) DEFAULT NULL,
   `dtau_soli` date DEFAULT NULL,
   PRIMARY KEY (`iden_soli`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `solicitacao`
@@ -276,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `telefone` (
   `iden_user` int NOT NULL,
   `nmro_fone` char(15) NOT NULL,
   PRIMARY KEY (`iden_fone`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -293,14 +293,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `mail_user` varchar(40) NOT NULL,
   `senh_user` varchar(16) NOT NULL,
   `fone_user` char(15) NOT NULL,
-  `foto_user` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `foto_user` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `flag_user` enum('A','P','S') NOT NULL,
   PRIMARY KEY (`iden_user`),
   UNIQUE KEY `mail_user` (`mail_user`),
   UNIQUE KEY `codg_user` (`codg_user`),
   UNIQUE KEY `regx_user` (`regx_user`),
   UNIQUE KEY `foto_user` (`foto_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `usuario`
