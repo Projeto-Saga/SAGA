@@ -7,7 +7,7 @@ class Controller
     public function __construct()
     {
         $this->url = "http://localhost:8080/aux/materia/find_all";
-        $this->con = include(DIR . "/../php/connect.php");
+        $this->con = include(__DIR__ . "/../php/connect.php");
     }
 
     public function mtc_callApi($iden, $cicl)
