@@ -20,7 +20,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
-$conn = include("{$_SERVER["DOCUMENT_ROOT"]}/server/SAGA/php/connect.php");
+$conn = include(DIR . "/../php/connect.php");
 
 session_start();
 
