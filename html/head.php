@@ -13,9 +13,6 @@
 <link rel="stylesheet" href="css/rspnsv.css">
 <link rel="stylesheet" href="css/mtrial.css">
 
-<link rel="manifest" href="/manifest.php">
-<meta name="theme-color" content="#007bff">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <script type="text/javascript" src="js/dataformat.js"></script>
@@ -87,14 +84,4 @@ if (isset($_SESSION['ativ']))
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>
   new window.VLibras.Widget('https://vlibras.gov.br/app');
-</script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('Service Worker registrado:', reg))
-      .catch(err => console.error('Erro ao registrar SW:', err));
-  });
-}
 </script>
