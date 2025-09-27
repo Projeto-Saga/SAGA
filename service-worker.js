@@ -7,8 +7,8 @@ const urlsToCache = [
   '/css/styles.css',  // coloque arquivos específicos, não pastas
   '/js/dataformat.js',
   '/js/animations.js',
-  '/img/logos/logo-192.png',
-  '/img/logos/logo-512.png'
+  '/img/logos/logo-n-colors-192.png',
+  '/img/logos/logo-n-colors-512.png'
 ];
 
 
