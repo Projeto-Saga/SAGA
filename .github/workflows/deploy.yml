@@ -3,7 +3,7 @@ name: 🚀 Deploy para InfinityFree
 on:
   push:
     branches:
-      - main   # ou 'master', dependendo do seu repositório
+      - main   # ou 'master', dependendo da sua branch
 
 jobs:
   ftp-deploy:
@@ -18,5 +18,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/   # pasta raiz no InfinityFree
-          local-dir: ./public    # sua pasta com arquivos do site
+          server-dir: /htdocs/          # pasta no servidor
+          local-dir: ./htdocs/          # pasta no seu repositório
