@@ -21,6 +21,7 @@
 
 <?php
 $conn = include(__DIR__ . "/../php/connect.php");
+mysqli_set_charset($conn, "utf8");
 
 session_start();
 
