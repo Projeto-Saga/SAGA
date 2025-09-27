@@ -62,7 +62,7 @@
         <?php
         }?>
         <a class="sidebar-link" href="calendar.php">
-            <div class="sidebar-icon"><img src="https://icon-library.com/images/calendar-icon-png/calendar-icon-png-2.jpg"></div>
+            <div class="sidebar-icon"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTENdUa5gQQRf-NNiyGG-_Exz1ufAe31q2faQ&s"></div>
             <div class="sidebar-label invobjct">Calendário</div>
         </a>
         <?php
