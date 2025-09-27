@@ -1,17 +1,16 @@
 const CACHE_NAME = 'saga-cache-v1';
 const urlsToCache = [
-  '/',
+  '/',                // index.php
   '/index.php',
-  '/calendar.php',
-  '/couser.php',
   '/lobby.php',
-  '/profile.php',
-  '/projects.php',
-  '/request.php',
-  '/css/',
-  '/js/',
-  '/img/'
+  '/calendar.php',
+  '/css/styles.css',  // coloque arquivos específicos, não pastas
+  '/js/dataformat.js',
+  '/js/animations.js',
+  '/img/logos/logo-192.png',
+  '/img/logos/logo-512.png'
 ];
+
 
 self.addEventListener('install', event => {
   event.waitUntil(
