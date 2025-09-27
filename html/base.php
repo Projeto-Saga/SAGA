@@ -48,7 +48,7 @@
         if ($flag == "A")
         {?>
         <a class="sidebar-link" href="mybook.php">
-            <div class="sidebar-icon"><img src="https://lapka.by/upload/iblock/e8e/literatura-po-shityu.png"></div>
+            <div class="sidebar-icon"><img src="https://static.thenounproject.com/png/903291-200.png"></div>
             <div class="sidebar-label invobjct">Notas e Faltas</div>
         </a>
         <?php
@@ -56,7 +56,7 @@
         if ($flag == "P")
         {?>
         <a class="sidebar-link" href="setbook.php">
-            <div class="sidebar-icon"><img src="https://lapka.by/upload/iblock/e8e/literatura-po-shityu.png"></div>
+            <div class="sidebar-icon"><img src="https://static.thenounproject.com/png/903291-200.png"></div>
             <div class="sidebar-label invobjct">Atribuições</div>
         </a>
         <?php

@@ -1,9 +1,10 @@
 <?php
 session_start();
-$con = include("{$_SERVER["DOCUMENT_ROOT"]}/server/SAGA/php/connect.php");
+$con = include("{$_SERVER["DOCUMENT_ROOT"]}/SAGA/php/connect.php");
 
 if (isset($_SESSION['ativ']))
 {
+    header('Content-Type: application/json; charset=utf-8');
     $iden = $_POST['iden'];
     $foto = "IMG_{$_SESSION["regx"]}.jpg";
 
