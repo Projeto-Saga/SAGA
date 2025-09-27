@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/rspnsv.css">
 <link rel="stylesheet" href="css/mtrial.css">
 
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/manifest.php">
 <meta name="theme-color" content="#007bff">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
