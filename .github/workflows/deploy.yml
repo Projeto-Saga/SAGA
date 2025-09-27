@@ -1,0 +1,22 @@
+name: 🚀 Deploy para InfinityFree
+
+on:
+  push:
+    branches:
+      - main   # ou 'master', dependendo do seu repositório
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /htdocs/   # pasta raiz no InfinityFree
+          local-dir: ./public    # sua pasta com arquivos do site
