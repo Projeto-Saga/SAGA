@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include("php/connect.php"); // Certifique-se de incluir a conexão com o banco
 $con = include("{$_SERVER["DOCUMENT_ROOT"]}/SAGA/php/connect.php");
 
 if (isset($_SESSION['ativ']))

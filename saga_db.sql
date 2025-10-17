@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/10/2025 às 03:18
+-- Tempo de geração: 17/10/2025 às 04:12
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -87,6 +87,28 @@ INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp
 (28, '202410101', 28, 9.25, 9.00, 0.00, 0.00, 4, '3', '2024', '2', 'Em Curso'),
 (29, '202410101', 20, 7.50, 8.00, 0.00, 0.00, 0, '3', '2024', '2', 'Em Curso'),
 (30, '202410101', 12, 10.00, 9.00, 0.00, 0.00, 8, '3', '2024', '2', 'Em Curso');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cursinho`
+--
+
+CREATE TABLE `cursinho` (
+  `idcs_csrl` int(11) NOT NULL,
+  `capa_csrl` varchar(255) DEFAULT NULL,
+  `nome_csrl` varchar(255) DEFAULT NULL,
+  `dura_csrl` int(11) DEFAULT NULL,
+  `desc_csrl` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cursinho`
+--
+
+INSERT INTO `cursinho` (`idcs_csrl`, `capa_csrl`, `nome_csrl`, `dura_csrl`, `desc_csrl`) VALUES
+(1, 'IMG_202410101', 'Curso de Teste 1', 40, 'Descrição do Curso 1'),
+(2, 'IMG_202410102', 'Curso de Teste 2', 30, 'Descrição do Curso 2');
 
 -- --------------------------------------------------------
 
@@ -302,6 +324,12 @@ ALTER TABLE `cursando`
   ADD PRIMARY KEY (`iden_crsn`);
 
 --
+-- Índices de tabela `cursinho`
+--
+ALTER TABLE `cursinho`
+  ADD PRIMARY KEY (`idcs_csrl`);
+
+--
 -- Índices de tabela `curso`
 --
 ALTER TABLE `curso`
@@ -366,6 +394,12 @@ ALTER TABLE `aluno`
 --
 ALTER TABLE `cursando`
   MODIFY `iden_crsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de tabela `cursinho`
+--
+ALTER TABLE `cursinho`
+  MODIFY `idcs_csrl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `curso`

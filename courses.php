@@ -1,45 +1,40 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <?php include('html/head.php'); ?>
-    </head>
-    <body>
-        <?php
-        if (isset($_SESSION['ativ']))
-        {
-            include('html/base.php');
-        ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include("php/connect.php"); // Certifique-se de incluir a conexão com o banco
+include('php/connect.php');
+include('html/head.php');
 
-        <div class="container fanimate">
-            <div class="box interface">
-                <div class="livrsect">
-                    <?php
-                    $cmd1 = "SELECT capa_csrl, nome_csrl, dura_csrl, desc_csrl FROM cursinho WHERE idcs_csrl=$idcs";
-                    $rst1 = mysqli_query($conn, $cmd1);
+if (!isset($_SESSION['ativ'])) {
+    header('location:index.php');
+    exit;
+}
 
-                    while ($a = mysqli_fetch_array($rst1))
-                    {
-                    echo "
-                    <a class=\"row livrbody\">
-                        <img class=\"livrimge\" src=\"img/curso/$a[0].jpg\" style=\"height:190px; width:190px\">
-                        <div class=\"col\" style=\"height:190px; justify-content:start\">
-                            <h3 class=\"livrtitl\">$a[1]</h3>
-                            <h6 class=\"livrauth\">$a[2] horas</h6>
-                            <p class=\"livrtext\" style=\"font-size:13px\">$a[3]</p>
-                        </div>
-                    </a>";
-                    }
-                    ?>
-                </div>
-            </div>
+include('html/base.php');
+
+$cmd1 = "SELECT idcs_csrl, capa_csrl, nome_csrl, dura_csrl, desc_csrl FROM cursinho";
+$result = mysqli_query($conn, $cmd1);
+
+if (mysqli_num_rows($result) === 0) {
+    echo "<p>Nenhum curso cadastrado.</p>";
+    exit;
+}
+?>
+
+<div class="container fanimate">
+    <div class="box interface">
+        <div class="livrsect">
+            <?php while ($a = mysqli_fetch_assoc($result)) { ?>
+                <a class="row livrbody" href="courses.php?idcs=<?php echo $a['idcs_csrl']; ?>">
+                    <img class="livrimge" src="img/fotos/<?php echo $a['capa_csrl']; ?>.jpg" style="height:190px; width:190px">
+                    <div class="col" style="height:190px; justify-content:start">
+                        <h3 class="livrtitl"><?php echo $a['nome_csrl']; ?></h3>
+                        <h6 class="livrauth"><?php echo $a['dura_csrl']; ?> horas</h6>
+                        <p class="livrtext" style="font-size:13px"><?php echo $a['desc_csrl']; ?></p>
+                    </div>
+                </a>
+            <?php } ?>
         </div>
-        
-        <?php 
-        }
-        else
-        {
-            header('location:index.php');
-        }
-        ?>
-    </body>
-</html>
+    </div>
+</div>
