@@ -60,46 +60,15 @@ $conn->close();
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+        <?php include('html/head.php'); ?>
+        <?php include('html/base.php'); ?>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/CadastroSec.css">
     <title>Cadastro de Usuário</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        form {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-            width: 320px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .mensagem {
-            margin-top: 10px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 
-<form action="" method="POST">
+<form class="FormCadastroSec" action="" method="POST">
     <h2>Cadastro</h2>
     <input type="text" name="nome" placeholder="Nome completo" required>
     <input type="email" name="email" placeholder="E-mail" required>
@@ -112,7 +81,7 @@ $conn->close();
         <option value="P">Professor</option>
         <option value="S">Secretaria</option>
     </select>
-    <button type="submit">Cadastrar</button>
+    <button type="submit" class="BtnCadastrar_Sec">Cadastrar</button>
     <div class="mensagem"><?= htmlspecialchars($mensagem) ?></div>
 </form>
 

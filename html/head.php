@@ -37,34 +37,35 @@ $curs = $cicl = $codg = $pass = $fone = $iden = $idcs = '';
 if (isset($_SESSION['ativ'])) {
     $ativ = $_SESSION['ativ'];
 
-    $cmd1 = "SELECT flag_user FROM usuario WHERE codg_user='$ativ'";
-    $rst1 = mysqli_query($conn, $cmd1);
+    // Busca o usuário logado
+    $cmd = "SELECT * FROM usuario WHERE codg_user = '$ativ'";
+    $rst = mysqli_query($conn, $cmd);
 
-    if ($rst1 && mysqli_num_rows($rst1) > 0) {
-        $flag = mysqli_fetch_assoc($rst1)['flag_user'];
+    if ($rst && mysqli_num_rows($rst) > 0) {
+        $b = mysqli_fetch_assoc($rst);
 
+        $flag = $b['flag_user'];
+        $name = $b['nome_user'];
+        $mail = $b['mail_user'];
+        $imge = $b['foto_user'];
+        $codg = $b['codg_user'];
+        $fone = $b['fone_user'];
+        $iden = $b['iden_user'];
+        $pass = $b['senh_user'];
+
+        // Só busca dados extras se for aluno (curso e ciclo)
         if ($flag == 'A') {
-            $cmd2 = "SELECT user.regx_user,user.mail_user,user.nome_user,curs.nome_curs,alun.cicl_alun,user.codg_user,
-                            user.senh_user,user.fone_user,user.foto_user,user.iden_user,alun.iden_curs
-                     FROM usuario AS user
-                     INNER JOIN aluno AS alun ON user.regx_user=alun.regx_user 
-                     INNER JOIN curso AS curs ON alun.iden_curs=curs.iden_curs
-                     WHERE user.flag_user='A' AND user.codg_user='$ativ'";
-
+            $cmd2 = "SELECT curs.nome_curs, alun.cicl_alun, alun.iden_curs
+                     FROM aluno AS alun
+                     INNER JOIN curso AS curs ON alun.iden_curs = curs.iden_curs
+                     WHERE alun.regx_user = '{$b['regx_user']}'";
             $rst2 = mysqli_query($conn, $cmd2);
+
             if ($rst2 && mysqli_num_rows($rst2) > 0) {
-                $b = mysqli_fetch_assoc($rst2);
-                $rmat = $b['regx_user'];
-                $mail = $b['mail_user'];
-                $name = $b['nome_user'];
-                $curs = $b['nome_curs'];
-                $cicl = $b['cicl_alun'];
-                $codg = $b['codg_user'];
-                $pass = $b['senh_user'];
-                $fone = $b['fone_user'];
-                $imge = $b['foto_user'];
-                $iden = $b['iden_user'];
-                $idcs = $b['iden_curs'];
+                $a = mysqli_fetch_assoc($rst2);
+                $curs = $a['nome_curs'];
+                $cicl = $a['cicl_alun'];
+                $idcs = $a['iden_curs'];
             }
         }
     } else {

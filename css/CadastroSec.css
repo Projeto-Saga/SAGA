@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    width: 320px;
+    margin-top: 25px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.mensagem {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.BtnCadastrar_Sec{
+    background-color: var(--red-base);
+}
+
+.BtnCadastrar_Sec:hover {
+    background-color: var(--gray-base);
+    color: var(--red-base);
+}

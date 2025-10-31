@@ -22,7 +22,7 @@
         <div class="stud-text clmalign">
             <p class="stud-name"><?php echo $name ?></p>
             <p class="stud-mail"><?php echo $mail ?></p>
-
+            
             <div class="stud-hidden clmalign">
                 <br>
                 <a href="profile.php" class="stud-link">Meu Perfil</a>
