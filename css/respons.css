@@ -158,6 +158,26 @@
         right: 10px;
     }
 
+    .interface{
+        height: auto;
+        overflow: hidden;
+        margin-top: 15px;
+    }
+
+    .livrsect {
+        grid-template-columns: 1fr !important;
+    }
+    .livrtitl{
+        font-size: 14px;
+    }
+    .livrbody{
+        padding: 0;
+    }
+
+    .calendar{
+        width: auto;
+    }
+
 } 
     
 @media screen and (max-width:1350px) { 
