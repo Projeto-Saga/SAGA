@@ -1,19 +1,79 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-form {
-    background: white;
+.FormCadastroSec {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px #ccc;
     width: 320px;
-    margin-top: 25px;
+}
+
+.container_AdminPainel {
+    max-width: 900px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+.dark-mode.container_AdminPainel {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cards-principais, .subcards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card, .card-sub {
+    background: #007bff;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.card:hover, .card-sub:hover {
+    background: #0056b3;
+}
+
+.voltar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background: var(--red-base);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.oculto {
+    display: none;
+}
+
+#conteudo-dinamico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 input, select {
