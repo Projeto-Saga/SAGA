@@ -161,7 +161,7 @@
 {
     background:#1f1f1f;
 }
-#studbook .body section button
+#studbook .body section .notas
 {
     height:20px;
     width:20px;
@@ -202,3 +202,4 @@
     margin:0;
     width:40px;
 }
+
