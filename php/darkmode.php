@@ -1,9 +1,11 @@
 <script>
-    const elements = [".box", ".box1", ".box2", ".box3", ".topbar", ".post", ".saga-stud", ".darkmode", ".reqs-form-form", ".reqs-form-inpt",
+    const elements = [".box", ".box1", ".box2", ".box3", ".topbar", ".post", ".saga-stud", ".stud-text", ".stud-hidden" ,".darkmode", ".reqs-form-form", ".reqs-form-inpt",
                       ".reqs-form-data", ".topbar-link", ".topbar-hr", "body", ".calendar", ".header", ".month", ".days", ".day", ".holiday",
                       ".separate", "section", "h2", "button", "th", "table", ".weekdays", ".saga-titl", ".update-input", ".update-label",
                       ".mainlabl", "footer", "footer div", ".maininpt", ".reqs-docs", "h1", "article div", "article div p",
-                      ".FormCadastroSec > input", ".FormCadastroSec", "select", "p", ".container_AdminPainel",".subcards"];
+                      ".FormCadastroSec > input", ".FormCadastroSec", "select", "p", ".container_AdminPainel",".subcards", 
+                      ".FormCadastroSec > div > input", ".sidebar", "input", ".direito",".direito > .materias-container", ".materias-header",
+                      ".materias-header > h3", ".materias-grid", ".materia-item" ];
 
     function darkmode()
     {

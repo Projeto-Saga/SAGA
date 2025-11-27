@@ -5,7 +5,7 @@ $tipoSelecionado = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 <link rel="stylesheet" href="../css/CadastroSec.css">
 
 <form class="FormCadastroSec" action="" method="POST">
-    <h2>Cadastro de Usuário</h2>
+    <h2>Cadastro de Secretários</h2>
 
     <input type="text" name="nome" placeholder="Nome completo" required>
     <input type="email" name="email" placeholder="E-mail" required>
