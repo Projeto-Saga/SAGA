@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/10/2025 às 04:12
+-- Tempo de geração: 27/11/2025 às 22:49
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -39,7 +39,21 @@ CREATE TABLE `aluno` (
 --
 
 INSERT INTO `aluno` (`iden_alun`, `regx_user`, `iden_curs`, `cicl_alun`) VALUES
-(1, '202410101', 1, 3);
+(1, '202410101', 1, 3),
+(2, '202500000', 1, 1),
+(3, '202550000', 3, 1),
+(4, '202505000', 2, 1),
+(5, '202555000', 4, 1),
+(6, '202555001', 1, 1),
+(7, '202555002', 3, 1),
+(8, '202555003', 1, 1),
+(9, '202555004', 1, 1),
+(10, '202555005', 1, 1),
+(11, '202555006', 1, 1),
+(12, '202555007', 1, 1),
+(13, '202555008', 1, 1),
+(14, '202555009', 2, 1),
+(15, '202555010', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -86,7 +100,97 @@ INSERT INTO `cursando` (`iden_crsn`, `regx_user`, `iden_matr`, `ntp1_crsn`, `ntp
 (27, '202410101', 13, 10.00, 8.00, 0.00, 0.00, 10, '3', '2024', '2', 'Em Curso'),
 (28, '202410101', 28, 9.25, 9.00, 0.00, 0.00, 4, '3', '2024', '2', 'Em Curso'),
 (29, '202410101', 20, 7.50, 8.00, 0.00, 0.00, 0, '3', '2024', '2', 'Em Curso'),
-(30, '202410101', 12, 10.00, 9.00, 0.00, 0.00, 8, '3', '2024', '2', 'Em Curso');
+(30, '202410101', 12, 10.00, 9.00, 0.00, 0.00, 8, '3', '2024', '2', 'Em Curso'),
+(32, '202500000', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(33, '202500000', 2, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(34, '202500000', 3, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(35, '202500000', 4, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(36, '202500000', 5, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(37, '202500000', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(38, '202500000', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(39, '202500000', 8, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(40, '202500000', 9, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(41, '202500000', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(42, '202500000', 11, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(43, '202500000', 12, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(44, '202500000', 13, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(45, '202500000', 14, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(46, '202500000', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(47, '202500000', 16, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(48, '202500000', 17, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(49, '202500000', 18, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(50, '202500000', 19, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(51, '202500000', 20, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(52, '202500000', 21, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(53, '202500000', 22, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(54, '202500000', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(55, '202500000', 24, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(56, '202500000', 25, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(57, '202500000', 26, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(58, '202500000', 27, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(59, '202500000', 28, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(60, '202550000', 5, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(61, '202550000', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(62, '202550000', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(63, '202505000', 5, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(64, '202505000', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(65, '202505000', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(66, '202555000', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(67, '202555000', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(68, '202555000', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(69, '202555000', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(70, '202555001', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(71, '202555001', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(72, '202555001', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(73, '202555001', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(74, '202555001', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(75, '202555001', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(76, '202555002', 5, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(77, '202555002', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(78, '202555002', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(79, '202555003', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(80, '202555003', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(81, '202555003', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(82, '202555003', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(83, '202555003', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(84, '202555003', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(85, '202555004', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(86, '202555004', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(87, '202555004', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(88, '202555004', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(89, '202555004', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(90, '202555004', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(91, '202555005', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(92, '202555005', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(93, '202555005', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(94, '202555005', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(95, '202555005', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(96, '202555005', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(97, '202555006', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(98, '202555006', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(99, '202555006', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(100, '202555006', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(101, '202555006', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(102, '202555006', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(103, '202555007', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(104, '202555007', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(105, '202555007', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(106, '202555007', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(107, '202555007', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(108, '202555007', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(109, '202555008', 1, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(110, '202555008', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(111, '202555008', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(112, '202555008', 10, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(113, '202555008', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(114, '202555008', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(115, '202555009', 5, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(116, '202555009', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(117, '202555009', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(118, '202555010', 6, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(119, '202555010', 7, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(120, '202555010', 15, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso'),
+(121, '202555010', 23, 0.00, 0.00, 0.00, 0.00, 0, '1', '2025', '2', 'Em Curso');
 
 -- --------------------------------------------------------
 
@@ -119,23 +223,83 @@ INSERT INTO `cursinho` (`idcs_csrl`, `capa_csrl`, `nome_csrl`, `dura_csrl`, `des
 CREATE TABLE `curso` (
   `iden_curs` int(11) NOT NULL,
   `nome_curs` varchar(50) NOT NULL,
-  `abrv_curs` varchar(3) NOT NULL
+  `abrv_curs` varchar(3) NOT NULL,
+  `total_semestres` int(11) NOT NULL DEFAULT 6,
+  `total_anos` int(11) NOT NULL DEFAULT 3,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `curso`
 --
 
-INSERT INTO `curso` (`iden_curs`, `nome_curs`, `abrv_curs`) VALUES
-(1, 'CIÊNCIAS DA COMPUTAÇÃO', 'CDC'),
-(2, 'LOGÍSTICA', 'LOG'),
-(3, 'ADMINISTRAÇÃO', 'ADM'),
-(4, 'INFORMÁTICA PARA NEGÓCIOS', 'INF'),
-(5, 'GESTÃO EMPRESARIAL', 'GES'),
-(6, 'ENGENHARIA MECÂNICA', 'EGM'),
-(7, 'DESENVOLVIMENTO DE PRODUTOS PLÁSTICOS', 'DPP'),
-(8, 'DIREITO', 'DIR'),
-(9, 'MEDICINA', 'MED');
+INSERT INTO `curso` (`iden_curs`, `nome_curs`, `abrv_curs`, `total_semestres`, `total_anos`, `ativo`) VALUES
+(1, 'CIÊNCIAS DA COMPUTAÇÃO', 'CDC', 8, 4, 1),
+(2, 'LOGÍSTICA', 'LOG', 6, 3, 1),
+(3, 'ADMINISTRAÇÃO', 'ADM', 6, 3, 1),
+(4, 'INFORMÁTICA PARA NEGÓCIOS', 'INF', 6, 3, 1),
+(5, 'GESTÃO EMPRESARIAL', 'GES', 6, 3, 1),
+(6, 'ENGENHARIA MECÂNICA', 'EGM', 10, 5, 1),
+(7, 'DESENVOLVIMENTO DE PRODUTOS PLÁSTICOS', 'DPP', 6, 3, 1),
+(8, 'DIREITO', 'DIR', 10, 5, 1),
+(9, 'MEDICINA', 'MED', 12, 6, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `curso_materia`
+--
+
+CREATE TABLE `curso_materia` (
+  `iden_curso_materia` int(11) NOT NULL,
+  `iden_curs` int(11) NOT NULL,
+  `iden_matr` int(11) NOT NULL,
+  `ciclo_semestre` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `curso_materia`
+--
+
+INSERT INTO `curso_materia` (`iden_curso_materia`, `iden_curs`, `iden_matr`, `ciclo_semestre`) VALUES
+(26, 1, 1, 1),
+(32, 1, 2, 2),
+(33, 1, 3, 2),
+(27, 1, 6, 1),
+(28, 1, 7, 1),
+(34, 1, 8, 2),
+(35, 1, 9, 2),
+(29, 1, 10, 1),
+(36, 1, 11, 2),
+(30, 1, 15, 1),
+(37, 1, 16, 2),
+(31, 1, 23, 1),
+(38, 1, 24, 2),
+(39, 2, 5, 1),
+(40, 2, 15, 1),
+(41, 2, 23, 1),
+(42, 3, 5, 1),
+(43, 3, 15, 1),
+(44, 3, 23, 1),
+(45, 4, 6, 1),
+(46, 4, 7, 1),
+(47, 4, 15, 1),
+(48, 4, 23, 1),
+(49, 5, 5, 1),
+(50, 5, 15, 1),
+(51, 5, 23, 1),
+(52, 6, 1, 1),
+(53, 6, 14, 1),
+(54, 6, 15, 1),
+(55, 6, 23, 1),
+(56, 7, 15, 1),
+(57, 7, 23, 1),
+(58, 8, 5, 1),
+(59, 8, 15, 1),
+(60, 8, 23, 1),
+(61, 9, 5, 1),
+(62, 9, 15, 1),
+(63, 9, 23, 1);
 
 -- --------------------------------------------------------
 
@@ -244,6 +408,27 @@ INSERT INTO `materia` (`iden_matr`, `nome_matr`, `chor_matr`, `abrv_matr`, `ccpv
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `professor_materia`
+--
+
+CREATE TABLE `professor_materia` (
+  `iden_prof_mat` int(11) NOT NULL,
+  `regx_user` varchar(20) NOT NULL,
+  `iden_matr` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `professor_materia`
+--
+
+INSERT INTO `professor_materia` (`iden_prof_mat`, `regx_user`, `iden_matr`) VALUES
+(1, '202555012', 1),
+(2, '202555017', 23),
+(3, '202555018', 9);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `solicitacao`
 --
 
@@ -304,7 +489,30 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`iden_user`, `regx_user`, `codg_user`, `nome_user`, `mail_user`, `senh_user`, `fone_user`, `foto_user`, `flag_user`) VALUES
 (1, '202410101', '111.111.111-11', 'ROGÉRIO DA SILVA LOPES', 'rogerio.lopes@maltec.sp.gov.br', 'cocacolamata', '(11) 91234-5678', 'IMG_202410101', 'A'),
 (2, '202410102', '222.222.222-22', 'MARCOS PEREIRA', 'marcos.pereira@maltec.sp.gov.br', 'professor123', '(11) 98765-4321', 'IMG_202410102', 'P'),
-(3, '202410103', '333.333.333-33', 'ANA LIMA', 'ana.lima@maltec.sp.gov.br', 'secretaria123', '(11) 94567-8901', 'IMG_202410103', 'S');
+(3, '202410103', '333.333.333-33', 'ANA LIMA', 'ana.lima@maltec.sp.gov.br', 'secretaria123', '(11) 94567-8901', 'IMG_202410103', 'S'),
+(4, '', '121.212.121-21', 'teste', 'teste@gmail.com', '$2y$10$.PxFeN4QQ', '1299999-9999', NULL, 'A'),
+(5, '202500000', '123.123.123-33', 'teste 2', 'teste2@gmail.com', '$2y$10$qQe9./ZzL', '(12) 91234-5678', NULL, 'A'),
+(6, '202550000', '133.133.133-33', 'teste 3', 'teste3@gmail.com', '$2y$10$P/W9OQol6', '(33) 93333-3333', NULL, 'A'),
+(7, '202505000', '144.144.144-44', 'teste 4', 'teste4@gmail.com', '$2y$10$IIzLU/kdW', '(11) 94444-4444', NULL, 'A'),
+(8, '202555000', '155.155.155-55', 'teste 5', 'teste5@gmail.com', '$2y$10$TYIyL8Ae9', '(11) 95555-5555', NULL, 'A'),
+(9, '202555001', '166.666.666-66', 'teste 6', 'teste6@gmail.com', '$2y$10$CZOy35PHp', '(11) 96666-6666', NULL, 'A'),
+(10, '202555002', '177.777.777-77', 'teste 7', 'teste7@gmail.com', '$2y$10$w.0DwzVAr', '(11) 97777-7777', NULL, 'A'),
+(11, '202555003', '188.188.188-18', 'teste 8', 'teste8@gmail.com', '$2y$10$NF/vZy112', '(11) 98888-8888', NULL, 'A'),
+(12, '202555004', '199.999.999-99', 'teste 9', 'teste9@gmail.com', '$2y$10$EXU1ILOka', '(11) 99999-9999', NULL, 'A'),
+(13, '202555005', '101.010.101-01', 'teste 10', 'teste10@gmail.com', '$2y$10$STEXZ/WJB', '(11) 91010-1010', NULL, 'A'),
+(14, '202555006', '110.110.110-11', 'teste 11', 'teste11@gmail.com', '$2y$10$rYj4QsaYp', '(11) 91101-1011', NULL, 'A'),
+(15, '202555007', '111.222.333-44', 'Aluno 1', 'aluno1@gmail.com', '$2y$10$YuJcT.Tpk', '(11) 91234-5678', NULL, 'A'),
+(16, '202555008', '222.233.344-22', 'Aluno 2', 'aluno2@gmail.com', '$2y$10$NAkDSylp6', '(11) 91234-5678', NULL, 'A'),
+(17, '202555009', '154.154.154-54', 'ultimo teste', 'ultimo@gmail.com.br', '$2y$10$HwBkx7J4M', '(11) 95454-5454', NULL, 'A'),
+(18, '202555010', '444.444.444-44', 'Wesley Antonio Rodrigues', 'wesley.rodrigues@maltec.sp.gov.br', '$2y$10$4fMJcdhgK', '(11) 94564-5565', NULL, 'A'),
+(19, '202555011', '646.464.646-64', 'Anderson Oliveira', 'anderson.oliveira855@maltec.sp.gov.br', '$2y$10$qFZXDYhbg', '(11) 96464-6464', NULL, 'P'),
+(20, '202555012', '646.464.646-65', 'Anderson Oliveira', 'anderson.oliveira849@maltec.sp.gov.br', '$2y$10$z7.M3vCAl', '(11) 91234-5678', NULL, 'P'),
+(21, '202555013', '156.146.645-23', 'antonio rocha', 'antonio.rocha185@maltec.sp.gov.br', '$2y$10$Xs3BATbvP', '(11) 95956-6564', NULL, 'P'),
+(22, '202555014', '484.186.512-52', 'Luiz Castro', 'luiz.castro242@maltec.sp.gov.br', '$2y$10$q0MoXa0q5', '(11) 91234-5678', NULL, 'P'),
+(23, '202555015', '352352352', 'Luiz Castro', 'luiz.castro571@maltec.sp.gov.br', '$2y$10$2.zrMJkR2', '(11) 96464-6464', NULL, 'P'),
+(24, '202555016', '352.352.352-35', 'Luiz Castro', 'luiz.castro186@maltec.sp.gov.br', '$2y$10$iJxqylAjr', '(11) 96464-6464', NULL, 'P'),
+(25, '202555017', '654.654.645-65', 'Teste Prévio', 'teste.previo439@maltec.sp.gov.br', '$2y$10$FkWbdV3oL', '(11) 96464-6464', NULL, 'P'),
+(26, '202555018', '133.133.133-35', 'Testinho', 'testinho043@maltec.sp.gov.br', '$2y$10$o/nu1KcVB', '(11) 96464-6464', NULL, 'P');
 
 --
 -- Índices para tabelas despejadas
@@ -338,6 +546,13 @@ ALTER TABLE `curso`
   ADD UNIQUE KEY `abrv_curs` (`abrv_curs`);
 
 --
+-- Índices de tabela `curso_materia`
+--
+ALTER TABLE `curso_materia`
+  ADD PRIMARY KEY (`iden_curso_materia`),
+  ADD UNIQUE KEY `unique_curso_materia_ciclo` (`iden_curs`,`iden_matr`,`ciclo_semestre`);
+
+--
 -- Índices de tabela `evento`
 --
 ALTER TABLE `evento`
@@ -356,6 +571,13 @@ ALTER TABLE `livro`
 --
 ALTER TABLE `materia`
   ADD PRIMARY KEY (`iden_matr`);
+
+--
+-- Índices de tabela `professor_materia`
+--
+ALTER TABLE `professor_materia`
+  ADD PRIMARY KEY (`iden_prof_mat`),
+  ADD UNIQUE KEY `unique_professor_materia` (`regx_user`,`iden_matr`);
 
 --
 -- Índices de tabela `solicitacao`
@@ -387,13 +609,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `aluno`
 --
 ALTER TABLE `aluno`
-  MODIFY `iden_alun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iden_alun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `cursando`
 --
 ALTER TABLE `cursando`
-  MODIFY `iden_crsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `iden_crsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT de tabela `cursinho`
@@ -406,6 +628,12 @@ ALTER TABLE `cursinho`
 --
 ALTER TABLE `curso`
   MODIFY `iden_curs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de tabela `curso_materia`
+--
+ALTER TABLE `curso_materia`
+  MODIFY `iden_curso_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de tabela `evento`
@@ -426,6 +654,12 @@ ALTER TABLE `materia`
   MODIFY `iden_matr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT de tabela `professor_materia`
+--
+ALTER TABLE `professor_materia`
+  MODIFY `iden_prof_mat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de tabela `solicitacao`
 --
 ALTER TABLE `solicitacao`
@@ -441,7 +675,7 @@ ALTER TABLE `telefone`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `iden_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iden_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
