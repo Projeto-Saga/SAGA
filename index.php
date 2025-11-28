@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <?php include("html/head.php") ?>
-</head>
-<body class="bodyind">
 <?php
+session_start();
+include("php/connect.php"); // se já está incluído no head.php, apenas garanta que seja antes do SQL
+
+$rslt = "";
+
+// Lógica de login deve vir ANTES de qualquer HTML
 if (isset($_POST['cpf_']) && isset($_POST['pass'])) {
     $cpf_ = $_POST['cpf_'];
     $pass = $_POST['pass'];
@@ -16,14 +16,20 @@ if (isset($_POST['cpf_']) && isset($_POST['pass'])) {
         $user = mysqli_fetch_assoc($rst1);
         $_SESSION['ativ'] = $cpf_;
         $_SESSION['tipo'] = $user['flag_user'];
-        header('location:lobby.php'); 
+
+        header('Location: lobby.php');
         exit;
     } else {
         $rslt = "Usuário e Senha Incompatíveis!";
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <?php include("html/head.php") ?>
+</head>
+<body class="bodyind">
 <div class="clmalign mainform">
     <form class="clmalign fanimate" action="" method="POST">
         <div class="rowalign"><img class="mainlogo" src="img/logos/logo-n-colors.png"></div>

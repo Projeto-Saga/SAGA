@@ -355,6 +355,31 @@ INSERT INTO `livro` (`iden_livr`, `idcs_livr`, `imge_livr`, `nome_livr`, `autr_l
 (5, 1, '01-05', 'Java 9 Interativo, reativo e modularizado', 'Rodrigo Turn', 'Livro aí', ''),
 (6, 1, '01-06', 'Arduino do Básico à Internet das Coisas', 'Altair dos Santos & Sylvio Ribeiro', 'Livro aí', '');
 
+
+-- --------------------------------------------------------
+-- Estrutura para tabela `faltas`
+-- --------------------------------------------------------
+
+CREATE TABLE `faltas` (
+  `iden_att` int(11) NOT NULL,
+  `regx_user` char(9) NOT NULL,         -- aluno
+  `iden_matr` int(11) NOT NULL,         -- matéria
+  `data_att` date NOT NULL,             -- data da aula
+  `stat_att` enum('P','F') NOT NULL,    -- P = Presente / F = Falta
+  `prof_att` char(9) NOT NULL           -- professor que lançou
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Índices
+ALTER TABLE `faltas`
+  ADD PRIMARY KEY (`iden_att`),
+  ADD KEY `regx_user` (`regx_user`),
+  ADD KEY `iden_matr` (`iden_matr`),
+  ADD KEY `prof_att` (`prof_att`);
+
+-- Auto Increment
+ALTER TABLE `faltas`
+  MODIFY `iden_att` int(11) NOT NULL AUTO_INCREMENT;
+
 -- --------------------------------------------------------
 
 --
@@ -601,6 +626,8 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `regx_user` (`regx_user`),
   ADD UNIQUE KEY `foto_user` (`foto_user`);
 
+  
+
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
@@ -677,6 +704,8 @@ ALTER TABLE `telefone`
 ALTER TABLE `usuario`
   MODIFY `iden_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
