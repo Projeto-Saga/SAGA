@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             include 'controllerCadastroProfessor.php';
             break;
         case 'secretaria':
-            // Incluir controller para secretaria quando existir
+            include 'controllerCadastroSecretaria.php';
             break;
         case 'curso':
             // Incluir controller para curso quando existir

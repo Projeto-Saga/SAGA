@@ -82,6 +82,12 @@ h1 {
     align-items: center;
 }
 
+.inputsSecretaria {
+    display: flex; 
+    flex-direction:column; 
+    gap: 10px;
+}
+
 .inputsAluno{
     display: flex;
     flex-direction: column;
@@ -377,7 +383,7 @@ button {
     font-size: 14px;
 }
 
-.inputsProfessor {
+.inputsProfessor{
     display: flex;
     flex-direction: column;
     gap: 15px;
