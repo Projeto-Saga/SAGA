@@ -81,14 +81,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $check->close();
 
         ## Hash da senha
-        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+        #$senha_hash = password_hash($senha, PASSWORD_DEFAULT);
         
         ## Inserir na tabela usuario
         $stmt_usuario = $conn->prepare("
             INSERT INTO usuario (regx_user, codg_user, nome_user, mail_user, senh_user, fone_user, flag_user)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
-        $stmt_usuario->bind_param("sssssss", $regex_user, $cpf_formatado, $nome, $email, $senha_hash, $telefone_formatado, $tipo);
+        $stmt_usuario->bind_param("sssssss", $regex_user, $cpf_formatado, $nome, $email, $senha, $telefone_formatado, $tipo);
         $stmt_usuario->execute();
         $stmt_usuario->close();
 

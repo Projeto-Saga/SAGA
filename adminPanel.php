@@ -21,11 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         case 'aluno':
             include 'controllerCadastroAluno.php';
             break;
-        case 'professor': // ← CORRIGIDO
+        case 'professor':
             include 'controllerCadastroProfessor.php';
             break;
         case 'secretaria':
             // Incluir controller para secretaria quando existir
+            break;
+        case 'curso':
+            // Incluir controller para curso quando existir
+            break;
+        case 'materia':
+            // Incluir controller para matéria quando existir
+            break;
+        case 'turma':
+            // Incluir controller para turma quando existir
             break;
         default:
             ## cadastro genérico (fallback)
@@ -94,7 +103,7 @@ $conn->close();
         <!-- Cards principais -->
         <div class="cards-principais" <?= $formularioAtivo ? 'style="display: none;"' : '' ?>>
             <div class="card" onclick="mostrarSubcards('usuario')">Cadastrar Usuário</div>
-            <div class="card" onclick="abrirFormulario('curso')">Cadastrar Cursos e Matérias</div>
+            <div class="card" onclick="mostrarSubcards('cursos')">Cadastrar Cursos e Matérias</div>
             <div class="card" onclick="abrirFormulario('calendario')">Editar Calendário</div>
         </div>
 
@@ -103,6 +112,14 @@ $conn->close();
             <div class="card-sub" onclick="abrirFormulario('aluno')">Aluno</div>
             <div class="card-sub" onclick="abrirFormulario('secretaria')">Secretaria</div>
             <div class="card-sub" onclick="abrirFormulario('professor')">Professor</div>
+            <button class="voltar" onclick="voltarPrincipal()">Voltar</button>
+        </div>
+
+        <!-- Subcards de cursos e matérias -->
+        <div id="subcards-cursos" class="subcards oculto">
+            <div class="card-sub" onclick="abrirFormulario('curso')">Curso</div>
+            <div class="card-sub" onclick="abrirFormulario('materia')">Matéria</div>
+            <div class="card-sub" onclick="abrirFormulario('turma')">Turma</div>
             <button class="voltar" onclick="voltarPrincipal()">Voltar</button>
         </div>
 
@@ -122,21 +139,32 @@ $conn->close();
                         include 'secretaria/FormProf.php';
                         break;
                     case 'curso':
-                        include 'cursos/FormCurso.php';
+                        include 'secretaria/FormCurso.php';
+                        break;
+                    case 'materia':
+                        include 'secretaria/FormMat.php';
+                        break;
+                    case 'turma':
+                        include 'secretaria/FormTurma.php';
                         break;
                     case 'calendario':
-                        include 'calendario/FormCalendario.php';
+                        include 'secretaria/FormCalendario.php';
+                        break;
+                    default:
+                        echo "<p>Formulário não encontrado.</p>";
                         break;
                 }
             }
             ?>
         </div>
     </div>
+
     <script>
         const titulo = document.getElementById('title_painel');       
         const painel = document.querySelector('.container_AdminPainel');
         const cardsPrincipais = document.querySelector('.cards-principais');
         const subcardsUsuario = document.getElementById('subcards-usuario');
+        const subcardsCursos = document.getElementById('subcards-cursos');
         const conteudoDinamico = document.getElementById('conteudo-dinamico');
 
         // Verificar se há um formulário ativo na carga da página
@@ -148,18 +176,29 @@ $conn->close();
             titulo.style.display = 'none';
             cardsPrincipais.style.display = 'none';
             subcardsUsuario.classList.add('oculto');
+            subcardsCursos.classList.add('oculto');
             painel.style.padding = '0px';
         }
 
         function mostrarSubcards(tipo) {
+            titulo.style.display = 'none';
             cardsPrincipais.classList.add('oculto');
-            subcardsUsuario.classList.remove('oculto');
+            if (tipo === 'usuario') {
+                subcardsUsuario.classList.remove('oculto');
+                subcardsCursos.classList.add('oculto');
+            } else if (tipo === 'cursos') {
+                subcardsCursos.classList.remove('oculto');
+                subcardsUsuario.classList.add('oculto');
+            }
         }
 
         function voltarPrincipal() {
             subcardsUsuario.classList.add('oculto');
+            subcardsCursos.classList.add('oculto');
             conteudoDinamico.innerHTML = '';
             cardsPrincipais.classList.remove('oculto');
+            titulo.style.display = 'block';
+            painel.style.padding = '';
             // Limpar URL
             window.history.replaceState({}, document.title, window.location.pathname);
         }

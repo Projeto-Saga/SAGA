@@ -32,10 +32,14 @@ $conn->close();
             
         <div class="esquerdo">
             <div class="inputsProfessor">
+                <label style="position: relative; top: 8px;">Nome completo:</label>
                 <input type="text" name="nome" placeholder="Nome completo" value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
                 <input type="email" name="email" placeholder="E-mail será gerado automaticamente" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required readonly>
+                <label style="position: relative; top: 8px;">Senha:</label>
                 <input type="password" name="senha" placeholder="Senha" required>
+                <label style="position: relative; top: 8px;">CPF:</label>
                 <input type="text" name="cpf" placeholder="CPF (ex: 000.000.000-00)" value="<?= htmlspecialchars($_POST['cpf'] ?? '') ?>" required>
+                <label style="position: relative; top: 8px;">Telefone:</label>
                 <input type="text" name="telefone" placeholder="Telefone (ex: (11) 91234-5678)" value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>">
             </div>
             
@@ -88,6 +92,12 @@ $conn->close();
             // Detectar tipo de mensagem
             if (strpos($mensagem, 'sucesso') !== false) {
                 echo "Popup.success('" . addslashes($mensagem) . "');";
+                echo "document.querySelector('input[name=\"nome\"]').value = '';";
+                echo "document.querySelector('input[name=\"email\"]').value = '';";
+                echo "document.querySelector('input[name=\"senha\"]').value = '';";
+                echo "document.querySelector('input[name=\"cpf\"]').value = '';";
+                echo "document.querySelector('input[name=\"telefone\"]').value = '';";
+                echo "document.querySelector('select[name=\"curso\"]').value = '';";
             } else if (strpos($mensagem, 'ERRO') !== false || strpos($mensagem, 'erro') !== false) {
                 echo "Popup.error('" . addslashes($mensagem) . "');";
             } else {

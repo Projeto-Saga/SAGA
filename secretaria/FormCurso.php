@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($stmt->execute()) {
             $curso_id = $conn->insert_id;
-            $mensagem = "Curso cadastrado com sucesso! ID: " . $curso_id;
+            $mensagem = "Curso cadastrado com sucesso!";
         } else {
             $mensagem = "Erro ao cadastrar curso: " . $conn->error;
         }
@@ -49,17 +49,77 @@ $conn->close();
 ?>
 
 <link rel="stylesheet" href="../css/CadastroSec.css">
+<script>
+function atualizarTotalAnos() {
+    const semestresSelect = document.querySelector('select[name="total_semestres"]');
+    const anosSelect = document.querySelector('select[name="total_anos"]');
+    
+    if (semestresSelect.value) {
+        // Calcula os anos baseado nos semestres (2 semestres = 1 ano)
+        const totalSemestres = parseInt(semestresSelect.value);
+        const totalAnos = Math.ceil(totalSemestres / 2);
+        
+        // Atualiza o campo de anos
+        anosSelect.value = totalAnos;
+        
+        // Se não existir a opção, cria dinamicamente
+        let opcaoExiste = false;
+        for (let i = 0; i < anosSelect.options.length; i++) {
+            if (anosSelect.options[i].value == totalAnos) {
+                opcaoExiste = true;
+                break;
+            }
+        }
+        
+        if (!opcaoExiste) {
+            const novaOpcao = new Option(totalAnos + ' anos', totalAnos);
+            anosSelect.add(novaOpcao);
+        }
+    } else {
+        // Se nenhum semestre selecionado, limpa o campo de anos
+        anosSelect.value = '';
+    }
+}
+
+// Função para inicializar o comportamento
+document.addEventListener('DOMContentLoaded', function() {
+    const semestresSelect = document.querySelector('select[name="total_semestres"]');
+    if (semestresSelect) {
+        semestresSelect.addEventListener('change', atualizarTotalAnos);
+        
+        // Se já houver um valor selecionado (em caso de recarregamento da página)
+        if (semestresSelect.value) {
+            atualizarTotalAnos();
+        }
+    }
+});
+
+function voltarAoPainel() {
+    if (window.parent && window.parent !== window) {
+        if (typeof window.parent.voltarAoPainel === 'function') {
+            window.parent.voltarAoPainel();
+        } else {
+            window.parent.location.href = 'adminPanel.php';
+        }
+    } else {
+        window.location.href = 'adminPanel.php';
+    }
+}
+</script>
 
 <form class="FormCadastroSec" method="POST">
     <h2>Cadastrar Novo Curso</h2>
 
-    <input type="text" name="nome_curso" placeholder="Nome do Curso" value="<?= htmlspecialchars($_POST['nome_curso'] ?? '') ?>" required>
-    <input type="text" name="abreviatura" placeholder="Abreviatura (ex: CC)" value="<?= htmlspecialchars($_POST['abreviatura'] ?? '') ?>" maxlength="3" required>
+    <label style="position: relative; top: 8px;">Nome do Curso:</label>
+    <input type="text" name="nome_curso" placeholder="Nome do Curso" value="<?= htmlspecialchars($_POST['nome_curso'] ?? '') ?>" oninput="this.value = this.value.toUpperCase()" required>
+    <label style="position: relative; top: 8px;">Abreviatura:</label>
+    <input type="text" name="abreviatura" placeholder="Abreviatura (ex: CC)" value="<?= htmlspecialchars($_POST['abreviatura'] ?? '') ?>" oninput="this.value = this.value.toUpperCase()" maxlength="3" required>
     
     <div class="form-group">
         <label>Total de Semestres:</label>
         <select name="total_semestres" required>
             <option value="">Selecione</option>
+            <option value="2" <?= (isset($_POST['total_semestres']) && $_POST['total_semestres'] == 2) ? 'selected' : '' ?>>2 semestres (1 ano)</option>
             <option value="4" <?= (isset($_POST['total_semestres']) && $_POST['total_semestres'] == 4) ? 'selected' : '' ?>>4 semestres (2 anos)</option>
             <option value="6" <?= (isset($_POST['total_semestres']) && $_POST['total_semestres'] == 6) ? 'selected' : '' ?>>6 semestres (3 anos)</option>
             <option value="8" <?= (isset($_POST['total_semestres']) && $_POST['total_semestres'] == 8) ? 'selected' : '' ?>>8 semestres (4 anos)</option>
@@ -71,7 +131,8 @@ $conn->close();
     <div class="form-group">
         <label>Total de Anos:</label>
         <select name="total_anos" required>
-            <option value="">Selecione</option>
+            <option value="">Selecione primeiro os semestres</option>
+            <option value="1" <?= (isset($_POST['total_anos']) && $_POST['total_anos'] == 1) ? 'selected' : '' ?>>1 ano</option>
             <option value="2" <?= (isset($_POST['total_anos']) && $_POST['total_anos'] == 2) ? 'selected' : '' ?>>2 anos</option>
             <option value="3" <?= (isset($_POST['total_anos']) && $_POST['total_anos'] == 3) ? 'selected' : '' ?>>3 anos</option>
             <option value="4" <?= (isset($_POST['total_anos']) && $_POST['total_anos'] == 4) ? 'selected' : '' ?>>4 anos</option>
@@ -81,16 +142,33 @@ $conn->close();
     </div>
 
     <div class="form-group checkbox">
-        <label>
+        <label  style="display:flex;">
             <input type="checkbox" name="ativo" <?= (isset($_POST['ativo']) && $_POST['ativo']) ? 'checked' : 'checked' ?>> Curso Ativo
         </label>
     </div>
 
     <button type="submit" class="BtnCadastrar_Sec">Cadastrar Curso</button>
     
-    <button type="button" class="BtnVoltar" onclick="window.location.href = '../adminPanel.php'">Voltar ao Painel</button>
+    <button type="button" class="BtnVoltar" onclick="voltarAoPainel()">Voltar ao Painel</button>
     
-    <?php if (isset($mensagem) && $mensagem): ?>
-        <div class="mensagem"><?= htmlspecialchars($mensagem) ?></div>
-    <?php endif; ?>
+<?php if (isset($mensagem) && $mensagem): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+            // Detectar tipo de mensagem
+            if (strpos($mensagem, 'sucesso') !== false) {
+                echo "Popup.success('" . addslashes($mensagem) . "');";
+                echo "document.querySelector('input[name=\"nome_curso\"]').value = '';";
+                echo "document.querySelector('input[name=\"abreviatura\"]').value = '';";
+                echo "document.querySelector('select[name=\"total_semestres\"]').value = '';";
+                echo "document.querySelector('select[name=\"total_anos\"]').value = '';";
+            } else if (strpos($mensagem, 'ERRO') !== false || strpos($mensagem, 'erro') !== false) {
+                echo "Popup.error('" . addslashes($mensagem) . "');";
+            } else {
+                echo "Popup.info('" . addslashes($mensagem) . "');";
+            }
+            ?>
+        });
+    </script>
+<?php endif; ?>
 </form>
