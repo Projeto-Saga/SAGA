@@ -81,10 +81,10 @@ function voltarAoPainel() {
         if (typeof window.parent.voltarAoPainel === 'function') {
             window.parent.voltarAoPainel();
         } else {
-            window.parent.location.href = '../adminPanel.php';
+            window.parent.location.href = 'adminPanel.php';
         }
     } else {
-        window.location.href = '../adminPanel.php';
+        window.location.href = 'adminPanel.php';
     }
 }
 </script>
