@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/mybook.css">
 <link rel="stylesheet" href="css/calend.css">
 <link rel="stylesheet" href="css/respons.css">
+<link rel="stylesheet" href="css/professor.css">
 <link rel="stylesheet" href="css/rqests.css">
 <link rel="stylesheet" href="css/rspnsv.css">
 <link rel="stylesheet" href="css/mtrial.css">
@@ -85,6 +86,7 @@ if (isset($_SESSION['ativ'])) {
 <link rel="stylesheet" href="css/homepg.css">
 <link rel="stylesheet" href="css/mybook.css">
 <link rel="stylesheet" href="css/respons.css">
+<link rel="stylesheet" href="css/professor.css">
 <link rel="stylesheet" href="css/calend.css">
 <link rel="stylesheet" href="css/rqests.css">
 <link rel="stylesheet" href="css/rspnsv.css">
