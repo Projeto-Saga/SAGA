@@ -19,7 +19,6 @@
 }
 
 body {
-    font-family: var(--ffml-base);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +36,6 @@ body {
 }
 
 .container_AdminPainel {
-    
     max-width: 900px;
     border-radius: 20px;
     padding: 20px;
@@ -360,43 +358,6 @@ button {
     color: #f39c12;
 }
 
-/* Estilos responsivos */
-@media (max-width: 1200px) {
-    .professor-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .professor-container .FormCadastroSec {
-        flex: none;
-        width: 100%;
-    }
-    
-    .materias-container {
-        width: 100%;
-        max-height: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .professor-container {
-        padding: 10px;
-    }
-    
-    .materias-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .materias-actions {
-        flex-direction: column;
-    }
-    
-    .btn-selecionar-todas,
-    .btn-deselecionar-todas {
-        min-width: auto;
-        width: 100%;
-    }
-}
 
 /* Estilos existentes mantidos */
 .curso-container {
