@@ -1,5 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* variáveis globais */
+:root
+{
+    /* general colors */
+    --red-base:#d72b48;
+    --red-dark:#bf0000;
+
+    --gray-base:#d4cdce;
+    --white-base:white;
+
+    --blue-base:#0198f8;
+    --blue-dark:#0b4cbc;
+
+    /* font families */
+    --ffml-base:"Poppins";
+    --ffml-text:"Roboto";
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--ffml-base);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +37,7 @@ body {
 }
 
 .container_AdminPainel {
+    
     max-width: 900px;
     border-radius: 20px;
     padding: 20px;
@@ -96,18 +117,23 @@ h1 {
 }
 
 input{
-    display: flex;
-    padding: 8px;
-    border: 2px 2px 2px 2px;
-    border-color: white;
-    padding: 10px;
-    border-radius: 10px;
+    background:#eee;
+    font-size:14px;
+    padding:8px 8px 5px 8px;
+    border-radius:5px 5px 0 0;
+    border-style:solid;
+    border-width:0 0 1px 0;
+    border-color:black;
+    margin-bottom:5px;
+    transition:all 0.3s ease;
+    font-family: var(--ffml-base);
 }
 
 select {
     padding: 10px;
     border-radius: 10px;
     width: 100%;
+    font-family: var(--ffml-base);
 }
 
 button {
@@ -115,6 +141,8 @@ button {
     padding: 10px;
     color: white;
     border: none;
+    font-size: 16px;
+    font-family: var(--ffml-base);
     cursor: pointer;
 }
 
