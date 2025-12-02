@@ -54,11 +54,11 @@
             </a>
         <?php elseif ($flag == 'P'): ?>
             <a class="sidebar-link" href="launchGrades.php">
-                <div class="sidebar-icon"><img src="https://i.pinimgproxy.com/?url=aHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS8yNTYvNjg0LzY4NDg3Mi5wbmc=&ts=1763426019&sig=1a34de955bf911c2f023dcbe49d34d16f4c86aa1dcf6dfdf5509cf45e7b320d6"></div>
+                <div class="sidebar-icon"><img src="https://cdn-icons-png.flaticon.com/512/768/768818.png"></div>
                 <div class="sidebar-label invobjct">Lançar Notas</div>
             </a>
             <a class="sidebar-link" href="launchAttendance.php">
-                <div class="sidebar-icon"><img src="https://i.pinimgproxy.com/?url=aHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS8yNTYvMTcxMjMvMTcxMjMyNTIucG5n&ts=1763426180&sig=431fea8604cf2f82c9209cef012d7d51c6420eaa40eda90aac31991634855417"></div>
+                <div class="sidebar-icon"><img src="https://static.thenounproject.com/png/4100349-200.png"></div>
                 <div class="sidebar-label invobjct">Lançar Faltas</div>
             </a>
         <?php elseif ($flag == 'S'): ?>
