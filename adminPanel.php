@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             include 'controllerCadastroMateria.php';
             break;
         case 'turma':
-            // Incluir controller para turma quando existir
+            include 'controllerCadastroTurma.php';
             break;
         default:
             ## cadastro genérico (fallback)

@@ -43,17 +43,28 @@ $conn->close();
                 <input type="text" name="telefone" placeholder="Telefone (ex: (11) 91234-5678)" value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>">
             </div>
             
-            <!-- Seleção de curso -->
-            <div class="curso-container">
-                <select name="curso" id="curso" required onchange="carregarMaterias(this.value)">
-                    <option value="">Selecione um curso</option>
-                    <?php foreach ($cursos as $curso): ?>
-                        <option value="<?= $curso['iden_curs'] ?>" <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+        <!-- Seleção de curso -->
+        <div class="curso-container">
+            <label>Curso:</label>
+            <select name="curso" id="curso" required onchange="carregarMaterias(this.value); carregarTurmas(this.value);">
+                <option value="">Selecione um curso</option>
+                <?php foreach ($cursos as $curso): ?>
+                    <option value="<?= $curso['iden_curs'] ?>" 
+                        <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <!-- Seleção de turma -->
+        <div class="turma-container">
+            <label>Turma:</label>
+            <select name="turma" id="turma" required>
+                <option value="">Selecione o curso primeiro...</option>
+            </select>
+        </div>
+
 
         </div>
         
@@ -234,6 +245,51 @@ document.getElementById('formProfessor').addEventListener('submit', function(e) 
         btnSubmit.textContent = originalText;
         btnSubmit.disabled = false;
     }, 3000);
+});
+
+// Função para carregar turmas do curso selecionado
+function carregarTurmas(cursoId) {
+    const turmaSelect = document.getElementById('turma');
+
+    turmaSelect.innerHTML = '<option>Carregando...</option>';
+
+    if (!cursoId) {
+        turmaSelect.innerHTML = '<option value="">Selecione o curso primeiro...</option>';
+        return;
+    }
+
+    fetch('buscarTurmasCurso.php?curso_id=' + cursoId)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                turmaSelect.innerHTML = '';
+
+                if (data.turmas.length > 0) {
+                    turmaSelect.innerHTML = '<option value="">Selecione a turma</option>';
+
+                    data.turmas.forEach(t => {
+                        turmaSelect.innerHTML += `
+                            <option value="${t.iden_turm}">
+                                ${t.nome_turm} — ${t.ano_turm}.${t.seme_turm}
+                            </option>
+                        `;
+                    });
+                } else {
+                    turmaSelect.innerHTML = '<option value="">Nenhuma turma cadastrada para este curso</option>';
+                }
+            } else {
+                turmaSelect.innerHTML = '<option value="">Erro ao carregar turmas</option>';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            turmaSelect.innerHTML = '<option value="">Erro ao carregar turmas</option>';
+        });
+}
+
+// Integra ao onchange de curso
+document.getElementById('curso').addEventListener('change', function() {
+    carregarTurmas(this.value);
 });
 
 </script>

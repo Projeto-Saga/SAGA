@@ -454,6 +454,53 @@ INSERT INTO `professor_materia` (`iden_prof_mat`, `regx_user`, `iden_matr`) VALU
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `turma`
+--
+
+CREATE TABLE turma (
+    iden_turm INT(11) NOT NULL AUTO_INCREMENT,
+    nome_turm VARCHAR(50) NOT NULL,
+    iden_curs INT(11) NOT NULL,    -- Curso
+    ano_turm INT(4) NOT NULL,
+    seme_turm INT(2) NOT NULL,
+    ativo_turm TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (iden_turm),
+    KEY (iden_curs)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `turma_materia`
+--
+
+CREATE TABLE turma_materia (
+    iden_turm_matr INT(11) NOT NULL AUTO_INCREMENT,
+    iden_turm INT(11) NOT NULL,   -- turma
+    iden_matr INT(11) NOT NULL,   -- materia
+    regx_prof CHAR(9) NOT NULL,   -- professor da matéria
+    PRIMARY KEY (iden_turm_matr),
+    KEY (iden_turm),
+    KEY (iden_matr),
+    KEY (regx_prof)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `aluno_turma`
+--
+
+CREATE TABLE aluno_turma (
+    regx_user CHAR(9) NOT NULL,    -- aluno
+    iden_turm INT(11) NOT NULL,    -- turma
+    PRIMARY KEY (regx_user),       -- impede aluno em mais de 1 turma
+    KEY (iden_turm)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `solicitacao`
 --
 

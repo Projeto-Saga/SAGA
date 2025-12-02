@@ -7,7 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha    = trim($_POST["senha"]);
     $cpf      = trim($_POST["cpf"]);
     $telefone = trim($_POST["telefone"]);
-    $curso_id = $_POST["curso"] ?? null;
+    $curso_id = isset($_POST["curso"]) ? intval($_POST["curso"]) : null;
+    $turma_id = isset($_POST["turma"]) ? intval($_POST["turma"]) : null; // NOVO: turma selecionada
     $materias = isset($_POST["materias"]) ? $_POST["materias"] : [];
     $tipo     = "P"; ## Sempre será Professor
 
@@ -15,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     error_log("=== CADASTRO PROFESSOR INICIADO ===");
     error_log("Nome: $nome");
     error_log("Curso ID: $curso_id");
+    error_log("Turma ID: " . ($turma_id ?? 'null'));
     error_log("Matérias selecionadas: " . implode(', ', $materias));
     error_log("Total de matérias: " . count($materias));
 
@@ -80,9 +82,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt_curso->close();
         }
 
-        ## Hash da senha
-        #$senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-        
+        ## Se uma turma foi selecionada, verificar se existe e (se curso_id informado) pertence ao curso
+        if ($turma_id) {
+            $stmt_check_turma = $conn->prepare("SELECT iden_turm, iden_curs FROM turma WHERE iden_turm = ?");
+            $stmt_check_turma->bind_param("i", $turma_id);
+            $stmt_check_turma->execute();
+            $res_turma = $stmt_check_turma->get_result();
+            if ($res_turma->num_rows === 0) {
+                throw new Exception("Turma selecionada não existe.");
+            }
+            $row_turma = $res_turma->fetch_assoc();
+            $turma_curso_id = intval($row_turma['iden_curs']);
+            $stmt_check_turma->close();
+
+            if ($curso_id && $turma_curso_id !== $curso_id) {
+                throw new Exception("A turma selecionada não pertence ao curso escolhido.");
+            }
+            error_log("Turma validada: pertence ao curso $turma_curso_id");
+        }
+
         ## Inserir na tabela usuario
         $stmt_usuario = $conn->prepare("
             INSERT INTO usuario (regx_user, codg_user, nome_user, mail_user, senh_user, fone_user, flag_user)
@@ -96,7 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt_usuario->close();
         error_log("✅ Usuário cadastrado na tabela usuario");
 
-        ## Inserir na tabela professor_materia para cada matéria selecionada
+        ## Inserir na tabela professor_materia para cada matéria selecionada (mapa geral)
+        $materias_cadastradas = 0;
         if (!empty($materias)) {
             error_log("Iniciando cadastro de " . count($materias) . " matérias...");
             
@@ -114,7 +133,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Criar string de tipos: 'i' para curso_id + 'i' para cada matéria
                 $types = str_repeat('i', count($params));
                 
-                $stmt_check_curso->bind_param($types, ...$params);
+                // bind_param aceita apenas variables, usar call_user_func_array
+                $stmt_check_curso_params = [];
+                $stmt_check_curso_params[] = $types;
+                foreach ($params as $p) $stmt_check_curso_params[] = $p;
+                // bind dinamico
+                $tmp = [];
+                foreach ($stmt_check_curso_params as $k => $v) $tmp[$k] = &$stmt_check_curso_params[$k];
+                call_user_func_array([$stmt_check_curso, 'bind_param'], $tmp);
+                
                 $stmt_check_curso->execute();
                 $result_check = $stmt_check_curso->get_result();
                 $row_check = $result_check->fetch_assoc();
@@ -132,17 +159,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 VALUES (?, ?)
             ");
 
-            $materias_cadastradas = 0;
             foreach ($materias as $iden_matr) {
-                error_log("Cadastrando matéria ID: $iden_matr para professor $regex_user");
+                error_log("Cadastrando matéria ID: $iden_matr para professor $regex_user (professor_materia)");
                 
                 $stmt_prof_mat->bind_param("si", $regex_user, $iden_matr);
                 if ($stmt_prof_mat->execute()) {
                     $materias_cadastradas++;
-                    error_log("✅ Matéria $iden_matr cadastrada com sucesso");
+                    error_log("✅ Matéria $iden_matr cadastrada com sucesso em professor_materia");
                 } else {
                     if ($conn->errno == 1062) { // 1062 = Duplicate entry
-                        error_log("⚠️ Matéria $iden_matr já estava cadastrada (duplicata)");
+                        error_log("⚠️ Matéria $iden_matr já estava cadastrada (duplicata) em professor_materia");
                         // Ignora duplicatas e continua
                     } else {
                         throw new Exception("Erro ao vincular matéria $iden_matr: " . $conn->error);
@@ -150,9 +176,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             }
             $stmt_prof_mat->close();
-            error_log("✅ Total de matérias cadastradas: $materias_cadastradas");
+            error_log("✅ Total de matérias cadastradas em professor_materia: $materias_cadastradas");
         } else {
-            error_log("⚠️ Nenhuma matéria selecionada para cadastrar");
+            error_log("⚠️ Nenhuma matéria selecionada para cadastrar em professor_materia");
+        }
+
+        ## INSERIR também em turma_materia (vínculo turma + matéria + professor) se turma foi selecionada
+        if ($turma_id && !empty($materias)) {
+            error_log("Iniciando cadastro em turma_materia para turma $turma_id");
+            $stmt_turm_mat = $conn->prepare("
+                INSERT INTO turma_materia (iden_turm, iden_matr, regx_prof)
+                VALUES (?, ?, ?)
+            ");
+
+            $turma_materias_cadastradas = 0;
+            foreach ($materias as $iden_matr) {
+                error_log("Cadastrando matéria ID: $iden_matr para turma $turma_id e professor $regex_user (turma_materia)");
+                
+                $stmt_turm_mat->bind_param("iis", $turma_id, $iden_matr, $regex_user);
+                if ($stmt_turm_mat->execute()) {
+                    $turma_materias_cadastradas++;
+                    error_log("✅ turma_materia inserida: turma $turma_id - mat $iden_matr");
+                } else {
+                    if ($conn->errno == 1062) {
+                        error_log("⚠️ vínculo turma_materia já existe (duplicata) para turma $turma_id mat $iden_matr");
+                        // Ignorar duplicata
+                    } else {
+                        throw new Exception("Erro ao inserir turma_materia (turma $turma_id, mat $iden_matr): " . $conn->error);
+                    }
+                }
+            }
+            $stmt_turm_mat->close();
+            error_log("✅ Total de turma_materia cadastradas: $turma_materias_cadastradas");
+        } else {
+            if (!$turma_id) error_log("⚠️ Nenhuma turma selecionada, pulando inserção em turma_materia");
+            if (empty($materias)) error_log("⚠️ Nenhuma matéria selecionada, pulando inserção em turma_materia");
         }
         
          ## Commit da transação
@@ -163,6 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ## Rollback em caso de erro
         $conn->rollback();
         $mensagem = $e->getMessage();
+        error_log("ERRO no cadastro de professor: " . $mensagem);
     }
 }
 ?>
