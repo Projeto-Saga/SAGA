@@ -1,0 +1,331 @@
+:root {
+  --vermelho: #d72b48;
+  --vermelho-escuro: #b81f3b;
+  --cinza-claro: #f5f5f5;
+}
+
+/* ===== Cabeçalho ===== */
+.header-faltas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #d72b48;
+    border-radius: 20px;
+}
+
+.header-faltas h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #d72b48;
+    margin: 0;
+    padding: 5px 20px;
+    border: 2px solid #d72b48;
+    border-radius: 40px;
+    align-self: center;
+}
+
+.info-dados {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+}
+
+.info-dados .label {
+    font-weight: 700;
+    color: #d72b48;
+    display: block;
+}
+
+.info-dados p {
+    margin: 0;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.select-aula {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.select-aula label {
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    margin-bottom: 3px;
+}
+
+.select-aula select {
+    background: #8b8b8b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.select-aula select:hover {
+    background: #707070;
+}
+
+/* ===== Tabela ===== */
+.tabela-faltas table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tabela-faltas th {
+    text-align: left;
+    font-weight: 700;
+    color: #d72b48;
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+.tabela-faltas td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.tabela-faltas tr:last-child td {
+    border-bottom: none;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    background: #d3d3d3;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.tabela-faltas input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4caf50;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* ===== Botão Salvar ===== */
+.btn-salvar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+
+/* Cabeçalho */
+.discip-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.discip-box {
+    background: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 6px;
+    min-width: 200px;
+}
+
+.discip-box .title {
+    font-weight: 700;
+    color: #c81c24;
+    margin: 0;
+}
+
+.discip-box .value {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 2px 0 0 0;
+}
+
+.aula-select {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.aula-select label {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.aula-select select {
+    background: #666;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+
+/* Tabela de alunos */
+.alunos-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.alunos-tabela th {
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+    color: #000;
+    font-weight: 600;
+}
+
+.alunos-tabela td {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #dcdcdc;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.presente input[type="checkbox"] {
+    accent-color: green;
+    transform: scale(1.2);
+    margin-right: 6px;
+}
+
+.ausente input[type="checkbox"] {
+    accent-color: #aaa;
+    transform: scale(1.2);
+    margin-right: 6px;
+}
+
+/* Botão salvar */
+.salvar-container {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-salvar {
+    background: var(--vermelho);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background: var(--vermelho-escuro);
+}
+
+.discip-box {
+    background: #f5f5f5;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ===== Botões de Ação ===== */
+.acoes-botoes {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 12px 0;
+}
+
+/* ===== Botão base ===== */
+.acoes-botoes .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    user-select: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* ===== Botão Faltas ===== */
+.acoes-botoes .btn-faltas {
+    background-color: #d72b48 !important;
+    box-shadow: 0 4px 10px rgba(215,43,72,0.25);
+}
+
+.acoes-botoes .btn-faltas:hover {
+    background-color: #b81f3b !important;
+    transform: translateY(-2px);
+}
+
+/* ===== Botão Notas ===== */
+.acoes-botoes .btn-notas {
+    background-color: #3b82f6 !important;
+    box-shadow: 0 4px 10px rgba(59,130,246,0.25);
+}
+
+.acoes-botoes .btn-notas:hover {
+    background-color: #2563eb !important;
+    transform: translateY(-2px);
+}
+
+/* ===== Botão Turma ===== */
+.acoes-botoes .btn-turma {
+    background-color: #10b981 !important;
+    box-shadow: 0 4px 10px rgba(16,185,129,0.25);
+}
+
+.acoes-botoes .btn-turma:hover {
+    background-color: #059669 !important;
+    transform: translateY(-2px);
+}
+
+/* ===== Efeito de clique ===== */
+.acoes-botoes .btn:active {
+    transform: scale(0.96);
+    filter: brightness(0.95);
+}
+
+/* ===== Responsividade ===== */
+@media screen and (max-width: 700px) {
+    .acoes-botoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .acoes-botoes .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
