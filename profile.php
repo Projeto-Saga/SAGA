@@ -64,7 +64,7 @@
                         <!-- seção: institucional -->
                         <h1 class="update-group" style="margin-top:0">Institucional</h1>
                         <label class="update-label">RA</label>
-                        <input class="update-input" type="text" value="<?php echo $regx ?>" disabled>
+                        <input class="update-input" type="text" value="<?php echo $rmat ?>" disabled>
 
                         <label class="update-label">Curso</label>
                         <input class="update-input" type="text" value="<?php echo $curs ?>" disabled>
@@ -93,10 +93,10 @@
             <!-- carteirinha -->
             <div id="studcard" class="modal" style="visibility:hidden; opacity:0">
                 <div class="student-card">
-                    <div class="card-imge" style="background-image:url('img/<?php echo $imge != null ? "fotos/$imge" : "foto-icon.png" ?>')"></div>
+                    <div class="card-imge" style="background-image: url('img/<?php echo $imge != null ? "fotos/$imge.jpg" : "foto-icon.png"; ?>');"></div>
                     <div class="card-text">
                         <h4><?php echo $name ?></h4>
-                        <p>MATRÍCULA: <?php echo $rmat ?></p>
+                        <p>MATRÍCULA: <?php echo $regx ?></p>
                         <p><?php echo "$cicl"."º CICLO" ?></p>
                         <p><?php echo $curs ?></p>
                         <p><?php echo $mail ?></p>

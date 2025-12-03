@@ -30,7 +30,7 @@
                 <a href="php/logout.php" class="stud-link">Desconectar</a>
             </div>
         </div>
-        <div class="stud-ball" style="background-image:url(img/fotos/<?php echo $imge ?>)"></div>
+        <div class="stud-ball" style="background-image: url('img/<?php echo $imge != null ? "fotos/$imge.jpg" : "foto-icon.png"; ?>');"></div>
     </div>
 </div>
 
