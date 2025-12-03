@@ -62,9 +62,10 @@ INSERT INTO `aluno` (`iden_alun`, `regx_user`, `iden_curs`, `cicl_alun`) VALUES
 --
 
 CREATE TABLE `cursando` (
-  `iden_crsn` int(11) NOT NULL,
+  `iden_crsn` int(11) NOT NULL AUTO_INCREMENT,
   `regx_user` char(9) NOT NULL,
   `iden_matr` int(11) NOT NULL,
+  `iden_turm` int(11) NOT NULL,                      
   `ntp1_crsn` decimal(5,2) NOT NULL DEFAULT 0.00,
   `ntp2_crsn` decimal(5,2) NOT NULL DEFAULT 0.00,
   `ntp3_crsn` decimal(5,2) NOT NULL DEFAULT 0.00,
@@ -73,8 +74,10 @@ CREATE TABLE `cursando` (
   `cicl_alun` enum('1','2','3','4','5','6','7','8','9','10') NOT NULL DEFAULT '1',
   `_ano_crsn` char(4) NOT NULL,
   `_sem_crsn` enum('1','2') NOT NULL DEFAULT '1',
-  `situ_crsn` enum('Em Curso','Retido','Aprovado') NOT NULL DEFAULT 'Em Curso'
+  `situ_crsn` enum('Em Curso','Retido','Aprovado') NOT NULL DEFAULT 'Em Curso',
+  PRIMARY KEY (`iden_crsn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Despejando dados para a tabela `cursando`

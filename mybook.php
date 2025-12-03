@@ -9,11 +9,27 @@ if (isset($_SESSION['ativ'])) {
     include('html/base.php');
 
     $cicl = isset($cicl) ? (int)$cicl : 1; // ciclo padrão
-    $rmat = isset($rmat) ? mysqli_real_escape_string($conn, $rmat) : '';
-
-    // Seleção do ciclo
     $tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
+    $rmat_raw = isset($_SESSION['ativ']) ? $_SESSION['ativ'] : '';
+    $rmat = '';
+
+    if ($rmat_raw !== '') {
+        $safe = mysqli_real_escape_string($conn, $rmat_raw);
+
+        $q = "SELECT regx_user 
+              FROM usuario 
+              WHERE regx_user = '$safe' OR codg_user = '$safe'
+              LIMIT 1";
+
+        $r = mysqli_query($conn, $q);
+        if ($r && mysqli_num_rows($r) > 0) {
+            $rowu = mysqli_fetch_assoc($r);
+            $rmat = $rowu['regx_user']; 
+        }
+    }
 ?>
+
+
 <div class="container fanimate">
     <form id="studbook" class="box interface" method="GET" action="mybook.php">
         <input id="cicl" name="cicl" hidden readonly value="<?php echo $tick; ?>">
