@@ -54,6 +54,7 @@ if (isset($_SESSION['ativ'])) {
         $fone = $b['fone_user'];
         $iden = $b['iden_user'];
         $pass = $b['senh_user'];
+        $regx = $b['regx_user'];
 
         // Só busca dados extras se for aluno (curso e ciclo)
         if ($flag == 'A') {

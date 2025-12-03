@@ -64,7 +64,7 @@
                         <!-- seção: institucional -->
                         <h1 class="update-group" style="margin-top:0">Institucional</h1>
                         <label class="update-label">RA</label>
-                        <input class="update-input" type="text" value="<?php echo $rmat ?>" disabled>
+                        <input class="update-input" type="text" value="<?php echo $regx ?>" disabled>
 
                         <label class="update-label">Curso</label>
                         <input class="update-input" type="text" value="<?php echo $curs ?>" disabled>
