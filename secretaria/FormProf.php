@@ -30,65 +30,66 @@ $conn->close();
 
         <div class="conjunto">
             
-        <div class="esquerdo">
-            <div class="inputsProfessor">
-                <label style="position: relative; top: 8px;">Nome completo:</label>
-                <input type="text" name="nome" placeholder="Nome completo" value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
-                <input type="email" name="email" placeholder="E-mail será gerado automaticamente" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required readonly>
-                <label style="position: relative; top: 8px;">Senha:</label>
-                <input type="password" name="senha" placeholder="Senha" required>
-                <label style="position: relative; top: 8px;">CPF:</label>
-                <input type="text" name="cpf" placeholder="CPF (ex: 000.000.000-00)" value="<?= htmlspecialchars($_POST['cpf'] ?? '') ?>" required>
-                <label style="position: relative; top: 8px;">Telefone:</label>
-                <input type="text" name="telefone" placeholder="Telefone (ex: (11) 91234-5678)" value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>">
+            <div class="esquerdo">
+                <div class="inputsProfessor">
+                    <label style="position: relative; top: 8px;">Nome completo:</label>
+                    <input type="text" name="nome" placeholder="Nome completo" value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
+                    <input type="email" name="email" placeholder="E-mail será gerado automaticamente" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required readonly>
+                    <label style="position: relative; top: 8px;">Senha:</label>
+                    <input type="password" name="senha" placeholder="Senha" required>
+                    <label style="position: relative; top: 8px;">CPF:</label>
+                    <input type="text" name="cpf" placeholder="CPF (ex: 000.000.000-00)" value="<?= htmlspecialchars($_POST['cpf'] ?? '') ?>" required>
+                    <label style="position: relative; top: 8px;">Telefone:</label>
+                    <input type="text" name="telefone" placeholder="Telefone (ex: (11) 91234-5678)" value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>">
+                </div>
+                
+                <!-- Seleção de curso -->
+                <div class="curso-container">
+                    <select name="curso" id="curso" required onchange="carregarMaterias(this.value); carregarTurmas(this.value);">
+                        <option value="">Selecione um curso</option>
+                        <?php foreach ($cursos as $curso): ?>
+                            <option value="<?= $curso['iden_curs'] ?>" <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <!-- Aqui podem ir outros campos do lado esquerdo -->
+
             </div>
             
-            <!-- Seleção de curso -->
-            <div class="curso-container">
-                <select name="curso" id="curso" required onchange="carregarMaterias(this.value); carregarTurmas(this.value);">
-                    <option value="">Selecione um curso</option>
-                    <?php foreach ($cursos as $curso): ?>
-                        <option value="<?= $curso['iden_curs'] ?>" <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+            <input type="hidden" name="tipo" value="P">
 
-            <!-- Aqui podem ir outros campos do lado esquerdo -->
+            <div class="direito">
+                <!-- Matérias (já existente, sem alteração) -->
+                <div class="materias-container" id="materiasContainer">
+                    <div class="materias-header">
+                        <h3>Matérias do Curso</h3>
+                        <p>Selecione um curso para carregar as matérias</p>
+                    </div>
+                    <div class="materias-grid" id="materiasGrid">
+                        <!-- As matérias serão carregadas aqui via JavaScript -->
+                    </div>
+                    <div class="materias-actions">
+                        <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasMaterias()">Selecionar Todas</button>
+                        <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasMaterias()">Deselecionar Todas</button>
+                    </div>
+                </div>
 
-        </div>
-        
-        <input type="hidden" name="tipo" value="P">
-
-        <div class="direito">
-            <!-- Matérias (já existente, sem alteração) -->
-            <div class="materias-container" id="materiasContainer">
-                <div class="materias-header">
-                    <h3>Matérias do Curso</h3>
-                    <p>Selecione um curso para carregar as matérias</p>
-                </div>
-                <div class="materias-grid" id="materiasGrid">
-                    <!-- As matérias serão carregadas aqui via JavaScript -->
-                </div>
-                <div class="materias-actions">
-                    <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasMaterias()">Selecionar Todas</button>
-                    <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasMaterias()">Deselecionar Todas</button>
-                </div>
-            </div>
-
-            <!-- Turmas (nova área com checkboxes) -->
-            <div class="materias-container" id="turmasContainer" style="margin-top:18px;">
-                <div class="materias-header">
-                    <h3>Turmas do Curso</h3>
-                    <p>Selecione uma ou mais turmas para este professor</p>
-                </div>
-                <div class="materias-grid" id="turmasGrid">
-                    <!-- As turmas serão carregadas aqui via JavaScript -->
-                </div>
-                <div class="materias-actions">
-                    <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasTurmas()">Selecionar Todas</button>
-                    <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasTurmas()">Deselecionar Todas</button>
+                <!-- Turmas (nova área com checkboxes) -->
+                <div class="materias-container" id="turmasContainer" style="margin-top:18px;">
+                    <div class="materias-header">
+                        <h3>Turmas do Curso</h3>
+                        <p>Selecione uma ou mais turmas para este professor</p>
+                    </div>
+                    <div class="materias-grid" id="turmasGrid">
+                        <!-- As turmas serão carregadas aqui via JavaScript -->
+                    </div>
+                    <div class="materias-actions">
+                        <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasTurmas()">Selecionar Todas</button>
+                        <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasTurmas()">Deselecionar Todas</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    margin: 200px 0;
 }
 
 .FormCadastroSec {
@@ -184,7 +184,7 @@ button {
     align-items: flex-start;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
 }
 
 #formProfessor{

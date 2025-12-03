@@ -257,6 +257,15 @@
   body {
     padding-bottom: 130px !important;
   }
+
+  .conjunto{
+    flex-direction:column !important;
+  }
+  #conteudo-dinamico{
+    max-width: fit-content;
+    max-height: 720px !important;
+    overflow-y: scroll;
+  }
 } 
     
 @media screen and (max-width:1350px) { 
