@@ -13,7 +13,7 @@
         <div class="rowalign">
             <a class="topbar-link" href="courses.php">CURSOS</a>
             <a class="topbar-link" href="material.php">MATERIAIS</a>
-            <a class="topbar-link" href="projects.php">PROJETOS</a>
+            <a class="topbar-link" href="projects.php" style="display: none;">PROJETOS</a>
         </div>
         <hr class="topbar-hr">
     </div>
