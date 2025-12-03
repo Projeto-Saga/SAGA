@@ -191,7 +191,6 @@
     }
 
 
-
     /* cartão em layout de linha (imagem à esquerda, texto à direita) */
     .student-card {
         width: calc(100% - 20px);
@@ -235,6 +234,29 @@
         word-break: break-word !important; /* quebra palavras grandes */
         padding: 3px;
     }
+
+
+    .discip-box { width:100%; box-sizing:border-box; }
+
+    
+  .salvar-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 78px; /* ANTES estava 18px - AGORA sobe acima da barra inferior */
+    z-index: 9999;
+    width: auto;
+  }
+
+  .btn-salvar {
+    padding: 14px 40px;
+    border-radius: 28px;
+  }
+
+  /* garante espaço na página para não ficar escondido atrás do botão fixo */
+  body {
+    padding-bottom: 130px !important;
+  }
 } 
     
 @media screen and (max-width:1350px) { 

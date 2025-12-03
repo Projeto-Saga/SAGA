@@ -145,10 +145,6 @@ $tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
                 <p class="value"><?= $materiaSelecionada ? count($alunos) : '—' ?></p>
             </div>
 
-            <div class="discip-box">
-                <p class="title">Ciclo</p>
-                <p class="value"><?= htmlspecialchars($tick) ?></p>
-            </div>
 
             <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
                 <select name="materia" required style="padding:8px;border-radius:6px;border:1px solid #ddd;">
@@ -200,7 +196,6 @@ $tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
                         <tr>
                             <th>Aluno</th>
                             <th>RA</th>
-                            <th>Faltas</th>
                             <th style="text-align:center">Presente?</th>
                         </tr>
                     </thead>
@@ -212,8 +207,6 @@ $tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
                                 <tr>
                                     <td><span class="circle"></span> <?= htmlspecialchars($al['nome_user']) ?></td>
                                     <td><?= htmlspecialchars($al['regx_user']) ?></td>
-                                    <!-- MÉDIA e FALTAS: não disponíveis nesta query — deixar em branco ou preencher via JOIN -->
-                                    <td class="muted">—</td>
                                     <td style="text-align:center">
                                         <input type="checkbox" name="presenca[<?= htmlspecialchars($al['regx_user']) ?>]" value="P" checked>
                                     </td>
