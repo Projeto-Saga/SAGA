@@ -2,7 +2,17 @@
 <html>
 <head>
     <?php include('html/head.php'); ?>
-    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .welcome-msg{
+    width: fit-content;
+}
+
+.welcome-msg:not(.dark-mode){
+    color:#111 !important;
+    background-color: #fff !important;
+}
+    </style>
 </head>
 <body>
 <?php

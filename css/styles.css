@@ -147,7 +147,7 @@ label
 .topbar
 {
     position:fixed;
-    top:0; left:100px;
+    top:0; 
     align-items:center;
     width:100%;
     height:100px;
@@ -582,15 +582,6 @@ img
 {
     height:50px;
     width:50px;
-}
-
-.welcome-msg{
-    width: fit-content;
-}
-
-.welcome-msg:not(.dark-mode){
-    color:#111 !important;
-    background-color: #fff !important;
 }
 
 /* animações */
