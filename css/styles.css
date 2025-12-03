@@ -584,6 +584,15 @@ img
     width:50px;
 }
 
+.welcome-msg{
+    width: fit-content;
+}
+
+.welcome-msg:not(.dark-mode){
+    color:#111 !important;
+    background-color: #fff !important;
+}
+
 /* animações */
 @keyframes fanimate
 {

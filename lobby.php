@@ -2,6 +2,7 @@
 <html>
 <head>
     <?php include('html/head.php'); ?>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <?php

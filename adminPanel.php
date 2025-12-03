@@ -104,7 +104,7 @@ $conn->close();
         <div class="cards-principais" <?= $formularioAtivo ? 'style="display: none;"' : '' ?>>
             <div class="card" onclick="mostrarSubcards('usuario')">Cadastrar Usuário</div>
             <div class="card" onclick="mostrarSubcards('cursos')">Cadastrar Cursos e Matérias</div>
-            <div class="card" onclick="abrirFormulario('calendario')">Editar Calendário</div>
+           <!-- <div class="card" onclick="abrirFormulario('calendario')">Editar Calendário</div> -->
         </div>
 
         <!-- Subcards de usuário -->
@@ -148,7 +148,7 @@ $conn->close();
                         include 'secretaria/FormTurma.php';
                         break;
                     case 'calendario':
-                        include 'secretaria/FormCalendario.php';
+                       // include 'secretaria/FormCalendario.php';
                         break;
                     default:
                         echo "<p>Formulário não encontrado.</p>";
