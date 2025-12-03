@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) === 0) {
         <div class="livrsect">
             <?php while ($a = mysqli_fetch_assoc($result)) { ?>
                 <a class="row livrbody" href="courses.php?idcs=<?php echo $a['idcs_csrl']; ?>">
-                    <img class="livrimge" src="img/fotos/<?php echo $a['capa_csrl']; ?>.jpg" style="height:190px; width:190px">
+                    <img class="livrimge" src="img/fotos/capa_csrl.jpg" style="height:190px; width:190px">
                     <div class="col" style="height:190px; justify-content:start">
                         <h3 class="livrtitl"><?php echo $a['nome_csrl']; ?></h3>
                         <h6 class="livrauth"><?php echo $a['dura_csrl']; ?> horas</h6>
