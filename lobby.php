@@ -6,6 +6,8 @@
     <style>
         .welcome-msg{
     width: fit-content;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 .welcome-msg:not(.dark-mode){
