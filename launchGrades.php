@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "php/connect.php"; // garante que $conn esteja disponível
+include_once "php/connect.php";
 
 // --- Verificar se professor está logado ---
 if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== "P") {
@@ -11,7 +11,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== "P") {
 // $_SESSION['ativ'] guarda o CPF (codg_user) conforme seu sistema
 $cpf = $_SESSION['ativ'];
 
-// Buscar regx_user do professor (mesma lógica do launchAttendance)
+// Buscar regx_user do professor
 $stmt = mysqli_prepare($conn, "SELECT regx_user FROM usuario WHERE codg_user = ? LIMIT 1");
 mysqli_stmt_bind_param($stmt, "s", $cpf);
 mysqli_stmt_execute($stmt);
@@ -92,86 +92,80 @@ if ($turmaSelecionada && $materiaSelecionada) {
     }
     mysqli_stmt_close($stmt);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include("html/head.php"); ?>
-    <meta charset="utf-8">
+    <?php include('html/head.php'); ?>
+
     <title>Lançamento de Notas</title>
-    <style>
-        body { padding: 20px; font-family: Arial, sans-serif; }
-        select, input { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
-        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-        button { padding: 10px 20px; margin-top: 20px; }
-        .col-50 { max-width: 600px; }
-    </style>
+    <link rel="stylesheet" href="css/notasFaltasProf.css">
 </head>
 <body>
+    <?php include('html/base.php'); ?>
+    
+    <div class="content-wrapper">
+        <h2>Lançamento de Notas</h2>
 
-<h2>Lançamento de Notas</h2>
+        <!-- Seleção da Turma -->
+        <form method="GET" class="col-50">
+            <label>Selecione a Turma:</label>
+            <select name="turma" onchange="this.form.submit()">
+                <option value="">-- Escolha --</option>
+                <?php foreach ($turmas as $t): ?>
+                    <option value="<?= $t['iden_turm'] ?>"
+                        <?= (isset($_GET['turma']) && $_GET['turma'] == $t['iden_turm']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($t['nome_turm']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
 
-<!-- Seleção da Turma -->
-<form method="GET" class="col-50">
-    <label>Selecione a Turma:</label>
-    <select name="turma" onchange="this.form.submit()">
-        <option value="">-- Escolha --</option>
-        <?php foreach ($turmas as $t): ?>
-            <option value="<?= $t['iden_turm'] ?>"
-                <?= (isset($_GET['turma']) && $_GET['turma'] == $t['iden_turm']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($t['nome_turm']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
+        <?php if (!empty($materias)) : ?>
+        <form method="GET" class="col-50">
+            <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
 
-<?php if (!empty($materias)) : ?>
-<form method="GET" class="col-50">
-    <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
+            <label>Selecione a Matéria:</label>
+            <select name="materia" onchange="this.form.submit()">
+                <option value="">-- Escolha --</option>
+                <?php foreach ($materias as $m): ?>
+                    <option value="<?= $m['iden_matr'] ?>"
+                        <?= (isset($_GET['materia']) && $_GET['materia'] == $m['iden_matr']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($m['abrv_matr']) ?> - <?= htmlspecialchars($m['nome_matr']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+        <?php endif; ?>
 
-    <label>Selecione a Matéria:</label>
-    <select name="materia" onchange="this.form.submit()">
-        <option value="">-- Escolha --</option>
-        <?php foreach ($materias as $m): ?>
-            <option value="<?= $m['iden_matr'] ?>"
-                <?= (isset($_GET['materia']) && $_GET['materia'] == $m['iden_matr']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($m['abrv_matr']) ?> - <?= htmlspecialchars($m['nome_matr']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
-<?php endif; ?>
+        <?php if (!empty($alunos)) : ?>
+        <form method="POST" action="saveGrades.php">
+            <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
+            <input type="hidden" name="materia" value="<?= $materiaSelecionada ?>">
 
-<?php if (!empty($alunos)) : ?>
-<form method="POST" action="saveGrades.php">
-    <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
-    <input type="hidden" name="materia" value="<?= $materiaSelecionada ?>">
+            <table>
+                <tr>
+                    <th>Aluno</th>
+                    <th>P1</th>
+                    <th>P2</th>
+                    <th>P3</th>
+                    <th>Trabalho</th>
+                </tr>
 
-    <table>
-        <tr>
-            <th>Aluno</th>
-            <th>P1</th>
-            <th>P2</th>
-            <th>P3</th>
-            <th>Trabalho</th>
-        </tr>
+                <?php foreach ($alunos as $a): ?>
+                    <tr>
+                        <td style="text-align:left;"><?= htmlspecialchars($a['nome_user']) ?></td>
+                        <td><input type="number" name="p1[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
+                        <td><input type="number" name="p2[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
+                        <td><input type="number" name="p3[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
+                        <td><input type="number" name="trab[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
 
-        <?php foreach ($alunos as $a): ?>
-            <tr>
-                <td style="text-align:left;"><?= htmlspecialchars($a['nome_user']) ?></td>
-                <td><input type="number" name="p1[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
-                <td><input type="number" name="p2[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
-                <td><input type="number" name="p3[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
-                <td><input type="number" name="trab[<?= $a['regx_user'] ?>]" min="0" max="10" step="0.1"></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
-    <button type="submit">Salvar Notas</button>
-</form>
-<?php endif; ?>
-
+            <button type="submit">Salvar Notas</button>
+        </form>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

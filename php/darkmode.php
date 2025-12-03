@@ -5,7 +5,7 @@
                       ".mainlabl", "footer", "footer div", ".maininpt", ".reqs-docs", "h1", "article div", "article div p",
                       ".FormCadastroSec > input", ".FormCadastroSec", "select", "p", ".container_AdminPainel",".subcards", 
                       ".FormCadastroSec > div > input", ".sidebar", "input", ".direito",".direito > .materias-container", ".materias-header",
-                      ".materias-header > h3", ".materias-grid", ".materia-item" ];
+                      ".materias-header > h3", ".materias-grid", ".materia-item", ".content-wrapper", ".discip-info", ".discip-box" ];
 
     function darkmode()
     {

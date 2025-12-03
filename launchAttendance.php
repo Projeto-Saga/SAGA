@@ -119,29 +119,10 @@ $tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include('html/head.php'); /* seu head já importa CSS/JS */ ?>
+    <?php include('html/head.php'); ?>
     <meta charset="utf-8">
     <title>SAGA — Lançar Faltas</title>
-    <style>
-        /* ajustes locais mínimos caso algum estilo falte */
-        .container.fanimate{max-width:1150px;margin:48px auto;padding: 80px 0 0 0}
-        .box.interface{background:transparent}
-        .discip-info{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
-        .discip-box{background:#fff;padding:12px;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.06);min-width:150px}
-        .title{font-size:12px;color:#b3323a;margin:0}
-        .value{font-weight:700;margin-top:6px}
-        .alunos-tabela{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden}
-        .alunos-tabela thead th{background:#f6f6f6;padding:14px;text-align:left;color:#b3323a;font-weight:700}
-        .alunos-tabela td{padding:12px;border-bottom:1px solid #f0f0f0}
-        .circle{width:14px;height:14px;border-radius:50%;background:#e6e6e6;display:inline-block;margin-right:12px;vertical-align:middle}
-        .salvar-container{text-align:center;margin-top:28px}
-        .btn-salvar{background:#c81e23;color:#fff;padding:12px 36px;border-radius:24px;border:0;cursor:pointer;font-weight:700}
-        .info-row{display:flex;gap:12px;align-items:center}
-        .muted{color:#666;font-size:13px}
-        @media (max-width:900px){
-            .discip-info{flex-direction:column}
-        }
-    </style>
+    <link rel="stylesheet" href="css/notasFaltasProf.css">
 </head>
 <body>
 <?php include('html/base.php'); ?>

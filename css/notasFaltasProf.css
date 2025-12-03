@@ -1,0 +1,142 @@
+body { 
+    display: flex;
+    padding: 20px; 
+    font-family: Arial, sans-serif; 
+}
+
+select, input { 
+    padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; 
+}
+
+table { 
+    width: 100%; margin-top: 20px; border-collapse: collapse; 
+}
+
+th, td { 
+    padding: 10px; border: 1px solid #ccc; text-align: center; 
+}
+
+button { 
+    padding: 10px 20px; margin-top: 20px; 
+}
+        
+.col-50 { 
+    max-width: 600px; 
+}
+        
+.content-wrapper {
+    display: flex;
+    padding: 20px;
+    margin-top: 150px;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.content-wrapper:not(.dark-mode) {
+    background-color: #fff;
+}
+
+.container.fanimate{
+    max-width:1150px;
+    margin:48px auto;
+    padding: 80px 0 0 0;
+}
+
+.box.interface{
+    background:transparent;
+}
+
+.discip-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:18px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.discip-info:not(.dark-mode) {
+    background-color: #fff;
+}
+
+.discip-box{
+    padding:12px;
+    border-radius:6px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.06);
+    min-width:150px;
+    border: 2px solid #666;
+}
+
+.title{
+    font-size:12px;
+    color:#b3323a;
+    margin:0;
+}
+
+.value{
+    font-weight:700;
+    margin-top:6px;
+}
+
+.alunos-tabela{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.alunos-tabela thead th{
+    background:#f6f6f6;
+    padding:14px;
+    text-align:left;
+    color:#b3323a;
+    font-weight:700;
+}
+
+.alunos-tabela td{
+    padding:12px;
+    border-bottom:1px solid #f0f0f0;
+}
+
+.circle{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#e6e6e6;
+    display:inline-block;
+    margin-right:12px;
+    vertical-align:middle;
+}
+
+.salvar-container{
+    text-align:center;
+    margin-top:28px;
+}
+
+.btn-salvar{
+    background:#c81e23;
+    color:#fff;
+    padding:12px 36px;
+    border-radius:24px;
+    border:0;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.info-row{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.muted{
+    color:#666;
+    font-size:13px;
+}
+
+@media (max-width:900px){
+    .discip-info{
+        flex-direction:column;
+    }
+}
