@@ -224,6 +224,17 @@
         right: 12px;
     }
 
+    
+    #form_6 .table-container table {
+        font-size: 11px;
+    }
+
+    #form_6 .table-container table td,
+    #form_6 .table-container table th {
+        white-space: normal !important;   /* permite quebra de linha */
+        word-break: break-word !important; /* quebra palavras grandes */
+        padding: 3px;
+    }
 } 
     
 @media screen and (max-width:1350px) { 
