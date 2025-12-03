@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Commit da transação
         $conn->commit();
-        $mensagem = "Matéria cadastrada com sucesso! ID: ";
+        $mensagem = "Matéria cadastrada com sucesso!";
 
     } catch (Exception $e) {
         // Rollback em caso de erro

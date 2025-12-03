@@ -13,10 +13,6 @@ $cursos = $conn->query("
 
     <h1>Cadastrar Turma</h1>
 
-    <?php if (!empty($mensagem)): ?>
-        <p class="mensagem"><?= $mensagem ?></p>
-    <?php endif; ?>
-
     <form method="POST" action="?form=turma" class="FormCadastroSec">
 
         <!-- Nome da Turma -->
@@ -57,6 +53,28 @@ $cursos = $conn->query("
     </form>
 </div>
 
+<?php if (isset($mensagem) && $mensagem): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+            // Detectar tipo de mensagem
+            if (strpos($mensagem, 'sucesso') !== false) {
+                echo "Popup.success('" . addslashes($mensagem) . "');";
+                echo "document.querySelector('input[name=\"nome\"]').value = '';";
+                echo "document.querySelector('input[name=\"email\"]').value = '';";
+                echo "document.querySelector('input[name=\"senha\"]').value = '';";
+                echo "document.querySelector('input[name=\"cpf\"]').value = '';";
+                echo "document.querySelector('input[name=\"telefone\"]').value = '';";
+                echo "document.querySelector('select[name=\"curso\"]').value = '';";
+            } else if (strpos($mensagem, 'ERRO') !== false || strpos($mensagem, 'erro') !== false) {
+                echo "Popup.error('" . addslashes($mensagem) . "');";
+            } else {
+                echo "Popup.info('" . addslashes($mensagem) . "');";
+            }
+            ?>
+        });
+    </script>
+<?php endif; ?>
 
 <script>
 /* ----------- Gerar nome automaticamente ----------- */
