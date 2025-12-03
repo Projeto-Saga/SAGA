@@ -98,7 +98,7 @@ $conn->close();
 
         <div class="Div_BtnCadastros">
             <button type="submit" class="BtnCadastrar_Sec">Cadastrar Professor</button>
-            <button type="button" class="BtnVoltar" onclick="voltarAoPainel()">Voltar ao Painel</button>
+            <button type="button" class="BtnVoltar" onclick="voltarAoPainel()" style="margin-bottom:10px;">Voltar ao Painel</button>
         </div>
     
     </form>
