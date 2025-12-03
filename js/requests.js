@@ -1,7 +1,8 @@
+console.log("requests.js carregado com sucesso!");
 // trocar de aba
 function form(iden)
 {
-    for (var i = 0; i <= 6; i++)
+    for (var i = 1; i <= 6; i++)
     {
         $(`#form_${i}`).addClass("stud-hidden");
     }

@@ -10,6 +10,27 @@
             include('html/base.php');
         ?>
 
+        <?php
+        // recuperar usuário logado
+        $rmat = '';
+        if (!empty($_SESSION['ativ'])) {
+
+            $safe = mysqli_real_escape_string($conn, $_SESSION['ativ']);
+
+            // tenta mapear sempre para regx_user
+            $q = "SELECT regx_user FROM usuario 
+                WHERE regx_user='$safe' OR codg_user='$safe'
+                LIMIT 1";
+
+            $r = mysqli_query($conn, $q);
+
+            if ($r && mysqli_num_rows($r) > 0) {
+                $usr = mysqli_fetch_assoc($r);
+                $rmat = $usr['regx_user'];
+            }
+        }
+        ?>
+
         <div class="container fanimate">
             <div class="box">
                 <!-- índice de abas -->
@@ -192,34 +213,58 @@
                                 <th class="reqs-form-form-th">SITUAÇÃO</th>
                             </tr>
                             <?php
-                            $cmd2 = "SELECT matr.nome_matr,crsn.ntp1_crsn,crsn.ntp2_crsn,crsn.ntp3_crsn,crsn.nttt_crsn,
-                                            crsn.falt_crsn,matr.chor_matr,crsn._ano_crsn,crsn._sem_crsn,crsn.situ_crsn
-                                    FROM cursando AS crsn INNER JOIN materia AS matr ON crsn.iden_matr=matr.iden_matr
-                                    WHERE crsn.regx_user='$rmat' AND crsn.situ_crsn!='Em Curso'
-                                    ORDER BY cicl_alun, dias_matr, hora_matr ASC";
-                            $rst2 = mysqli_query($conn, $cmd2);
-                            
-                            while ($b = mysqli_fetch_array($rst2))
-                            {
+                    // form_6 — histórico escolar
+                    if (!empty($rmat)) {
+
+                        $cmd2 = "
+                            SELECT matr.nome_matr,
+                                crsn.ntp1_crsn, crsn.ntp2_crsn, crsn.ntp3_crsn, crsn.nttt_crsn,
+                                crsn.falt_crsn, matr.chor_matr, crsn._ano_crsn, crsn._sem_crsn,
+                                crsn.situ_crsn, crsn.cicl_alun
+                            FROM cursando AS crsn
+                            INNER JOIN materia AS matr ON crsn.iden_matr = matr.iden_matr
+                            WHERE crsn.regx_user = '" . mysqli_real_escape_string($conn, $rmat) . "'
+                            AND LOWER(crsn.situ_crsn) != 'em curso'
+                            ORDER BY crsn.cicl_alun, crsn._ano_crsn, crsn._sem_crsn, matr.dias_matr, matr.hora_matr
+                        ";
+
+                        $rst2 = mysqli_query($conn, $cmd2);
+
+                        if ($rst2 && mysqli_num_rows($rst2) > 0) {
+
+                            while ($b = mysqli_fetch_array($rst2)) {
+
                                 $media = number_format($b[1]*0.35 + $b[2]*0.4 + $b[4]*0.25, 2, '.', '');
-                                
-                                $media < 6 ? $media = number_format($media + $b[3]*0.35, 2, '.', '') : null;
-                                
+                                if ($media < 6) $media = number_format($media + $b[3]*0.35, 2, '.', '');
+
                                 $freqs = (($b[6] - $b[5]) / $b[6]) * 100;
-                                
-                                $clr1  = $media < 6  ? 'red' : 'green';
-                                $clr2  = $freqs < 75 ? 'red' : 'green';
-                                $clr3  = $b[9] == 'Retido' ? 'red' : 'green';
-                            
-                            echo "<tr>
-                                <td class=\"reqs-form-form-td\">$b[0]</td>
-                                <td class=\"reqs-form-form-td\" style=\"color:$clr1\">$media</td>
-                                <td class=\"reqs-form-form-td\" style=\"color:$clr2\">$freqs%</td>
-                                <td class=\"reqs-form-form-td\">$b[7]-$b[8]</td>
-                                <td class=\"reqs-form-form-td\" style=\"color:$clr3\">$b[9]</td>
-                            </tr>";
+
+                                $clr1 = $media < 6 ? 'red' : 'green';
+                                $clr2 = $freqs < 75 ? 'red' : 'green';
+                                $clr3 = strtolower($b[9]) == 'retido' ? 'red' : 'green';
+
+                                echo "<tr>
+                                    <td class='reqs-form-form-td'>{$b[0]}</td>
+                                    <td class='reqs-form-form-td' style='color:$clr1'>$media</td>
+                                    <td class='reqs-form-form-td' style='color:$clr2'>".round($freqs,2)."%</td>
+                                    <td class='reqs-form-form-td'>{$b[7]}-{$b[8]}</td>
+                                    <td class='reqs-form-form-td' style='color:$clr3'>{$b[9]}</td>
+                                </tr>";
                             }
-                            ?>
+
+                        } else {
+                            echo "<tr><td colspan='5' style='text-align:center;padding:20px;'>
+                                    Nenhuma disciplina finalizada encontrada.
+                                </td></tr>";
+                        }
+
+                    } else {
+                        echo "<tr><td colspan='5' style='text-align:center;padding:20px;'>
+                                Usuário não identificado.
+                            </td></tr>";
+                    }
+                    ?>
+
                         </table>
                     </div>
                </div>
