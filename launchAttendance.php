@@ -1,187 +1,255 @@
 <?php
+// launchAttendance.php - Backend integrado + layout conforme imagens
 session_start();
-include_once "php/connect.php";
+include_once "php/connect.php"; // ajuste o caminho se necessário
 
-// --- Verificar se professor está logado ---
+// validações de sessão / professor
 if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== "P") {
-    echo "Acesso negado.";
+    // caso prefira redirecionar: header('Location: index.php'); exit;
+    echo "<p style='color:red;margin:18px;'>Erro: apenas professores podem acessar esta página.</p>";
+    exit;
+}
+if (!isset($_SESSION['ativ']) || empty($_SESSION['ativ'])) {
+    echo "<p style='color:red;margin:18px;'>Erro: sessão inválida (faltando CPF).</p>";
     exit;
 }
 
+// pega regx_user do professor
 $cpf = $_SESSION['ativ'];
-
-// Buscar regx_user do professor
-$stmt = mysqli_prepare($conn, "SELECT regx_user FROM usuario WHERE codg_user = ? LIMIT 1");
-mysqli_stmt_bind_param($stmt, "s", $cpf);
-mysqli_stmt_execute($stmt);
-$res = mysqli_stmt_get_result($stmt);
-$professor = mysqli_fetch_assoc($res)['regx_user'];
-mysqli_stmt_close($stmt);
-
-// ---------------------
-// 1. BUSCAR TURMAS DO PROFESSOR
-// ---------------------
-$sqlTurmas = "
-    SELECT DISTINCT t.iden_turm, t.nome_turm
-    FROM turma t
-    INNER JOIN turma_materia tm ON tm.iden_turm = t.iden_turm
-    WHERE tm.regx_prof = ?
-    ORDER BY t.nome_turm
-";
-$stmt = mysqli_prepare($conn, $sqlTurmas);
-mysqli_stmt_bind_param($stmt, "s", $professor);
-mysqli_stmt_execute($stmt);
-$resTurmas = mysqli_stmt_get_result($stmt);
-
-$turmas = [];
-while ($row = mysqli_fetch_assoc($resTurmas)) {
-    $turmas[] = $row;
-}
-mysqli_stmt_close($stmt);
-
-// Obter turma selecionada
-$turmaSelecionada = isset($_GET['turma']) ? intval($_GET['turma']) : null;
-
-// ---------------------
-// 2. BUSCAR MATÉRIAS DESSA TURMA QUE SÃO DESSE PROFESSOR
-// ---------------------
-$materias = [];
-if ($turmaSelecionada) {
-    $sqlMat = "
-        SELECT tm.iden_turm_matr, m.iden_matr, m.nome_matr, m.abrv_matr, m.dias_matr
-        FROM turma_materia tm
-        INNER JOIN materia m ON m.iden_matr = tm.iden_matr
-        WHERE tm.iden_turm = ? AND tm.regx_prof = ?
-    ";
-    $stmt = mysqli_prepare($conn, $sqlMat);
-    mysqli_stmt_bind_param($stmt, "is", $turmaSelecionada, $professor);
+$professor = null;
+if ($stmt = mysqli_prepare($conn, "SELECT regx_user FROM usuario WHERE codg_user = ? LIMIT 1")) {
+    mysqli_stmt_bind_param($stmt, "s", $cpf);
     mysqli_stmt_execute($stmt);
-    $resMat = mysqli_stmt_get_result($stmt);
-
-    while ($row = mysqli_fetch_assoc($resMat)) {
-        $materias[] = $row;
+    $res = mysqli_stmt_get_result($stmt);
+    if ($row = mysqli_fetch_assoc($res)) {
+        $professor = $row['regx_user'];
     }
+    mysqli_stmt_close($stmt);
+}
+if (!$professor) {
+    echo "<p style='color:red;margin:18px;'>Erro: professor não encontrado no banco.</p>";
+    exit;
+}
 
+// buscar matérias vinculadas ao professor
+$sqlMaterias = "
+    SELECT m.iden_matr, m.nome_matr, m.abrv_matr, m.dias_matr
+    FROM professor_materia pm
+    INNER JOIN materia m ON pm.iden_matr = m.iden_matr
+    WHERE pm.regx_user = ?
+    ORDER BY m.abrv_matr, m.nome_matr
+";
+$resultMaterias = [];
+if ($stmt = mysqli_prepare($conn, $sqlMaterias)) {
+    mysqli_stmt_bind_param($stmt, "s", $professor);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    while ($r = mysqli_fetch_assoc($res)) {
+        $resultMaterias[] = $r;
+    }
     mysqli_stmt_close($stmt);
 }
 
-$materiaSelecionada = isset($_GET['materia']) ? intval($_GET['materia']) : null;
-
-// ---------------------
-// 3. BUSCAR ALUNOS DA TURMA
-// ---------------------
+// tratar seleção de matéria (GET)
+$materiaSelecionada = null;
 $alunos = [];
-if ($turmaSelecionada && $materiaSelecionada) {
-    $sqlAl = "
+$datasValidas = [];
+$diaMateria = null;
+$nomeSelecionada = '';
+$abrvSelecionada = '';
+
+if (isset($_GET['materia']) && $_GET['materia'] !== '') {
+    $materiaSelecionada = intval($_GET['materia']);
+
+    // buscar alunos matriculados nessa matéria
+    $sqlAlunos = "
         SELECT u.regx_user, u.nome_user
-        FROM aluno_turma at
-        INNER JOIN usuario u ON u.regx_user = at.regx_user
-        WHERE at.iden_turm = ?
+        FROM cursando c
+        INNER JOIN usuario u ON c.regx_user = u.regx_user
+        WHERE c.iden_matr = ?
         ORDER BY u.nome_user
     ";
-    $stmt = mysqli_prepare($conn, $sqlAl);
-    mysqli_stmt_bind_param($stmt, "i", $turmaSelecionada);
-    mysqli_stmt_execute($stmt);
-    $resAl = mysqli_stmt_get_result($stmt);
-
-    while ($row = mysqli_fetch_assoc($resAl)) $alunos[] = $row;
-
-    mysqli_stmt_close($stmt);
-}
-
-// ---------------------
-// 4. GERAR DATAS FIXAS DE ACORDO COM A MATÉRIA
-// ---------------------
-$datasValidas = [];
-if ($materiaSelecionada) {
-
-    // pegar o dia da matéria
-    foreach ($materias as $m) {
-        if ($m['iden_matr'] == $materiaSelecionada) {
-            $diaMateria = $m['dias_matr']; // 1..5
+    if ($stmt2 = mysqli_prepare($conn, $sqlAlunos)) {
+        mysqli_stmt_bind_param($stmt2, "i", $materiaSelecionada);
+        mysqli_stmt_execute($stmt2);
+        $res2 = mysqli_stmt_get_result($stmt2);
+        while ($row = mysqli_fetch_assoc($res2)) {
+            $alunos[] = $row;
         }
+        mysqli_stmt_close($stmt2);
     }
 
-    if (!empty($diaMateria)) {
+    // buscar info da matéria (dias_matr, nome e abrv)
+    $sqlDia = "SELECT dias_matr, nome_matr, abrv_matr FROM materia WHERE iden_matr = ? LIMIT 1";
+    if ($stmt3 = mysqli_prepare($conn, $sqlDia)) {
+        mysqli_stmt_bind_param($stmt3, "i", $materiaSelecionada);
+        mysqli_stmt_execute($stmt3);
+        $res3 = mysqli_stmt_get_result($stmt3);
+        if ($r = mysqli_fetch_assoc($res3)) {
+            $diaMateria = isset($r['dias_matr']) ? (int)$r['dias_matr'] : null;
+            $nomeSelecionada = $r['nome_matr'];
+            $abrvSelecionada = $r['abrv_matr'];
+        }
+        mysqli_stmt_close($stmt3);
+    }
+
+    // gerar próximas datas conforme dias_matr (1=seg .. 7=dom)
+    if ($diaMateria >= 1 && $diaMateria <= 7) {
+        $diaPHP = $diaMateria;
         $hoje = new DateTime();
         $count = 0;
-
-        while ($count < 8) {
-            if ($hoje->format('N') == $diaMateria) {
-                $datasValidas[] = $hoje->format('Y-m-d');
+        $i = 0;
+        while ($count < 8 && $i < 60) {
+            $dataTemp = (clone $hoje)->modify("+$i day");
+            if ((int)$dataTemp->format('N') === $diaPHP) {
+                $datasValidas[] = $dataTemp->format('Y-m-d');
                 $count++;
             }
-            $hoje->modify('+1 day');
+            $i++;
         }
     }
 }
+
+// valores front
+$cicl = isset($cicl) ? (int)$cicl : 1;
+$rmat = isset($rmat) ? mysqli_real_escape_string($conn, $rmat) : '';
+$tick = isset($_GET['cicl']) ? (int)$_GET['cicl'] : $cicl;
+
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <?php include('html/head.php'); /* seu head já importa CSS/JS */ ?>
     <meta charset="utf-8">
-    <title>Lançar Presença</title>
+    <title>SAGA — Lançar Faltas</title>
+    <style>
+        /* ajustes locais mínimos caso algum estilo falte */
+        .container.fanimate{max-width:1150px;margin:48px auto;padding: 80px 0 0 0}
+        .box.interface{background:transparent}
+        .discip-info{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+        .discip-box{background:#fff;padding:12px;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.06);min-width:150px}
+        .title{font-size:12px;color:#b3323a;margin:0}
+        .value{font-weight:700;margin-top:6px}
+        .alunos-tabela{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden}
+        .alunos-tabela thead th{background:#f6f6f6;padding:14px;text-align:left;color:#b3323a;font-weight:700}
+        .alunos-tabela td{padding:12px;border-bottom:1px solid #f0f0f0}
+        .circle{width:14px;height:14px;border-radius:50%;background:#e6e6e6;display:inline-block;margin-right:12px;vertical-align:middle}
+        .salvar-container{text-align:center;margin-top:28px}
+        .btn-salvar{background:#c81e23;color:#fff;padding:12px 36px;border-radius:24px;border:0;cursor:pointer;font-weight:700}
+        .info-row{display:flex;gap:12px;align-items:center}
+        .muted{color:#666;font-size:13px}
+        @media (max-width:900px){
+            .discip-info{flex-direction:column}
+        }
+    </style>
 </head>
 <body>
+<?php include('html/base.php'); ?>
 
-<h2>Lançar Presença</h2>
+<div class="container fanimate">
+    <form id="selectMateria" method="GET" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
+        <div class="discip-info">
+            <div class="discip-box">
+                <p class="title">Disciplina</p>
+                <p class="value"><?= $materiaSelecionada ? htmlspecialchars(mb_strtoupper($nomeSelecionada)) : '—' ?></p>
+            </div>
 
-<form method="GET" action="launchAttendance.php">
-    <label>Turma:</label>
-    <select name="turma" onchange="this.form.submit()">
-        <option value="">-- selecione --</option>
-        <?php foreach ($turmas as $t): ?>
-            <option value="<?= $t['iden_turm'] ?>" <?= ($turmaSelecionada==$t['iden_turm'])?'selected':'' ?>>
-                <?= $t['nome_turm'] ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
+            <div class="discip-box">
+                <p class="title">Turma</p>
+                <p class="value"><?= $abrvSelecionada ? htmlspecialchars($abrvSelecionada) : '—' ?></p>
+            </div>
 
-<?php if ($turmaSelecionada): ?>
+            <div class="discip-box">
+                <p class="title">Total de alunos</p>
+                <p class="value"><?= $materiaSelecionada ? count($alunos) : '—' ?></p>
+            </div>
 
-<form method="GET" action="launchAttendance.php">
-    <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
-    <label>Matéria:</label>
-    <select name="materia" onchange="this.form.submit()">
-        <option value="">-- selecione --</option>
-        <?php foreach ($materias as $m): ?>
-            <option value="<?= $m['iden_matr'] ?>" <?= ($materiaSelecionada==$m['iden_matr'])?'selected':'' ?>>
-                <?= $m['abrv_matr']." - ".$m['nome_matr'] ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
+            <div class="discip-box">
+                <p class="title">Ciclo</p>
+                <p class="value"><?= htmlspecialchars($tick) ?></p>
+            </div>
 
-<?php endif; ?>
+            <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+                <select name="materia" required style="padding:8px;border-radius:6px;border:1px solid #ddd;">
+                    <option value="">-- selecione matéria --</option>
+                    <?php foreach ($resultMaterias as $m):
+                        $sel = ($materiaSelecionada !== null && $materiaSelecionada == $m['iden_matr']) ? 'selected' : '';
+                    ?>
+                        <option value="<?= htmlspecialchars($m['iden_matr']) ?>" <?= $sel ?>>
+                            <?= htmlspecialchars($m['abrv_matr'] . " - " . $m['nome_matr']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit" style="padding:9px 12px;border-radius:8px;background:#2d89ef;color:#fff;border:0;cursor:pointer;">Carregar</button>
+            </div>
+        </div>
+    </form>
 
-<?php if ($materiaSelecionada && !empty($alunos)): ?>
+    <!-- tabela de alunos -->
+    <div style="margin-top:8px;">
+        <?php if (!$materiaSelecionada): ?>
+            
 
-<form method="POST" action="saveAttendance.php">
-    <input type="hidden" name="materia" value="<?= $materiaSelecionada ?>">
-    <input type="hidden" name="turma" value="<?= $turmaSelecionada ?>">
+            <div class="salvar-container">
+                <button class="btn-salvar" type="button" onclick="alert('Selecione uma matéria para habilitar salvar')">SALVAR</button>
+            </div>
 
-    <label>Data da aula:</label>
-    <select name="data_aula" required>
-        <?php foreach ($datasValidas as $d): ?>
-            <option value="<?= $d ?>"><?= date("d/m/Y", strtotime($d)) ?></option>
-        <?php endforeach; ?>
-    </select>
+        <?php else: ?>
+            <!-- formulário real para salvar presenças/notas -->
+            <form id="savePresenceForm" method="POST" action="saveAttendance.php">
+                <input type="hidden" name="materia" value="<?= htmlspecialchars($materiaSelecionada) ?>">
+                <input type="hidden" name="cicl" value="<?= htmlspecialchars($tick) ?>">
+                <input type="hidden" name="professor" value="<?= htmlspecialchars($professor) ?>">
 
-    <table border="1" cellpadding="5">
-        <tr><th>Aluno</th><th>Presente?</th></tr>
-        <?php foreach ($alunos as $al): ?>
-        <tr>
-            <td><?= $al['nome_user'] ?></td>
-            <td><input type="checkbox" name="presenca[<?= $al['regx_user'] ?>]" checked></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+                <div style="margin-bottom:12px;">
+                    <?php if (!empty($datasValidas)): ?>
+                        <label class="muted">Data da aula:</label>
+                        <select name="data_aula" required style="margin-left:8px;padding:8px;border-radius:6px;border:1px solid #ddd;">
+                            <?php foreach ($datasValidas as $d): ?>
+                                <option value="<?= $d ?>"><?= date("d/m/Y", strtotime($d)) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <p style="color:#c0392b">Não foi possível determinar as próximas datas da matéria (campo <em>dias_matr</em> incorreto ou ausente).</p>
+                    <?php endif; ?>
+                </div>
 
-    <button type="submit">Salvar Presença</button>
-</form>
+                <table class="alunos-tabela" role="table" aria-label="Lista de alunos">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>RA</th>
+                            <th>Faltas</th>
+                            <th style="text-align:center">Presente?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($alunos)): ?>
+                            <tr><td colspan="5">Nenhum aluno encontrado para a matéria selecionada.</td></tr>
+                        <?php else: ?>
+                            <?php foreach ($alunos as $al): ?>
+                                <tr>
+                                    <td><span class="circle"></span> <?= htmlspecialchars($al['nome_user']) ?></td>
+                                    <td><?= htmlspecialchars($al['regx_user']) ?></td>
+                                    <!-- MÉDIA e FALTAS: não disponíveis nesta query — deixar em branco ou preencher via JOIN -->
+                                    <td class="muted">—</td>
+                                    <td style="text-align:center">
+                                        <input type="checkbox" name="presenca[<?= htmlspecialchars($al['regx_user']) ?>]" value="P" checked>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
 
-<?php endif; ?>
+                <div class="salvar-container">
+                    <button class="btn-salvar" type="submit">SALVAR</button>
+                </div>
+            </form>
+        <?php endif; ?>
+    </div>
+</div>
 
+<script src="js/mybook.js"></script>
 </body>
 </html>
