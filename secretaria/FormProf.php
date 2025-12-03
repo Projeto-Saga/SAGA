@@ -43,34 +43,26 @@ $conn->close();
                 <input type="text" name="telefone" placeholder="Telefone (ex: (11) 91234-5678)" value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>">
             </div>
             
-        <!-- Seleção de curso -->
-        <div class="curso-container">
-            <label>Curso:</label>
-            <select name="curso" id="curso" required onchange="carregarMaterias(this.value); carregarTurmas(this.value);">
-                <option value="">Selecione um curso</option>
-                <?php foreach ($cursos as $curso): ?>
-                    <option value="<?= $curso['iden_curs'] ?>" 
-                        <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
+            <!-- Seleção de curso -->
+            <div class="curso-container">
+                <select name="curso" id="curso" required onchange="carregarMaterias(this.value); carregarTurmas(this.value);">
+                    <option value="">Selecione um curso</option>
+                    <?php foreach ($cursos as $curso): ?>
+                        <option value="<?= $curso['iden_curs'] ?>" <?= (isset($_POST['curso']) && $_POST['curso'] == $curso['iden_curs']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($curso['nome_curs']) ?> (<?= htmlspecialchars($curso['abrv_curs']) ?>)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-        <!-- Seleção de turma -->
-        <div class="turma-container">
-            <label>Turma:</label>
-            <select name="turma" id="turma" required>
-                <option value="">Selecione o curso primeiro...</option>
-            </select>
-        </div>
-
+            <!-- Aqui podem ir outros campos do lado esquerdo -->
 
         </div>
         
         <input type="hidden" name="tipo" value="P">
 
         <div class="direito">
+            <!-- Matérias (já existente, sem alteração) -->
             <div class="materias-container" id="materiasContainer">
                 <div class="materias-header">
                     <h3>Matérias do Curso</h3>
@@ -82,6 +74,21 @@ $conn->close();
                 <div class="materias-actions">
                     <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasMaterias()">Selecionar Todas</button>
                     <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasMaterias()">Deselecionar Todas</button>
+                </div>
+            </div>
+
+            <!-- Turmas (nova área com checkboxes) -->
+            <div class="materias-container" id="turmasContainer" style="margin-top:18px;">
+                <div class="materias-header">
+                    <h3>Turmas do Curso</h3>
+                    <p>Selecione uma ou mais turmas para este professor</p>
+                </div>
+                <div class="materias-grid" id="turmasGrid">
+                    <!-- As turmas serão carregadas aqui via JavaScript -->
+                </div>
+                <div class="materias-actions">
+                    <button type="button" class="btn-selecionar-todas" onclick="selecionarTodasTurmas()">Selecionar Todas</button>
+                    <button type="button" class="btn-deselecionar-todas" onclick="deselecionarTodasTurmas()">Deselecionar Todas</button>
                 </div>
             </div>
         </div>
@@ -109,6 +116,8 @@ $conn->close();
                 echo "document.querySelector('input[name=\"cpf\"]').value = '';";
                 echo "document.querySelector('input[name=\"telefone\"]').value = '';";
                 echo "document.querySelector('select[name=\"curso\"]').value = '';";
+                echo "document.getElementById('materiasGrid').innerHTML = '';";
+                echo "document.getElementById('turmasGrid').innerHTML = '';";
             } else if (strpos($mensagem, 'ERRO') !== false || strpos($mensagem, 'erro') !== false) {
                 echo "Popup.error('" . addslashes($mensagem) . "');";
             } else {
@@ -149,73 +158,105 @@ document.querySelector('input[name="telefone"]').addEventListener('input', funct
     e.target.value = value;
 });
 
-// Função para carregar matérias do curso selecionado
-// Função para carregar matérias do curso selecionado
+// ---------- MATÉRIAS (já implementado) ----------
 function carregarMaterias(cursoId) {
-    const materiasContainer = document.getElementById('materiasContainer');
     const materiasGrid = document.getElementById('materiasGrid');
-    
+    materiasGrid.innerHTML = '<div class="loading">Carregando matérias...</div>';
     if (!cursoId) {
-        materiasContainer.style.display = 'none';
         materiasGrid.innerHTML = '';
         return;
     }
-    
-    // Mostrar loading
-    materiasContainer.style.display = 'block';
-    materiasGrid.innerHTML = '<div class="loading">Carregando matérias...</div>';
-    
+
     fetch('buscarMateriasCurso.php?curso_id=' + cursoId)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na requisição: ' + response.status);
-            }
-            return response.json();
-        })
+        .then(r => r.json())
         .then(data => {
-            if (data.success) {
-                if (data.materias.length > 0) {
-                    materiasGrid.innerHTML = '';
-                    data.materias.forEach(materia => {
-                        const materiaItem = document.createElement('div');
-                        materiaItem.className = 'materia-item';
-                        materiaItem.innerHTML = `
-                            <input type="checkbox" name="materias[]" value="${materia.iden_matr}" id="materia_${materia.iden_matr}">
-                            <label for="materia_${materia.iden_matr}">
-                                <strong>${materia.abrv_matr}</strong> - ${materia.nome_matr}
-                            </label>
-                        `;
-                        materiasGrid.appendChild(materiaItem);
-                    });
-                } else {
-                    materiasGrid.innerHTML = '<div class="no-materias">Nenhuma matéria encontrada para este curso.</div>';
-                }
+            if (data.success && data.materias.length) {
+                materiasGrid.innerHTML = '';
+                data.materias.forEach(materia => {
+                    const el = document.createElement('div');
+                    el.className = 'materia-item';
+                    el.innerHTML = `
+                        <label style="display:flex;align-items:center;gap:12px;">
+                            <input type="checkbox" name="materias[]" value="${materia.iden_matr}" id="mat_${materia.iden_matr}">
+                            <span><strong>${materia.abrv_matr}</strong> - ${materia.nome_matr}</span>
+                        </label>
+                    `;
+                    materiasGrid.appendChild(el);
+                });
             } else {
-                materiasGrid.innerHTML = '<div class="error">' + (data.message || 'Erro ao carregar matérias.') + '</div>';
+                materiasGrid.innerHTML = '<div class="no-materias">Nenhuma matéria encontrada para este curso.</div>';
             }
         })
-        .catch(error => {
-            console.error('Erro:', error);
+        .catch(e => {
+            console.error(e);
             materiasGrid.innerHTML = '<div class="error">Erro ao carregar matérias.</div>';
         });
 }
-// Função para selecionar todas as matérias
+
 function selecionarTodasMaterias() {
-    const checkboxes = document.querySelectorAll('#materiasGrid input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = true;
-    });
+    document.querySelectorAll('#materiasGrid input[type="checkbox"]').forEach(c => c.checked = true);
 }
-
-// Função para deselecionar todas as matérias
 function deselecionarTodasMaterias() {
-    const checkboxes = document.querySelectorAll('#materiasGrid input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    });
+    document.querySelectorAll('#materiasGrid input[type="checkbox"]').forEach(c => c.checked = false);
 }
 
-// Função para voltar ao painel
+// ---------- TURMAS (nova) ----------
+function carregarTurmas(cursoId) {
+    const turmasGrid = document.getElementById('turmasGrid');
+    turmasGrid.innerHTML = '<div class="loading">Carregando turmas...</div>';
+    if (!cursoId) {
+        turmasGrid.innerHTML = '';
+        return;
+    }
+
+    fetch('buscarTurmasCurso.php?curso_id=' + cursoId)
+        .then(r => r.json())
+        .then(data => {
+            if (data.success && data.turmas.length) {
+                turmasGrid.innerHTML = '';
+                data.turmas.forEach(turma => {
+                    const el = document.createElement('div');
+                    el.className = 'materia-item'; // reaproveita estilo
+                    el.innerHTML = `
+                        <label style="display:flex;align-items:center;gap:12px;">
+                            <input type="checkbox" name="turmas[]" value="${turma.iden_turm}" id="turm_${turma.iden_turm}">
+                            <span><strong>${turma.nome_turm}</strong></span>
+                        </label>
+                    `;
+                    turmasGrid.appendChild(el);
+                });
+            } else {
+                turmasGrid.innerHTML = '<div class="no-materias">Nenhuma turma encontrada para este curso.</div>';
+            }
+        })
+        .catch(e => {
+            console.error(e);
+            turmasGrid.innerHTML = '<div class="error">Erro ao carregar turmas.</div>';
+        });
+}
+
+function selecionarTodasTurmas() {
+    document.querySelectorAll('#turmasGrid input[type="checkbox"]').forEach(c => c.checked = true);
+}
+function deselecionarTodasTurmas() {
+    document.querySelectorAll('#turmasGrid input[type="checkbox"]').forEach(c => c.checked = false);
+}
+
+// Prevenir comportamento padrão do formulário e mostrar loading
+document.getElementById('formProfessor').addEventListener('submit', function(e) {
+    // mostra loading no botão
+    const btnSubmit = this.querySelector('button[type="submit"]');
+    const originalText = btnSubmit.textContent;
+    btnSubmit.textContent = 'Cadastrando...';
+    btnSubmit.disabled = true;
+
+    setTimeout(() => {
+        btnSubmit.textContent = originalText;
+        btnSubmit.disabled = false;
+    }, 3000);
+});
+
+// Função para voltar ao painel (igual ao seu original)
 function voltarAoPainel() {
     if (window.parent && window.parent !== window) {
         if (typeof window.parent.voltarAoPainel === 'function') {
@@ -227,69 +268,4 @@ function voltarAoPainel() {
         window.location.href = 'adminPanel.php';
     }
 }
-
-// Prevenir comportamento padrão do formulário e mostrar loading
-document.getElementById('formProfessor').addEventListener('submit', function(e) {
-    console.log('Formulário submetido - processando...');
-    
-    // Mostrar loading no botão
-    const btnSubmit = this.querySelector('button[type="submit"]');
-    const originalText = btnSubmit.textContent;
-    btnSubmit.textContent = 'Cadastrando...';
-    btnSubmit.disabled = true;
-    
-    // O formulário continuará com o comportamento normal (POST)
-    // mas pelo menos o usuário verá o loading
-    
-    setTimeout(() => {
-        btnSubmit.textContent = originalText;
-        btnSubmit.disabled = false;
-    }, 3000);
-});
-
-// Função para carregar turmas do curso selecionado
-function carregarTurmas(cursoId) {
-    const turmaSelect = document.getElementById('turma');
-
-    turmaSelect.innerHTML = '<option>Carregando...</option>';
-
-    if (!cursoId) {
-        turmaSelect.innerHTML = '<option value="">Selecione o curso primeiro...</option>';
-        return;
-    }
-
-    fetch('buscarTurmasCurso.php?curso_id=' + cursoId)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                turmaSelect.innerHTML = '';
-
-                if (data.turmas.length > 0) {
-                    turmaSelect.innerHTML = '<option value="">Selecione a turma</option>';
-
-                    data.turmas.forEach(t => {
-                        turmaSelect.innerHTML += `
-                            <option value="${t.iden_turm}">
-                                ${t.nome_turm} — ${t.ano_turm}.${t.seme_turm}
-                            </option>
-                        `;
-                    });
-                } else {
-                    turmaSelect.innerHTML = '<option value="">Nenhuma turma cadastrada para este curso</option>';
-                }
-            } else {
-                turmaSelect.innerHTML = '<option value="">Erro ao carregar turmas</option>';
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            turmaSelect.innerHTML = '<option value="">Erro ao carregar turmas</option>';
-        });
-}
-
-// Integra ao onchange de curso
-document.getElementById('curso').addEventListener('change', function() {
-    carregarTurmas(this.value);
-});
-
 </script>
